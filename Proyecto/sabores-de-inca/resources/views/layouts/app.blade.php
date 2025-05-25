@@ -18,6 +18,8 @@
 <body>
     <header style="background-color:rgb(253, 0, 0); padding: 1rem;">
         <h1 style="margin: 0;">Sabores de Inca</h1>
+        <a id="register" href="/register">Registrarse</a>
+        <a id="login" href="/login">Iniciar sesión</a>
         <button id="dark-mode-toggle" aria-label="Cambiar modo oscuro">Modo oscuro</button>
     </header>
 

@@ -63,3 +63,7 @@ Route::get('/login', function () {
 Route::get('/quien-soy', function () {
     return view('quien-soy');
 });
+
+Route::get('/register', function () {
+    return view('auth.register');
+})->name('register');
