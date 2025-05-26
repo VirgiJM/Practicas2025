@@ -1,35 +1,29 @@
-<!DOCTYPE html>
-<html lang="es">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <title>Registro</title>
-    @vite('resources/css/dark-mode.css')
-    @vite('resources/js/dark-mode.js')
-    @vite('resources/css/register.css')
-    @vite('resources/js/register.js')
-</head>
-
-<body>
-    <h2>Registrarse</h2>
+@section('titulo', 'Registro')
+@vite('resources/css/dark-mode.css')
+@vite('resources/js/dark-mode.js')
+@vite('resources/css/register.css')
+@vite('resources/js/register.js')
+@section('contenido')
+<div class="register-container">
+    <h2>Crear cuenta</h2>
     <form id="register-form">
-        <label for="username">Nombre de usuario:</label><br>
-        <input type="text" id="username" name="Username" required><br>
-        <span id="error-username" class="error-message"></span><br>
+        <label for="Username">Nombre</label>
+        <input type="text" name="Username">
 
-        <label for="email">Correo electrónico:</label><br>
-        <input type="email" id="email" name="Email" required><br>
-        <span id="error-email" class="error-message"></span><br>
+        <label for="Email">Correo electrónico</label>
+        <input type="email" name="Email">
 
-        <label for="password">Contraseña:</label><br>
-        <input type="password" id="password" name="Password" required><br>
-        <span id="error-password" class="error-message"></span><br>
+        <label for="Password">Contraseña</label>
+        <input type="password" name="Password">
+
+        <label for="Password_confirmation">Confirmar contraseña</label>
+        <input type="password" name="Password_confirmation">
 
         <button type="submit">Registrarse</button>
     </form>
 
-    <div id="response"></div>
-
-</body>
-
-</html>
+    <div id="errors" class="error-message"></div>
+</div>
+@endsection

@@ -10,14 +10,14 @@ use Illuminate\Support\Facades\Validator; // Para las validaciones.
 
 class UserController extends Controller
 {
-    public function login(Request $request)
+    public function store(Request $request)
     {
         try {
             // Validación de los campos
             $validator = Validator::make($request->all(), [
                 'Username' => 'required|string|max:100|unique:Usuario',
                 'Email' => 'required|email|max:30|unique:Usuario',
-                'Password' => 'required|string|min:8',
+                'Password' => 'required|string|min:8|confirmed', // El confirmed es para cuando quieres que dos contraseñas coincidan.
                 // 'Profile_Image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Necesario únicamente si voy a subir yo una imagen mientras creo el usuario.
             ]);
 

@@ -1,52 +1,45 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('register-form');
+document.getElementById('register-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
 
-    function clearErrors() {
-        document.querySelectorAll('.error-message').forEach(span => {
-            span.textContent = '';
-        });
+    const form = e.target;
+    const password = form.Password.value;
+    const confirmPassword = form.Password_confirmation.value;
+
+    // Validación de coincidencia de contraseñas
+    if (password !== confirmPassword) {
+        document.getElementById('errors').innerText = 'Las contraseñas no coinciden.';
+        return; // Evita enviar la solicitud
     }
 
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        clearErrors();
+    const data = {
+        Username: form.Username.value,
+        Email: form.Email.value,
+        Password: password,
+        Password_confirmation: confirmPassword
+    };
 
-        const data = {
-            Username: document.getElementById('username').value,
-            Email: document.getElementById('email').value,
-            Password: document.getElementById('password').value
-        };
-
-        const res = await fetch('/api/register', {
+    try {
+        const response = await fetch('http://127.0.0.1:8000/api/register', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
         });
 
-        const result = await res.json();
+        const result = await response.json();
 
-        if (res.ok) {
-            window.location.href = '/login'; // Redirigir al login si el registro es correcto.
+        if (response.ok) {
+            alert('Registro exitoso');
         } else {
-            // Mostrar errores específicos debajo de cada input.
-            if (result.errors) {
-                for (const field in result.errors) {
-                    const messages = result.errors[field];
-                    const errorSpan = document.getElementById(`error-${field.toLowerCase()}`);
-                    if (errorSpan) {
-                        errorSpan.textContent = messages.join(' ');
-                        errorSpan.style.color = 'red';
-                    }
-                }
-            } else if (result.error) {
-                // Si hay un error general.
-                alert(result.error);
-            } else {
-                alert('Ha ocurrido un error desconocido.');
+            let messages = [];
+            for (let field in result.errors) {
+                messages.push(result.errors[field].join(', '));
             }
+            document.getElementById('errors').innerText = messages.join('\n');
         }
-    });
+
+    } catch (error) {
+        console.error('Error:', error);
+    }
 });

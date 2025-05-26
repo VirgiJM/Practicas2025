@@ -77,5 +77,6 @@ Route::post('/logout', function () {
 })->name('logout');
 
 Route::get('/perfil', function () {
-    return view('perfil');
-})->middleware('auth');
+    return view('user.perfil');
+})->name('perfil');
+// })->middleware('auth');
