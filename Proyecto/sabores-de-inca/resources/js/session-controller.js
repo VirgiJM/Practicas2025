@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (res.ok) {
             const user = await res.json();
-            // console.log(user); // Devuelve el nombre y el email. Mirar de ponerle la foto.
+            console.log(user); // Devuelve el nombre y el email. Mirar de ponerle la foto.
 
             // Mostrar menú de usuario
             if (loginLink) loginLink.style.display = 'none';
@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const username = document.getElementById('nombre-usuario');
             if (profileLink && user.username) {
                 username.textContent = `¡Hola, ${user.username}!`;
+                document.getElementById('user-image').src = user.profile_image;
                 profileLink.textContent = `Mi perfil`;
                 // profileLink.textContent = `${user.profile_image}`;
             }

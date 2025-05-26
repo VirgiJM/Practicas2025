@@ -28,6 +28,7 @@
             <div id="user-menu" style="display: none;">
                 <p id="nombre-usuario"></p>
                 <a id="profile-link" href="/perfil">Perfil</a>
+                <img id="user-image">
                 <button id="logout-button">Cerrar sesión</button>
             </div>
         </header>
