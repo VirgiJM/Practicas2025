@@ -46,7 +46,7 @@ Route::middleware('auth:sanctum')->post('/valoracion', [ValoracionController::cl
 Route::prefix('restaurantes')->group(function () {
     // Route::get('/', [RestauranteController::class, 'index']);
     Route::get('/', [RestauranteController::class, 'indexApi']);
-    Route::get('/{id}', [RestauranteController::class, 'show']);
+    Route::get('/{id}', [RestauranteController::class, 'showApi']);
     Route::post('/', [RestauranteController::class, 'store']);
     Route::put('/{id}', [RestauranteController::class, 'update']);
     Route::delete('/{id}', [RestauranteController::class, 'destroy']);

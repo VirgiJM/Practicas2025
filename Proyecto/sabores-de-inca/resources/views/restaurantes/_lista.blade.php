@@ -6,13 +6,14 @@
         <p>{{ $restaurante->Direccion }} 📍</p>
         @if ($restaurante->Vegano)
         <p style="color:green">Vegano</p>
-            @else
+        @else
         <p style="color:red">No vegano</p>
-            @endif
-            <!-- <p style="color:green">{{ $restaurante->Vegano ? 'Vegano' : '' }}</p> -->
+        @endif
+        <!-- <p style="color:green">{{ $restaurante->Vegano ? 'Vegano' : '' }}</p> -->
         <p>
             {{ number_format($restaurante->promedio_valoracion ?? 0, 1, '.', '') }} ⭐
         </p>
+        <a href="{{ url('/restaurante/' . $restaurante->idRestaurante) }}">Ver más</a>
     </div>
 </div>
 @endforeach

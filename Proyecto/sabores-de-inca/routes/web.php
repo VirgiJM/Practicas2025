@@ -49,7 +49,7 @@ Route::get('/restaurantes', [RestauranteController::class, 'index'])->name('rest
 // Route::get('/tipo-cocina-traduccion/{id}', [TipoCocinaTraduccionController::class, 'show']);
 
 // Route::get('/restaurante', [RestauranteController::class, 'index']);
-// Route::get('/restaurante/{id}', [RestauranteController::class, 'show']);
+Route::get('/restaurante/{id}', [RestauranteController::class, 'show']);
 
 // Route::get('/restaurante-accesibilidad', [RestauranteAccesibilidadController::class, 'index']);
 // Route::get('/restaurante-accesibilidad/{id}', [RestauranteAccesibilidadController::class, 'show']);
