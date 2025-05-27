@@ -30,4 +30,8 @@ class Restaurante extends Model
     {
         return $this->hasMany(Valoracion::class, 'fk_idRestaurante', 'idRestaurante');
     }
+    // public function tipoCocina()
+    // {
+    //     return $this->belongsTo(TipoCocina::class, 'TipoCocinaID');
+    // }
 }

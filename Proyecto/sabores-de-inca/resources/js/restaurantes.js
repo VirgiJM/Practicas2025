@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
         10: 'Chino'
     };
 
+    // Input de la web.
     const selectTipo = document.getElementById('tipoCocina');
     if (selectTipo) {
         // Vaciar select por si hay algo.
@@ -54,8 +55,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    const checkboxVegano = document.getElementById('vegano');
-    const selectMedia = document.getElementById('filtroMedia');
+    const checkboxVegano = document.getElementById('vegano'); // Checkbox para opciones veganas.
+    const selectMedia = document.getElementById('filtroMedia'); // Select para filtrar a partir de x cantidad de estrellas.
 
 
     // Variable global para los marcadores en el mapa.
@@ -75,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (media && media != 0) {
             urlApi += `mediaMinima=${media}&`;
         }
-        urlApi = urlApi.slice(0, -1); // quitar último & si existe
+        urlApi = urlApi.slice(0, -1); // Quitar último & si existe
 
         fetch(urlApi)
             .then(res => {

@@ -30,12 +30,12 @@ class RestauranteController extends Controller
         // Ejecutamos la consulta
         $restaurantes = $query->get();
 
-        // Si es una petición AJAX, devolvemos solo el fragmento de lista
+        // Si es una petición AJAX, devolvemos solo el fragmento de lista.
         if ($request->ajax()) {
             return view('restaurantes._lista', compact('restaurantes'));
         }
 
-        // Si no es AJAX, devolvemos la vista completa
+        // Si no es AJAX, devolvemos la vista completa.
         return view('restaurantes.index', compact('restaurantes'));
     }
 
@@ -64,8 +64,8 @@ class RestauranteController extends Controller
         return response()->json($query->get());
     }
 
-    // Show es para mostrar un elemento en específico.
-    public function show($id)
+    // Show es para mostrar un elemento en específico. Esta función será para pruebas de PostMan y tal. 
+    public function showApi($id)
     {
         $restaurante = Restaurante::find($id); // Busca en la base de datos el elemento con ese ID
 
@@ -74,6 +74,13 @@ class RestauranteController extends Controller
         } else {
             return response()->json(['mensaje' => 'Restaurante no encontrado'], 404); // Si no lo encuentra, error 404
         }
+    }
+
+    // Función para vista web.
+    public function show($id)
+    {
+        $restaurante = Restaurante::findOrFail($id);
+        return view('restaurantes.show', compact('restaurante'));
     }
 
     // Store es la función que se encarga de recibir peticiones POST.
@@ -109,6 +116,32 @@ class RestauranteController extends Controller
             ], 400);
         }
     }
+
+    // Función para subir la carta de un restaurante con PostMan.
+    public function subirCarta(Request $request, $id)
+    {
+        // Validación del archivo PDF
+        $request->validate([
+            'Carta' => 'required|file|mimes:pdf|max:6144', // Puedo ajustar el tamaño máximo. Lo suyo es que no sea muy grande para que no ralentice la carga de la página. 5120 -> 5 MB
+        ]);
+
+        $restaurante = Restaurante::findOrFail($id);
+
+        if ($request->hasFile('Carta')) {
+            $path = $request->file('Carta')->store('/cartas', 'public'); // Carpeta storage/app/public/cartas.
+
+            // Guardar la ruta relativa en la base de datos
+            $restaurante->Carta = $path;
+            $restaurante->save();
+
+            return response()->json(['mensaje' => 'Carta subida correctamente', 'ruta' => $path], 200);
+        }
+
+        return response()->json(['error' => 'No se ha subido ningún archivo'], 400);
+    }
+
+
+
     // Método para eliminar una accesibilidad
     public function destroy($id)
     {

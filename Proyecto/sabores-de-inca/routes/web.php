@@ -10,6 +10,7 @@ use App\Models\Restaurante; // Para hacer la vista con Blade.
 use App\Http\Controllers\RestauranteTraduccionController;
 use App\Http\Controllers\TipoCocinaController;
 use App\Http\Controllers\TipoCocinaTraduccionController;
+use Illuminate\Support\Facades\Auth; // Para el logout.
 
 // Prueba
 // Route::get('/debug-api', function () {
@@ -48,7 +49,7 @@ Route::get('/restaurantes', [RestauranteController::class, 'index'])->name('rest
 // Route::get('/tipo-cocina-traduccion/{id}', [TipoCocinaTraduccionController::class, 'show']);
 
 // Route::get('/restaurante', [RestauranteController::class, 'index']);
-// Route::get('/restaurante/{id}', [RestauranteController::class, 'show']);
+Route::get('/restaurante/{id}', [RestauranteController::class, 'show']);
 
 // Route::get('/restaurante-accesibilidad', [RestauranteAccesibilidadController::class, 'index']);
 // Route::get('/restaurante-accesibilidad/{id}', [RestauranteAccesibilidadController::class, 'show']);
@@ -56,10 +57,26 @@ Route::get('/restaurantes', [RestauranteController::class, 'index'])->name('rest
 // Route::get('/restaurante-traduccion', [RestauranteTraduccionController::class, 'index']);
 // Route::get('/restaurante-traduccion/{id}', [RestauranteTraduccionController::class, 'show']);
 
-Route::get('/login', function () {
-    return response()->json(['error' => 'Credenciales incorrectas.'], 401);
-})->name('login');
 
 Route::get('/quien-soy', function () {
     return view('quien-soy');
 });
+
+Route::get('/register', function () {
+    return view('auth.register');
+})->name('register');
+
+Route::get('/login', function () {
+    // return response()->json(['error' => 'Credenciales incorrectas.'], 401);
+    return view('auth.login');
+})->name('login');
+
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/');
+})->name('logout');
+
+Route::get('/perfil', function () {
+    return view('user.perfil');
+})->name('perfil');
+// })->middleware('auth');

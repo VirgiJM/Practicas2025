@@ -5,10 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     <title>@yield('titulo', 'Sabors d\'Inca')</title> <!-- Esto del yield es como los block que hay en Flask. Este bloque es el del título. -->
     @vite('resources/css/app.css')
     @vite('resources/css/dark-mode.css')
     @vite('resources/js/dark-mode.js')
+    @vite('resources/js/session-controller.js')
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
@@ -18,8 +20,24 @@
 <body>
     <header style="background-color:rgb(253, 0, 0); padding: 1rem;">
         <h1 style="margin: 0;">Sabores de Inca</h1>
+        <header>
+            <div id="no-login" style="display: none;">
+                <a id="register-link" href="/register">Registrarse</a>
+                <a id="login-link" href="/login">Iniciar sesión</a>
+            </div>
+
+            <div id="user-menu" style="display: none;">
+                <p id="nombre-usuario"></p>
+                <a id="profile-link" href="/perfil">Perfil</a>
+                <!-- <img id="user-image"> -->
+                <button id="logout-button">Cerrar sesión</button>
+            </div>
+        </header>
+
+
         <button id="dark-mode-toggle" aria-label="Cambiar modo oscuro">Modo oscuro</button>
     </header>
+
 
     <nav style="background-color: #eee; padding: 0.5rem;">
         <a href="/" style="margin-right: 1rem;">Inicio</a>
