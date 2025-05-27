@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     <title>@yield('titulo', 'Sabors d\'Inca')</title> <!-- Esto del yield es como los block que hay en Flask. Este bloque es el del título. -->
     @vite('resources/css/app.css')
     @vite('resources/css/dark-mode.css')
@@ -28,7 +29,7 @@
             <div id="user-menu" style="display: none;">
                 <p id="nombre-usuario"></p>
                 <a id="profile-link" href="/perfil">Perfil</a>
-                <img id="user-image">
+                <!-- <img id="user-image"> -->
                 <button id="logout-button">Cerrar sesión</button>
             </div>
         </header>
