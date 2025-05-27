@@ -12,5 +12,10 @@
 <p><strong>Precio medio:</strong> {{ $restaurante->RangoPrecio }}</p>
 <p><strong>Teléfono:</strong> {{ $restaurante->Telefono }}</p>
 <strong><a href="{{ $restaurante->SitioWeb }}" target="_blank">Sitio Web</a></strong>
-<p><strong>Carta:<strong> {{$restaurante->Carta}}</p>
+
+@if ($restaurante->Carta)
+<a href="{{ asset('storage/' . $restaurante->Carta) }}" target="_blank">Ver carta PDF</a>
+@else
+<p>No hay carta disponible</p>
+@endif
 @endsection

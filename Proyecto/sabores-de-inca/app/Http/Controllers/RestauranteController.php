@@ -116,6 +116,32 @@ class RestauranteController extends Controller
             ], 400);
         }
     }
+
+    // Función para subir la carta de un restaurante con PostMan.
+    public function subirCarta(Request $request, $id)
+    {
+        // Validación del archivo PDF
+        $request->validate([
+            'Carta' => 'required|file|mimes:pdf|max:6144', // Puedo ajustar el tamaño máximo. Lo suyo es que no sea muy grande para que no ralentice la carga de la página. 5120 -> 5 MB
+        ]);
+
+        $restaurante = Restaurante::findOrFail($id);
+
+        if ($request->hasFile('Carta')) {
+            $path = $request->file('Carta')->store('/cartas', 'public'); // Carpeta storage/app/public/cartas.
+
+            // Guardar la ruta relativa en la base de datos
+            $restaurante->Carta = $path;
+            $restaurante->save();
+
+            return response()->json(['mensaje' => 'Carta subida correctamente', 'ruta' => $path], 200);
+        }
+
+        return response()->json(['error' => 'No se ha subido ningún archivo'], 400);
+    }
+
+
+
     // Método para eliminar una accesibilidad
     public function destroy($id)
     {
