@@ -5,10 +5,10 @@ document.getElementById('register-form').addEventListener('submit', async functi
     const password = form.Password.value;
     const confirmPassword = form.Password_confirmation.value;
 
-    // Validación de coincidencia de contraseñas
+    // Validación de coincidencia de contraseñas.
     if (password !== confirmPassword) {
         document.getElementById('errors').innerText = 'Las contraseñas no coinciden.';
-        return; // Evita enviar la solicitud
+        return; // Evita enviar la solicitud.
     }
 
     const data = {
@@ -30,7 +30,8 @@ document.getElementById('register-form').addEventListener('submit', async functi
         const result = await response.json();
 
         if (response.ok) {
-            alert('Registro exitoso');
+            alert('Te has registrado correctamente, ¡bienvenid@!');
+            window.location.href = '/login';
         } else {
             let messages = [];
             for (let field in result.errors) {

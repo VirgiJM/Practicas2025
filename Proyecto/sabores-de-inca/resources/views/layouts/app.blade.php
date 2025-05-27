@@ -21,7 +21,7 @@
     <header style="background-color:rgb(253, 0, 0); padding: 1rem;">
         <h1 style="margin: 0;">Sabores de Inca</h1>
         <header>
-            <div id="no-login">
+            <div id="no-login" style="display: none;">
                 <a id="register-link" href="/register">Registrarse</a>
                 <a id="login-link" href="/login">Iniciar sesión</a>
             </div>

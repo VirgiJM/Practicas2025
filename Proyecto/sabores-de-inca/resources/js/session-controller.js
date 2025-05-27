@@ -1,11 +1,20 @@
 document.addEventListener('DOMContentLoaded', async () => {
     const token = localStorage.getItem('token');
-    const loginLink = document.getElementById('login-link');
-    const registerLink = document.getElementById('register-link');
+    const noLogin = document.getElementById('no-login');
     const userMenu = document.getElementById('user-menu');
     const logoutButton = document.getElementById('logout-button');
+    const profileLink = document.getElementById('profile-link');
+    const username = document.getElementById('nombre-usuario');
 
-    if (!token) return; // no hacemos nada si no hay token
+    // Por defecto, ocultamos ambos para que el JS decida cuál mostrar:
+    if (noLogin) noLogin.style.display = 'none';
+    if (userMenu) userMenu.style.display = 'none';
+
+    if (!token) {
+        // No hay token, mostramos menú de login/registro
+        if (noLogin) noLogin.style.display = 'block';
+        return; // No hace falta seguir.
+    }
 
     try {
         const res = await fetch('/api/user', {
@@ -17,30 +26,27 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (res.ok) {
             const user = await res.json();
-            console.log(user); // Devuelve el nombre y el email. Mirar de ponerle la foto.
 
-            // Mostrar menú de usuario
-            if (loginLink) loginLink.style.display = 'none';
-            if (registerLink) registerLink.style.display = 'none';
+            // Token válido, mostramos menú de usuario
             if (userMenu) userMenu.style.display = 'inline-block';
 
-            // (opcional) mostrar el nombre del usuario
-            const profileLink = document.getElementById('profile-link');
-            const username = document.getElementById('nombre-usuario');
-            if (profileLink && user.username) {
+            // Mostrar saludo con usuario
+            if (username && user.username) {
                 username.textContent = `¡Hola, ${user.username}!`;
-                document.getElementById('user-image').src = user.profile_image;
-                profileLink.textContent = `Mi perfil`;
-                // profileLink.textContent = `${user.profile_image}`;
             }
 
+            if (profileLink) {
+                profileLink.textContent = 'Mi perfil';
+            }
         } else {
-            // Token inválido, lo borramos
+            // Token inválido, borramos y mostramos menú login/registro
             localStorage.removeItem('token');
+            if (noLogin) noLogin.style.display = 'block';
         }
     } catch (error) {
         console.error('Error al verificar el token:', error);
         localStorage.removeItem('token');
+        if (noLogin) noLogin.style.display = 'block';
     }
 
     if (logoutButton) {
