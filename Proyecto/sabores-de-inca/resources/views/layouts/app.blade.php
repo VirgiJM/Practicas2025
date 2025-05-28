@@ -31,11 +31,10 @@
                 <p id="nombre-usuario"></p>
                 <a id="profile-link" href="/perfil">Perfil</a>
                 <button id="logout-button">Cerrar sesión</button>
+            </div>
+            <button id="dark-mode-toggle" aria-label="Cambiar modo oscuro">Modo oscuro</button>
+        </div>
     </header>
-    </div>
-
-    <button id="dark-mode-toggle" aria-label="Cambiar modo oscuro">Modo oscuro</button>
-    </div>
 
     <nav class="barra-nav">
         <div class="nav-links">
