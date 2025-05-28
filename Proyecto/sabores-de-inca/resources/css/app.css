@@ -120,3 +120,141 @@ input[type="submit"]:hover {
         width: 90%;
     }
 }
+
+/* HEADER GENERAL */
+.main-header {
+    background-color: rgb(253, 0, 0);
+    color: white;
+    padding: 1rem 0;
+}
+
+.main-header .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.main-header .logo {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Links de login y usuario */
+.auth-links {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.auth-links a,
+.auth-links button {
+    background: white;
+    color: rgb(253, 0, 0);
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    text-decoration: none;
+}
+
+.auth-links a:hover,
+.auth-links button:hover {
+    background: #ffe5e5;
+}
+
+/* Botón modo oscuro */
+#dark-mode-toggle {
+    background-color: white;
+    color: rgb(253, 0, 0);
+    font-weight: 600;
+    border-radius: 4px;
+    padding: 0.4rem 0.8rem;
+    border: none;
+    cursor: pointer;
+}
+
+#dark-mode-toggle:hover {
+    background-color: #ffe5e5;
+}
+
+/* RESPONSIVE HEADER */
+@media (max-width: 768px) {
+    .main-header .container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .auth-links {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    #dark-mode-toggle {
+        align-self: flex-start;
+    }
+}
+
+a {
+    text-decoration: none;
+}
+
+/* NAV GENERAL */
+.barra-nav {
+    background-color: #ffe5e5; /* tono suave que combina con el rojo */
+    padding: 0.75rem 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.barra-nav .nav-links {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.barra-nav .nav-links a {
+    text-decoration: none;
+    color: rgb(253, 0, 0);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color 0.2s ease, border-bottom 0.2s ease;
+    position: relative;
+}
+
+.barra-nav .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 2px;
+    width: 100%;
+    background-color: rgb(253, 0, 0);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.2s ease;
+}
+
+.barra-nav .nav-links a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+@media (max-width: 600px) {
+    .barra-nav .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+}

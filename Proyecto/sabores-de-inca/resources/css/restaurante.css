@@ -69,3 +69,30 @@
 .restaurante-detalle .acciones a:hover {
     background-color: #27ae60;
 }
+
+body {
+    background-color: deeppink;
+}
+
+.restaurante-detalle img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto 1.5rem auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 600px) {
+    .restaurante-detalle {
+        padding: 1rem;
+    }
+
+    .restaurante-detalle h1 {
+        font-size: 1.5rem;
+    }
+
+    .restaurante-detalle .info strong {
+        width: 120px;
+    }
+}
