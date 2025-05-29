@@ -22,4 +22,9 @@ class User extends Authenticatable
     protected $hidden = [
         'Password',
     ];
+
+    public function favoritos()
+    {
+        return $this->hasMany(Favorito::class, 'fk_idUsuario');
+    }
 }

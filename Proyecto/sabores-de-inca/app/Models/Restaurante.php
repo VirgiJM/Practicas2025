@@ -34,4 +34,8 @@ class Restaurante extends Model
     // {
     //     return $this->belongsTo(TipoCocina::class, 'TipoCocinaID');
     // }
+    public function favoritos()
+    {
+        return $this->hasMany(Favorito::class, 'fk_idRestaurante');
+    }
 }

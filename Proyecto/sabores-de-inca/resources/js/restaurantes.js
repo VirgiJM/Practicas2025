@@ -58,7 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const checkboxVegano = document.getElementById('vegano'); // Checkbox para opciones veganas.
     const selectMedia = document.getElementById('filtroMedia'); // Select para filtrar a partir de x cantidad de estrellas.
 
-
     // Variable global para los marcadores en el mapa.
     if (!window.marcadoresLayer) {
         window.marcadoresLayer = L.layerGroup().addTo(map);
@@ -100,7 +99,6 @@ document.addEventListener("DOMContentLoaded", () => {
             .catch(err => console.error('Error al cargar restaurantes:', err));
     }
 
-
     // Función para actualizar la lista HTML a partir de un array de restaurantes.
     function actualizarListaHtml(restaurantesFiltrados) {
         const tarjetas = document.querySelectorAll('.restaurante-card');
@@ -122,7 +120,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-
     // Leer filtros actuales y recargar datos.
     function actualizarFiltros() {
         const vegano = checkboxVegano.checked ? 1 : 0;
@@ -138,7 +135,6 @@ document.addEventListener("DOMContentLoaded", () => {
     checkboxVegano.addEventListener('change', actualizarFiltros);
     selectTipo.addEventListener('change', actualizarFiltros);
     selectMedia.addEventListener('change', actualizarFiltros);
-
 
     // Leyenda en el mapa.
     const leyenda = L.control({ position: 'bottomright' });
@@ -158,31 +154,49 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     leyenda.addTo(map);
+
     // Variable para almacenar el tipo seleccionado, 0 = todos.
     let tipoSeleccionado = 0;
 
-    leyenda.addTo(map);
+    // Esperar a que el div de leyenda se inyecte antes de añadir el listener.
+    setTimeout(() => {
+        const leyendaDiv = document.querySelector('.info.legend');
+        if (!leyendaDiv) return;
 
-    const leyendaDiv = document.querySelector('.info.legend');
+        leyendaDiv.addEventListener('click', (e) => {
+            e.preventDefault();
+            const item = e.target.closest('.leyenda-item');
+            if (!item) return;
 
-    leyendaDiv.addEventListener('click', (e) => {
-        e.preventDefault();
-        const item = e.target.closest('.leyenda-item');
-        if (!item) return;
+            const tipo = parseInt(item.dataset.tipo, 10);
 
-        const tipo = parseInt(item.dataset.tipo, 10);
+            // Toggle del filtro.
+            tipoSeleccionado = (tipoSeleccionado === tipo) ? 0 : tipo;
 
-        // Éste código es para quitar el filtro, basta con vovler a hacer click en el filtro seleccionado.
-        tipoSeleccionado = (tipoSeleccionado === tipo) ? 0 : tipo;
+            const vegano = checkboxVegano.checked ? 1 : 0;
+            cargarRestaurantes(vegano, tipoSeleccionado);
 
-        // Luego se vuelve a llamar a cargarRestaurantes con el nuevo filtro.
-        const vegano = checkboxVegano.checked ? 1 : 0;
-        cargarRestaurantes(vegano, tipoSeleccionado);
+            // Negrita para el tipo activo.
+            document.querySelectorAll('.leyenda-item').forEach(el => el.style.fontWeight = '');
+            if (tipoSeleccionado !== 0) {
+                item.style.fontWeight = 'bold';
+            }
+        });
+    }, 0);
 
-        // Negrita para el tipo de restaurante activo.
-        document.querySelectorAll('.leyenda-item').forEach(el => el.style.fontWeight = '');
-        if (tipoSeleccionado !== 0) {
-            item.style.fontWeight = 'bold';
-        }
+
+    document.querySelectorAll('.favorito-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const icon = btn.querySelector('i');
+            if (icon.classList.contains('fa-regular')) {
+                icon.classList.remove('fa-regular');
+                icon.classList.add('fa-solid');
+            } else {
+                icon.classList.remove('fa-solid');
+                icon.classList.add('fa-regular');
+            }
+            // Aquí podrías agregar lógica para guardar favorito en backend o localStorage
+        });
     });
+
 });
