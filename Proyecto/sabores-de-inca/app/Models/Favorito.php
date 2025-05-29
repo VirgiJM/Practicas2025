@@ -15,7 +15,7 @@ class Favorito extends Model
 
     public function usuario()
     {
-        return $this->belongsTo(Usuario::class, 'fk_idUsuario');
+        return $this->belongsTo(User::class, 'fk_idUsuario');
     }
 
     public function restaurante()

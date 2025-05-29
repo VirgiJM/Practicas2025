@@ -2,9 +2,10 @@
 <div class="restaurante-card">
     <div class="image-container">
         <img src="{{ Storage::url($restaurante->Foto) }}" alt="Foto del restaurante">
-        <div class="favorito-btn" style="display: none;">
-            <i class="fa-regular fa-heart"></i> <!-- Corazón vacío de la libería  -->
+        <div class="favorito-btn" data-restaurante-id="{{ $restaurante->idRestaurante }}" style="display: none;">
+            <i class="fa-regular fa-heart"></i>
         </div>
+
     </div>
     <div class="details">
         <h3>{{ $restaurante->Nombre }}</h3>

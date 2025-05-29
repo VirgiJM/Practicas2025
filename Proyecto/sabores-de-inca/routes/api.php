@@ -17,6 +17,7 @@ use App\Http\Controllers\RestauranteAccesibilidadController;
 use App\Http\Controllers\RestauranteTraduccionController;
 use App\Http\Controllers\ValoracionController;
 use App\Http\Controllers\Api\FavoritoController;
+use Illuminate\Support\Facades\Log;
 
 require base_path('routes/test.php');
 
@@ -122,11 +123,13 @@ Route::prefix('traducciones-restaurante')->group(function () {
 //     return $request->user()->favoritos->pluck('id'); // Devuelve un array con los IDs de los restaurantes favoritos
 Route::middleware('auth:sanctum')->prefix('favoritos')->group(function () {
     Route::get('/', [FavoritoController::class, 'index']);
-    Route::middleware('auth:sanctum')->post('/toggle', function (Request $request) {
+    Route::post('/toggle', function (Request $request) {
         $usuario = $request->user();
-        $restauranteId = $request->input('restaurante_id');
+        $restauranteId = $request->input('fk_idRestaurante');
+        Log::info('Restaurante ID recibido: ' . $restauranteId); // Ya que el dd hace caput, con esto puedo ver si estoy pasando bien el id del restaurante.
 
-        if ($usuario->favoritos()->where('restaurante_id', $restauranteId)->exists()) {
+
+        if ($usuario->favoritos()->where('fk_idRestaurante', $restauranteId)->exists()) {
             $usuario->favoritos()->detach($restauranteId);
             return response()->json(['estado' => 'eliminado']);
         } else {

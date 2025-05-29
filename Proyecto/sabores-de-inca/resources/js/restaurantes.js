@@ -186,17 +186,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     document.querySelectorAll('.favorito-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', async (e) => {
+            e.stopPropagation();
             const icon = btn.querySelector('i');
-            if (icon.classList.contains('fa-regular')) {
+            const restauranteId = btn.dataset.restauranteId;
+            const token = localStorage.getItem('token');
+
+            const res = await fetch('/api/favoritos/toggle', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({ fk_restaurante_id: restauranteId })
+            });
+
+            const result = await res.json();
+            if (result.estado === 'añadido') {
                 icon.classList.remove('fa-regular');
                 icon.classList.add('fa-solid');
-            } else {
+            } else if (result.estado === 'eliminado') {
                 icon.classList.remove('fa-solid');
                 icon.classList.add('fa-regular');
             }
-            // Aquí podrías agregar lógica para guardar favorito en backend o localStorage
         });
+
     });
 
 });

@@ -25,6 +25,6 @@ class User extends Authenticatable
 
     public function favoritos()
     {
-        return $this->hasMany(Favorito::class, 'fk_idUsuario');
+        return $this->belongsToMany(Restaurante::class, 'favorito', 'fk_idUsuario', 'fk_idRestaurante'); // Favorito es la tabla pivote.
     }
 }
