@@ -27,6 +27,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (res.ok) {
             const user = await res.json();
 
+            // Mostrar botones de favorito (sólo en la página de restaurantes).
+            const favoritoBtns = document.querySelectorAll('.favorito-btn');
+            if (favoritoBtns.length > 0) { // Si es menor que 0, no dará error, pero devolverá una lista vacía.
+                favoritoBtns.forEach(btn => {
+                    btn.style.display = 'block';
+                });
+            }
+
+
             // Token válido, mostramos menú de usuario
             if (userMenu) userMenu.style.display = 'inline-block';
 
@@ -55,4 +64,5 @@ document.addEventListener('DOMContentLoaded', async () => {
             window.location.href = '/login';
         });
     }
+
 });
