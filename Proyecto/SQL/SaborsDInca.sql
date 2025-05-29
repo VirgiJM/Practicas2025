@@ -59,6 +59,7 @@ updated_at TIMESTAMP NULL DEFAULT current_timestamp,
 fk_idTipoCocina INT,
 FOREIGN KEY (fk_idTipoCocina) REFERENCES Tipo_Cocina(idTipoCocina)
 );
+ALTER TABLE restaurante CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 
 CREATE TABLE Restaurante_Accesibilidad(
@@ -113,4 +114,12 @@ created_at TIMESTAMP NULL DEFAULT current_timestamp,
 updated_at TIMESTAMP NULL DEFAULT current_timestamp,
 FOREIGN KEY (fk_idUsuario) REFERENCES Usuario (idUsuario),
 FOREIGN KEY (fk_idRestaurante) REFERENCES Restaurante(idRestaurante)
+);
+
+CREATE TABLE favoritos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT,
+    restaurante_id INT,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
+    FOREIGN KEY (restaurante_id) REFERENCES restaurantes(id)
 );
