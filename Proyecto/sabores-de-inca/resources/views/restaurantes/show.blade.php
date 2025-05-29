@@ -11,8 +11,8 @@
 
     <h1>{{ $restaurante->Nombre }}</h1>
     <img src="{{ Storage::url($restaurante->Foto) }}" alt="{{ $restaurante->Nombre }}">
-    <p><strong>Dirección:</strong> {{ $restaurante->Direccion }}</p>
-    <p><strong>Precio medio:</strong> {{ $restaurante->RangoPrecio }}</p>
+    <p><strong>Ubicación:</strong> {{ $restaurante->Direccion }}</p>
+    <p><strong>Precio medio:</strong><a> {{ $restaurante->RangoPrecio }}<a></p>
     <p><strong>Teléfono:</strong> {{ $restaurante->Telefono }}</p>
     <strong><a href="{{ $restaurante->SitioWeb }}" target="_blank">Sitio Web</a></strong>
 

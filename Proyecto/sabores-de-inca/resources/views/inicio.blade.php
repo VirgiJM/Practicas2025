@@ -38,6 +38,9 @@
         <div class="slide">
             <img src="{{ asset('images/slider/11.jpg') }}" alt="Restaurante 7">
         </div>
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+
     </div>
 </section>
 
