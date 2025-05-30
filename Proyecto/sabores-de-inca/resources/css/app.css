@@ -48,12 +48,13 @@ body {
     margin: 0;
     font-size: 1.3rem;
     font-weight: 600;
+    color: black;
 }
 
 .restaurante-card p {
     font-size: 0.95rem;
-    color: #777;
     margin: 8px 0 0 0;
+    color: black;
 }
 
 /* Filtros y formularios */
@@ -102,6 +103,7 @@ input[type="submit"]:hover {
 
 .info.legend {
     background: white;
+    color: black;
     padding: 10px;
     font-size: 14px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -297,3 +299,23 @@ a {
 .favorito-btn .fa-solid {
     color: red;
 }
+
+#dark-mode-toggle {
+    margin-left: 20rem;
+
+}
+
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+

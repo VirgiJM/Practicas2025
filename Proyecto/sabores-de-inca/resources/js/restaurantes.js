@@ -186,32 +186,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     document.querySelectorAll('.favorito-btn').forEach(btn => {
-        btn.addEventListener('click', async (e) => {
+        btn.addEventListener('click', e => {
             e.stopPropagation();
             const icon = btn.querySelector('i');
-            const restauranteId = btn.dataset.restauranteId;
-            const token = localStorage.getItem('token');
+            const restauranteId = btn.dataset.restauranteId; // Asegúrate de tener esto en tu HTML
 
-            const res = await fetch('/api/favoritos/toggle', {
+            fetch('/api/favoritos/toggle', {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Authorization': 'Bearer ' + localStorage.getItem('token') // si usas Sanctum con token
                 },
-                body: JSON.stringify({ fk_restaurante_id: restauranteId })
-            });
-
-            const result = await res.json();
-            if (result.estado === 'añadido') {
-                icon.classList.remove('fa-regular');
-                icon.classList.add('fa-solid');
-            } else if (result.estado === 'eliminado') {
-                icon.classList.remove('fa-solid');
-                icon.classList.add('fa-regular');
-            }
+                body: JSON.stringify({ fk_idRestaurante: restauranteId })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.estado === 'añadido') {
+                        icon.classList.remove('fa-regular');
+                        icon.classList.add('fa-solid');
+                    } else if (data.estado === 'eliminado') {
+                        icon.classList.remove('fa-solid');
+                        icon.classList.add('fa-regular');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al hacer toggle del favorito:', error);
+                });
         });
-
     });
+
 
 });

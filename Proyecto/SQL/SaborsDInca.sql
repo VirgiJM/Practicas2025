@@ -116,10 +116,9 @@ FOREIGN KEY (fk_idUsuario) REFERENCES Usuario (idUsuario),
 FOREIGN KEY (fk_idRestaurante) REFERENCES Restaurante(idRestaurante)
 );
 
-CREATE TABLE favoritos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    usuario_id INT,
-    restaurante_id INT,
-    FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
-    FOREIGN KEY (restaurante_id) REFERENCES restaurantes(id)
+CREATE TABLE Favorito (
+    fk_idUsuario INT,
+    fk_idRestaurante INT,
+    FOREIGN KEY (fk_idUsuario) REFERENCES Usuario(idUsuario),
+    FOREIGN KEY (fk_idRestaurante) REFERENCES Restaurante(idRestaurante)
 );

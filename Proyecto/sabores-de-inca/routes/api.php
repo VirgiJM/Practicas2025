@@ -26,10 +26,8 @@ Route::get('/prueba', function () {
     return '¡Funciona!';
 });
 
-// Ruta para registro de usuario.
+// Rutas públicas
 Route::post('register', [UserController::class, 'store']);
-
-// Ruta para login de usuario (autenticación).
 Route::post('login', [AuthController::class, 'login']);
 
 // Rutas protegidas (se necesita un token para poder acceder a ellas).

@@ -17,7 +17,7 @@
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
@@ -39,6 +39,7 @@
         </div>
     </header>
 
+
     <nav class="barra-nav">
         <div class="nav-links">
             <a href="/">Inicio</a>
@@ -51,8 +52,8 @@
         @yield('contenido')
     </main>
 
-    <footer style="background-color: #f8f8f8; padding: 1rem; text-align: center;">
-        <p>&copy; {{ date('Y') }} Sabores de Inca. Todos los derechos reservados.</p>
+    <footer style="background-color: #9b0202; padding: 1rem; text-align: center;">
+        <p style="color: white">&copy; {{ date('Y') }} Sabores de Inca. Todos los derechos reservados.</p>
     </footer>
 </body>
 

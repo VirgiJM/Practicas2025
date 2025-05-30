@@ -8,6 +8,8 @@ use App\Models\Restaurante;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 
 class RestauranteController extends Controller
@@ -15,29 +17,31 @@ class RestauranteController extends Controller
     // Index para mostrar todos los elementos de la tabla. 
     public function index(Request $request)
     {
-        // Empezamos la query con la relación de valoraciones
         $query = Restaurante::with('valoraciones')
             ->withAvg('valoraciones as promedio_valoracion', 'Valoracion');
 
-        // Si se solicita el filtro vegano, lo aplicamos
         if ($request->has('vegano') && $request->vegano == 1) {
-            $query->where('Vegano', true); // Recuerda: columna con mayúscula
+            $query->where('Vegano', true);
         }
 
-        // Ordenamos por valoración promedio de mayor a menor
         $query->orderByDesc('promedio_valoracion');
-
-        // Ejecutamos la consulta
         $restaurantes = $query->get();
 
-        // Si es una petición AJAX, devolvemos solo el fragmento de lista.
-        if ($request->ajax()) {
-            return view('restaurantes._lista', compact('restaurantes'));
+        /** @var \App\Models\User $usuario */
+        $usuario = Auth::user();
+
+        if ($usuario) {
+            $usuario->load('favoritos');
         }
 
-        // Si no es AJAX, devolvemos la vista completa.
-        return view('restaurantes.index', compact('restaurantes'));
+        if ($request->ajax()) {
+            return view('restaurantes._lista', compact('restaurantes', 'usuario'));
+        }
+
+        return view('restaurantes.index', compact('restaurantes', 'usuario'));
     }
+
+
 
 
     // Este método sería usado desde `api.php`. Devuelve datos en json.
