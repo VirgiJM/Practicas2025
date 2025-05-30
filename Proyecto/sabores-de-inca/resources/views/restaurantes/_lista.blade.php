@@ -2,10 +2,9 @@
 <div class="restaurante-card">
     <div class="image-container">
         <img src="{{ Storage::url($restaurante->Foto) }}" alt="Foto del restaurante">
-        <div class="favorito-btn" data-restaurante-id="{{ $restaurante->idRestaurante }}" style="display: none;">
+        <div class="favorito-btn" data-restaurante-id="{{ $restaurante->idRestaurante }}">
             <i class="fa-regular fa-heart"></i>
         </div>
-
     </div>
     <div class="details">
         <h3>{{ $restaurante->Nombre }}</h3>
@@ -15,10 +14,7 @@
         @else
         <p style="color:red">No vegano</p>
         @endif
-        <!-- <p style="color:green">{{ $restaurante->Vegano ? 'Vegano' : '' }}</p> -->
-        <p>
-            {{ number_format($restaurante->promedio_valoracion ?? 0, 1, '.', '') }} ⭐
-        </p>
+        <p>{{ number_format($restaurante->promedio_valoracion ?? 0, 1, '.', '') }} ⭐</p>
         <button class="ver-mas"><a href="{{ url('/restaurante/' . $restaurante->idRestaurante) }}">Ver más</a></button>
     </div>
 </div>

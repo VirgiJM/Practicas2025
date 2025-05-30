@@ -185,36 +185,39 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 0);
 
 
-    document.querySelectorAll('.favorito-btn').forEach(btn => {
-        btn.addEventListener('click', e => {
-            e.stopPropagation();
-            const icon = btn.querySelector('i');
-            const restauranteId = btn.dataset.restauranteId; // Asegúrate de tener esto en tu HTML
+    document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.favorito-btn');
+        if (!btn) return;
 
-            fetch('/api/favoritos/toggle', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                    'Authorization': 'Bearer ' + localStorage.getItem('token') // si usas Sanctum con token
-                },
-                body: JSON.stringify({ fk_idRestaurante: restauranteId })
+        e.stopPropagation();
+        const icon = btn.querySelector('i');
+        const restauranteId = btn.dataset.restauranteId;
+
+        fetch('/api/favoritos/toggle', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+            body: JSON.stringify({ fk_idRestaurante: restauranteId })
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.estado === 'añadido') {
+                    icon.classList.remove('fa-regular');
+                    icon.classList.add('fa-solid');
+                    icon.style.color = 'red';
+                } else if (data.estado === 'eliminado') {
+                    icon.classList.remove('fa-solid');
+                    icon.classList.add('fa-regular');
+                    icon.style.color = '';
+                }
             })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.estado === 'añadido') {
-                        icon.classList.remove('fa-regular');
-                        icon.classList.add('fa-solid');
-                    } else if (data.estado === 'eliminado') {
-                        icon.classList.remove('fa-solid');
-                        icon.classList.add('fa-regular');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error al hacer toggle del favorito:', error);
-                });
-        });
+            .catch(error => {
+                console.error('Error al hacer toggle del favorito:', error);
+            });
     });
 
 

@@ -119,7 +119,11 @@ Route::prefix('traducciones-restaurante')->group(function () {
 // Route::middleware('auth:sanctum')->post('/favoritos/toggle', [FavoritoController::class, 'toggle']);
 // Route::middleware('auth:sanctum')->get('/favoritos', function (Request $request) {
 //     return $request->user()->favoritos->pluck('id'); // Devuelve un array con los IDs de los restaurantes favoritos
+
 Route::middleware('auth:sanctum')->prefix('favoritos')->group(function () {
+    Route::get('/ids', function (Request $request) {
+        return $request->user()->favoritos->pluck('fk_idRestaurante');
+    });
     Route::get('/', [FavoritoController::class, 'index']);
     Route::post('/toggle', function (Request $request) {
         $usuario = $request->user();

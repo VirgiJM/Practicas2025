@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Log; // Pruebas.
 
 
 class RestauranteController extends Controller
@@ -29,9 +30,11 @@ class RestauranteController extends Controller
 
         /** @var \App\Models\User $usuario */
         $usuario = Auth::user();
+        // Log::info('Usuario:' . $usuario);
 
         if ($usuario) {
             $usuario->load('favoritos');
+            Log::info('Favoritos del usuario:', $usuario->favoritos->pluck('idRestaurante')->toArray()); // Log para ver si se devuelven bien los fav del usuario.
         }
 
         if ($request->ajax()) {
