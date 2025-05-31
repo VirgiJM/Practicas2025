@@ -23,20 +23,29 @@
 <body>
     <header class="main-header">
         <div class="container">
-            <h1 class="logo">Sabores de Inca</h1>
+            <div class="espaciador"></div>
+            <!-- Logo -->
+            <img class="logo" src="{{ asset('Logo.png')}}" alt='Logo-Sabores-Inca'>
 
-            <div id="no-login" class="auth-links" style="display: none;">
-                <a id="register-link" href="/register">Registrarse</a>
-                <a id="login-link" href="/login">Iniciar sesión</a>
+            <!-- Sección de enlaces y modo oscuro -->
+            <div class="auth-links">
+                <div id="no-login" style="display: none;">
+                    <a id="register-link" href="/register">Registrarse</a>
+                    <a id="login-link" href="/login">Iniciar sesión</a>
+                </div>
+
+                <div id="user-menu" style="display: none;">
+                    <p id="nombre-usuario"></p>
+                    <a id="profile-link" href="/perfil">Mi perfil</a>
+                    <button id="logout-button">Cerrar sesión</button>
+                </div>
+
+                <!-- Botón separado -->
+                <div class="dark-mode-wrapper">
+                    <button id="dark-mode-toggle" aria-label="Cambiar modo oscuro">🌓</button>
+                </div>
             </div>
 
-            <div id="user-menu" class="auth-links" style="display: none;">
-                <p id="nombre-usuario"></p>
-                <a id="profile-link" href="/perfil">Perfil</a>
-                <button id="logout-button">Cerrar sesión</button>
-            </div>
-            <button id="dark-mode-toggle" aria-label="Cambiar modo oscuro">Modo oscuro</button>
-        </div>
     </header>
 
 

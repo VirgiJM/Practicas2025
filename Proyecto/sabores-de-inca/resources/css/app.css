@@ -142,9 +142,18 @@ input[type="submit"]:hover {
 }
 
 .main-header .logo {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin: 0;
+    width: 10%;
+    max-width: 140px;
+    
+}
+
+/* Logo responsive en móviles */
+@media (max-width: 768px) {
+    .main-header .logo {
+        width: 50%;
+        max-width: 200px;
+        margin-right: 70px;
+    }
 }
 
 /* Links de login y usuario */
@@ -181,8 +190,18 @@ input[type="submit"]:hover {
     padding: 0.4rem 0.8rem;
     border: none;
     cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 0 !important;
+    margin-bottom: 0;
+    
 }
 
+@media (max-width: 675px) {
+    #dark-mode-toggle {
+        position: static;
+        margin-top: -40px !important;
+    }
+}
 #dark-mode-toggle:hover {
     background-color: #ffe5e5;
 }
@@ -318,4 +337,3 @@ body {
 main {
     flex: 1;
 }
-
