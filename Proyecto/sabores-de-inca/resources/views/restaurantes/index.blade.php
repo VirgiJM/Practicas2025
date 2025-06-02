@@ -21,7 +21,7 @@
     </select>
 
     <select id="rangoPrecio">
-        <option value="">Rango de precio</option>
+        <option value="0">Rango de precio</option>
         @foreach ($rangosPrecio as $rango)
         <option value="{{ $rango }}">{{ $rango }}</option>
         @endforeach
