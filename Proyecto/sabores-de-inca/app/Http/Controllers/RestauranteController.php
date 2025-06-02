@@ -8,6 +8,9 @@ use App\Models\Restaurante;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Support\Facades\Log; // Pruebas.
 
 
 class RestauranteController extends Controller
@@ -15,29 +18,33 @@ class RestauranteController extends Controller
     // Index para mostrar todos los elementos de la tabla. 
     public function index(Request $request)
     {
-        // Empezamos la query con la relación de valoraciones
         $query = Restaurante::with('valoraciones')
             ->withAvg('valoraciones as promedio_valoracion', 'Valoracion');
 
-        // Si se solicita el filtro vegano, lo aplicamos
         if ($request->has('vegano') && $request->vegano == 1) {
-            $query->where('Vegano', true); // Recuerda: columna con mayúscula
+            $query->where('Vegano', true);
         }
 
-        // Ordenamos por valoración promedio de mayor a menor
         $query->orderByDesc('promedio_valoracion');
-
-        // Ejecutamos la consulta
         $restaurantes = $query->get();
 
-        // Si es una petición AJAX, devolvemos solo el fragmento de lista.
-        if ($request->ajax()) {
-            return view('restaurantes._lista', compact('restaurantes'));
+        /** @var \App\Models\User $usuario */
+        $usuario = Auth::user();
+        // Log::info('Usuario:' . $usuario);
+
+        if ($usuario) {
+            $usuario->load('favoritos');
+            Log::info('Favoritos del usuario:', $usuario->favoritos->pluck('idRestaurante')->toArray()); // Log para ver si se devuelven bien los fav del usuario.
         }
 
-        // Si no es AJAX, devolvemos la vista completa.
-        return view('restaurantes.index', compact('restaurantes'));
+        if ($request->ajax()) {
+            return view('restaurantes._lista', compact('restaurantes', 'usuario'));
+        }
+
+        return view('restaurantes.index', compact('restaurantes', 'usuario'));
     }
+
+
 
 
     // Este método sería usado desde `api.php`. Devuelve datos en json.
@@ -68,18 +75,23 @@ class RestauranteController extends Controller
     public function showApi($id)
     {
         $restaurante = Restaurante::find($id); // Busca en la base de datos el elemento con ese ID
-
         if ($restaurante) {
             return response()->json($restaurante); // Si lo encuentra, lo devuelve en formato JSON
         } else {
             return response()->json(['mensaje' => 'Restaurante no encontrado'], 404); // Si no lo encuentra, error 404
         }
+
+        // $restaurante = Restaurante::where('Slug', $slug)->firstOrFail();
+        // return view('restaurantes.show', compact('restaurante'));
     }
 
     // Función para vista web.
-    public function show($id)
+    public function show($slug)
     {
-        $restaurante = Restaurante::findOrFail($id);
+        // $restaurante = Restaurante::findOrFail($id);
+        // return view('restaurantes.show', compact('restaurante'));
+        $restaurante = Restaurante::find($slug);
+        $restaurante = Restaurante::where('Slug', $slug)->firstOrFail();
         return view('restaurantes.show', compact('restaurante'));
     }
 

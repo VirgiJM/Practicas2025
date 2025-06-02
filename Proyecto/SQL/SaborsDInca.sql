@@ -54,12 +54,15 @@ Carta Varchar(255), # Se guardará la ruta del archivo.
 Foto Varchar(255),
 Latitud Double,
 Longitud Double,
+Slug Varchar(100),
+Descripcion Text,
 created_at TIMESTAMP NULL DEFAULT current_timestamp,
 updated_at TIMESTAMP NULL DEFAULT current_timestamp,
 fk_idTipoCocina INT,
 FOREIGN KEY (fk_idTipoCocina) REFERENCES Tipo_Cocina(idTipoCocina)
 );
-
+# ALTER TABLE restaurante CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+-- ALTER TABLE Restaurante ADD COLUMN Slug Varchar(100);
 
 CREATE TABLE Restaurante_Accesibilidad(
 idRestauranteAccesible INT AUTO_INCREMENT PRIMARY KEY,
@@ -113,4 +116,11 @@ created_at TIMESTAMP NULL DEFAULT current_timestamp,
 updated_at TIMESTAMP NULL DEFAULT current_timestamp,
 FOREIGN KEY (fk_idUsuario) REFERENCES Usuario (idUsuario),
 FOREIGN KEY (fk_idRestaurante) REFERENCES Restaurante(idRestaurante)
+);
+
+CREATE TABLE Favorito (
+    fk_idUsuario INT,
+    fk_idRestaurante INT,
+    FOREIGN KEY (fk_idUsuario) REFERENCES Usuario(idUsuario),
+    FOREIGN KEY (fk_idRestaurante) REFERENCES Restaurante(idRestaurante)
 );

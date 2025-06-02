@@ -5,6 +5,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Restaurante extends Model
 {
@@ -34,4 +35,15 @@ class Restaurante extends Model
     // {
     //     return $this->belongsTo(TipoCocina::class, 'TipoCocinaID');
     // }
+    public function usuariosFavoritos()
+    {
+        return $this->belongsToMany(User::class, 'favorito', 'fk_idRestaurante', 'fk_idUsuario');
+    }
+
+    protected static function booted() // Función para que en la URL salga el nombre del restaurante y no el id.
+    {
+        static::saving(function ($restaurante) {
+            $restaurante->Slug = Str::slug($restaurante->Nombre);
+        });
+    }
 }

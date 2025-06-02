@@ -48,12 +48,13 @@ body {
     margin: 0;
     font-size: 1.3rem;
     font-weight: 600;
+    color: black;
 }
 
 .restaurante-card p {
     font-size: 0.95rem;
-    color: #777;
     margin: 8px 0 0 0;
+    color: black;
 }
 
 /* Filtros y formularios */
@@ -100,14 +101,54 @@ input[type="submit"]:hover {
     background-color: #17a689;
 }
 
+/* Estilos generales de la leyenda */
 .info.legend {
     background: white;
     padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
     font-size: 14px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    border-radius: 5px;
-    line-height: 1.4em;
+    max-width: 90vw;
+    /* Asegura que no se salga del viewport en móvil */
 }
+
+/* Elementos individuales */
+.leyenda-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+    flex-wrap: nowrap;
+}
+
+/* Iconos */
+.leyenda-item img {
+    width: 20px;
+    height: 30px;
+    margin-right: 6px;
+}
+
+/* Móvil: mostrar en varias columnas si hay poco espacio */
+/* @media (max-width: 768px) {
+  .info.legend {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .leyenda-item {
+    margin-bottom: 3px;
+  }
+
+  .leyenda-item img {
+    width: 16px;
+    height: 24px;
+    margin-right: 4px;
+  }
+
+  .leyenda-item span {
+    font-size: 12px;
+  }
+} */
+
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -119,4 +160,423 @@ input[type="submit"]:hover {
     .restaurante-card {
         width: 90%;
     }
+}
+
+/* HEADER GENERAL */
+.main-header {
+    background-color: rgb(253, 0, 0);
+    color: white;
+    padding: 1rem 0;
+}
+
+.main-header .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.main-header .logo {
+    width: 10%;
+    max-width: 140px;
+
+}
+
+/* Logo responsive en móviles */
+@media (max-width: 768px) {
+    .main-header .logo {
+        width: 50%;
+        max-width: 200px;
+        margin-right: 70px;
+    }
+}
+
+/* Links de login y usuario */
+.auth-links {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.auth-links a,
+.auth-links button {
+    background: white;
+    color: rgb(253, 0, 0);
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    text-decoration: none;
+}
+
+.auth-links a:hover,
+.auth-links button:hover {
+    background: #ffe5e5;
+}
+
+/* Botón modo oscuro */
+#dark-mode-toggle {
+    background-color: white;
+    color: rgb(253, 0, 0);
+    font-weight: 600;
+    border-radius: 4px;
+    padding: 0.4rem 0.8rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 0 !important;
+    margin-bottom: 0;
+
+}
+
+@media (max-width: 675px) {
+    #dark-mode-toggle {
+        position: static;
+        margin-top: -40px !important;
+    }
+}
+
+#dark-mode-toggle:hover {
+    background-color: #ffe5e5;
+}
+
+/* RESPONSIVE HEADER */
+@media (max-width: 768px) {
+    .main-header .container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .auth-links {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    #dark-mode-toggle {
+        align-self: flex-start;
+    }
+}
+
+a {
+    text-decoration: none;
+}
+
+/* NAV GENERAL */
+.barra-nav {
+    background-color: #ffe5e5;
+    /* tono suave que combina con el rojo */
+    padding: 0.75rem 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.barra-nav .nav-links {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.barra-nav .nav-links a {
+    text-decoration: none;
+    color: rgb(253, 0, 0);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color 0.2s ease, border-bottom 0.2s ease;
+    position: relative;
+}
+
+.barra-nav .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 2px;
+    width: 100%;
+    background-color: rgb(253, 0, 0);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.2s ease;
+}
+
+.barra-nav .nav-links a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+@media (max-width: 600px) {
+    .barra-nav .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+}
+
+/* Favoritos */
+.favorito-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #fff;
+    transition: color 0.3s;
+}
+
+.favorito-btn .liked {
+    color: #e63946;
+    /* rojo corazón */
+}
+
+.restaurant-card {
+    position: relative;
+}
+
+.image-container {
+    position: relative;
+}
+
+.favorito-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: #888;
+}
+
+.favorito-btn .fa-solid {
+    color: red;
+}
+
+#dark-mode-toggle {
+    margin-left: 20rem;
+
+}
+
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+
+/* Contenedor para organizar */
+.filtro-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 25px;
+    background: #f9fafb;
+    padding: 15px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgb(0 0 0 / 0.05);
+}
+
+/* Título */
+h2 {
+    width: 100%;
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: #222;
+    margin-bottom: 15px;
+}
+
+/* Select estilo “botón” */
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: white;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #444;
+    cursor: pointer;
+    min-width: 180px;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 0.07);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-image: url("data:image/svg+xml,%3csvg fill='none' stroke='%23444' stroke-width='2' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' d='M6 9l6 6 6-6'%3e%3c/path%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 14px 14px;
+}
+
+select:hover,
+select:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 8px #4f46e5aa;
+    outline: none;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #4f46e5;
+    border-radius: 5px;
+    transition: box-shadow 0.3s ease;
+    box-shadow: 0 0 5px #4f46e5aa;
+}
+
+input[type="checkbox"]:hover {
+    box-shadow: 0 0 10px #4f46e5cc;
+}
+
+label[for="vegano"] {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+    cursor: pointer;
+    gap: 10px;
+
+}
+
+
+/* Ajustes para filtros en móvil */
+@media (max-width: 768px) {
+    .filtro-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    /* Los selects e input checkbox ocupan 100% en móviles para mejor usabilidad */
+    .filtro-container select,
+    .filtro-container label[for="vegano"] {
+        width: 100%;
+        min-width: unset;
+        /* Elimina el min-width para móviles */
+    }
+
+    /* Ajustar el checkbox para que no ocupe tanto espacio */
+    input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+/* Ajustar tarjetas para móviles */
+@media (max-width: 768px) {
+    .restaurantes-container {
+        flex-direction: column;
+        padding: 20px 10px;
+        gap: 15px;
+    }
+
+    .restaurante-card {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+}
+
+/* Ajustar mapa para que no tenga tanto margen arriba en móvil */
+@media (max-width: 768px) {
+    #map {
+        margin-top: 2rem !important;
+        height: 400px !important;
+        /* Más compacto en móviles */
+    }
+}
+
+
+#yo {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1rem auto;
+    border-radius: 12px;
+    /* opcional: para que tenga bordes redondeados */
+}
+
+.container-tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.restaurante-card {
+  display: flex;
+  flex-direction: column;
+  height: 350px; 
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  background-color: white;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* ocupa espacio para empujar botón abajo */
+  gap: 0.3rem;
+  font-size: 0.9rem; /* un poco más pequeño */
+  line-height: 1.3;
+}
+
+.details p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+h3 {
+  font-size: 1.1rem;
+  margin: 0 0 0.5rem 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-ver-mas {
+  margin-top: auto; /* empuja botón abajo */
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: white;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn-ver-mas:hover {
+  background-color: #0056b3;
 }

@@ -16,6 +16,8 @@ use App\Http\Controllers\IdiomaController;
 use App\Http\Controllers\RestauranteAccesibilidadController;
 use App\Http\Controllers\RestauranteTraduccionController;
 use App\Http\Controllers\ValoracionController;
+use App\Http\Controllers\Api\FavoritoController;
+use Illuminate\Support\Facades\Log;
 
 require base_path('routes/test.php');
 
@@ -24,10 +26,8 @@ Route::get('/prueba', function () {
     return '¡Funciona!';
 });
 
-// Ruta para registro de usuario.
+// Rutas públicas
 Route::post('register', [UserController::class, 'store']);
-
-// Ruta para login de usuario (autenticación).
 Route::post('login', [AuthController::class, 'login']);
 
 // Rutas protegidas (se necesita un token para poder acceder a ellas).
@@ -46,7 +46,7 @@ Route::middleware('auth:sanctum')->post('/valoracion', [ValoracionController::cl
 Route::prefix('restaurantes')->group(function () {
     // Route::get('/', [RestauranteController::class, 'index']);
     Route::get('/', [RestauranteController::class, 'indexApi']);
-    Route::get('/{id}', [RestauranteController::class, 'showApi']);
+    // Route::get('/{slug}', [RestauranteController::class, 'showApi']);
     Route::post('/{id}/subir-carta', [RestauranteController::class, 'subirCarta']);
     Route::post('/', [RestauranteController::class, 'store']);
     Route::put('/{id}', [RestauranteController::class, 'update']);
@@ -112,4 +112,33 @@ Route::prefix('traducciones-restaurante')->group(function () {
     Route::post('/', [RestauranteTraduccionController::class, 'store']);
     Route::put('/{id}', [RestauranteTraduccionController::class, 'update']);
     Route::delete('/{id}', [RestauranteTraduccionController::class, 'destroy']);
+});
+
+// Rutas API para los favoritos.
+// Route::middleware('auth:sanctum')->get('/favoritos', [FavoritoController::class, 'index']);
+// Route::middleware('auth:sanctum')->post('/favoritos/toggle', [FavoritoController::class, 'toggle']);
+// Route::middleware('auth:sanctum')->get('/favoritos', function (Request $request) {
+//     return $request->user()->favoritos->pluck('id'); // Devuelve un array con los IDs de los restaurantes favoritos
+
+Route::middleware('auth:sanctum')->prefix('favoritos')->group(function () {
+    Route::get('/ids', function (Request $request) {
+        $ids = $request->user()->favoritos->pluck('idRestaurante');
+        Log::info('IDs de favoritos del usuario:', $ids->toArray());
+        return $ids;
+    });
+    Route::get('/', [FavoritoController::class, 'index']);
+    Route::post('/toggle', function (Request $request) {
+        $usuario = $request->user();
+        $restauranteId = $request->input('fk_idRestaurante');
+        Log::info('Restaurante ID recibido: ' . $restauranteId); // Ya que el dd hace caput, con esto puedo ver si estoy pasando bien el id del restaurante. // Da bien.
+
+
+        if ($usuario->favoritos()->where('fk_idRestaurante', $restauranteId)->exists()) {
+            $usuario->favoritos()->detach($restauranteId);
+            return response()->json(['estado' => 'eliminado']);
+        } else {
+            $usuario->favoritos()->attach($restauranteId);
+            return response()->json(['estado' => 'añadido']);
+        }
+    });
 });

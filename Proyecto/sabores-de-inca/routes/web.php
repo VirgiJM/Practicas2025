@@ -28,6 +28,7 @@ Route::get('/', function () {
 // return view('restaurantes.index', compact('restaurantes')); # Sintaxis: Hace un return de la vista y devuelve los datos de la variable.
 // });
 // Route::get('/restaurantes', [RestauranteController::class, 'index']);
+// Route::middleware(['auth:sanctum'])->get('/restaurantes', [RestauranteController::class, 'index']);
 Route::get('/restaurantes', [RestauranteController::class, 'index'])->name('restaurantes.index');
 
 
@@ -49,7 +50,7 @@ Route::get('/restaurantes', [RestauranteController::class, 'index'])->name('rest
 // Route::get('/tipo-cocina-traduccion/{id}', [TipoCocinaTraduccionController::class, 'show']);
 
 // Route::get('/restaurante', [RestauranteController::class, 'index']);
-Route::get('/restaurante/{id}', [RestauranteController::class, 'show']);
+Route::get('/restaurante/{slug}', [RestauranteController::class, 'show']);
 
 // Route::get('/restaurante-accesibilidad', [RestauranteAccesibilidadController::class, 'index']);
 // Route::get('/restaurante-accesibilidad/{id}', [RestauranteAccesibilidadController::class, 'show']);

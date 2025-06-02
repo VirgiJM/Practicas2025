@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens; // Añadirlo una vez se han hecho las migraciones.
+use App\Models\Restaurante;
+
 
 class User extends Authenticatable
 {
@@ -22,4 +24,9 @@ class User extends Authenticatable
     protected $hidden = [
         'Password',
     ];
+
+    public function favoritos()
+    {
+        return $this->belongsToMany(Restaurante::class, 'favorito', 'fk_idUsuario', 'fk_idRestaurante'); // Favorito es la tabla pivote.
+    }
 }

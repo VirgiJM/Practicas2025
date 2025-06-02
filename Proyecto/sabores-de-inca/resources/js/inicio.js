@@ -24,3 +24,22 @@ setInterval(() => {
 
 // Al cargar la página, se muetsra la primera diapositiva.
 showSlide(currentSlide);
+
+const prevButton = document.querySelector('.prev');
+const nextButton = document.querySelector('.next');
+
+prevButton.addEventListener('click', () => {
+    currentSlide = currentSlide - 1;
+    if (currentSlide < 0) {
+        currentSlide = slides.length - 1;
+    }
+    showSlide(currentSlide);
+});
+
+nextButton.addEventListener('click', () => {
+    currentSlide = currentSlide + 1;
+    if (currentSlide >= slides.length) {
+        currentSlide = 0;
+    }
+    showSlide(currentSlide);
+});
