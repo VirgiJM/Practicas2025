@@ -8,9 +8,9 @@
 <h2>Filtrar</h2>
 <div class="filtro-container">
     <select id="tipoCocina">
-        <!-- Opciones se llenan con JS -->
+        <!-- Esto se llena con JS. -->
     </select>
-    
+
     <select id="filtroMedia">
         <option value="0">Cualquier media</option>
         <option value="1">⭐</option>
@@ -20,10 +20,18 @@
         <option value="5">⭐⭐⭐⭐⭐</option>
     </select>
 
+    <select id="rangoPrecio">
+        <option value="">Rango de precio</option>
+        @foreach ($rangosPrecio as $rango)
+        <option value="{{ $rango }}">{{ $rango }}</option>
+        @endforeach
+    </select>
+
     <label for="vegano">
         ¿Vegano?
         <input type="checkbox" id="vegano">
     </label>
+
 </div>
 
 <h2>Lista de restaurantes</h2>

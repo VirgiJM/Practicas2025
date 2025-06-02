@@ -33,7 +33,7 @@ Route::get('/restaurantes', [RestauranteController::class, 'index'])->name('rest
 
 
 
-// // Una ruta por cada tabla.
+// Una ruta por cada tabla.
 // Route::get('/accesibilidad', [AccesibilidadController::class, 'index']);
 // Route::get('/accesibilidad/{id}', [AccesibilidadController::class, 'show']);
 
