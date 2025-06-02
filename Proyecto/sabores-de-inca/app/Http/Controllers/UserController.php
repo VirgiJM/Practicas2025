@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator; // Para las validaciones.
+
 
 class UserController extends Controller
 {
@@ -12,12 +14,19 @@ class UserController extends Controller
     {
         try {
             // Validación de los campos
-            $validatedData = $request->validate([
+            $validator = Validator::make($request->all(), [
                 'Username' => 'required|string|max:100|unique:Usuario',
                 'Email' => 'required|email|max:30|unique:Usuario',
-                'Password' => 'required|string|min:8',
+                'Password' => 'required|string|min:8|confirmed', // El confirmed es para cuando quieres que dos contraseñas coincidan.
                 // 'Profile_Image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Necesario únicamente si voy a subir yo una imagen mientras creo el usuario.
             ]);
+
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()], 422);
+            }
+
+            $validatedData = $validator->validated();
+
 
             // Asignación de la imagen por defecto.
             $profileImagePath = 'images/default-profile.png';  // Ruta de la imagen por defecto.

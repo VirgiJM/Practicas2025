@@ -3,9 +3,18 @@
 @section('titulo', 'Quién soy | Sabores de Inca')
 
 @section('contenido')
-<h2>Hola, me llamo Virginia</h2>
-<p>Soy programadora y amante de la buena comida, especialmente la que ofrece Inca.</p>
-<p>Este proyecto nació de mi deseo de crear una guía fácil y accesible para que tanto locales como visitantes puedan descubrir y disfrutar de la gastronomía local con toda la información que necesitan.</p>
-<p>Me apasiona apoyar a los negocios locales y fomentar opciones para todos los gustos, incluyendo opciones veganas y accesibles.</p>
-<p>Si quieres contactarme para sugerencias o colaborar, puedes escribirme a <a href="mailto:info@saboresdeinca.com">info@saboresdeinca.com</a> o seguirme en <a href="https://twitter.com/info@saboresdeinca.com" target="_blank" rel="noopener noreferrer">Twitter</a>.</p>
+<section id="quien-soy" style="max-width: 800px; margin: 0 auto; padding: 2rem;">
+    <h2 style="font-size: 2rem; margin-bottom: 1rem; color:red;">Quién soy</h2>
+    <p style="font-size: 1.1rem; line-height: 1.6;">
+        ¡Hola! Soy <strong>Virginia</strong>, programadora y entusiasta de la buena comida.
+        <em>Sabores de Inca</em> es un proyecto que une dos de mis grandes pasiones: el desarrollo web y descubrir nuevos sitios para comer bien.
+    </p>
+    <p style="font-size: 1.1rem; line-height: 1.6; margin-top: 1rem;">
+        Esta guía nace como parte de mi proyecto de fin de grado, con el objetivo de facilitar a cualquier persona la búsqueda de restaurantes en Inca
+        según sus gustos, presupuesto o necesidades. Desde cartas y precios hasta ubicación, accesibilidad u opciones veganas, he diseñado esta web pensando en la experiencia del usuario…
+        <strong>¡y en abrir el apetito!</strong>
+    </p>
+    <img id="yo" src="{{ asset('Yo.jpg')}}">
+</section>
+
 @endsection

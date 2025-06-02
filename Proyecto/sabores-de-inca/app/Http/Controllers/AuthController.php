@@ -26,7 +26,11 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'Bienvenida!!',
             'access_token' => $token,
-            'user' => $user
+            'user' => [
+                'username' => $user->Username,
+                'email' => $user->Email,
+                'profile_image' => asset($user->Profile_Image),
+            ]
         ]);
     }
 }
