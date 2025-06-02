@@ -135,6 +135,47 @@ document.addEventListener("DOMContentLoaded", () => {
     // Inicializar carga.
     actualizarFiltros();
 
+    // Pintar los favoritos.
+    let favoritosIds = [];
+
+    fetch('/api/favoritos/ids', {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
+        credentials: 'include'
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (Array.isArray(data)) {
+                favoritosIds = data;
+                console.log('IDs de favoritos recibidos:', favoritosIds);
+                pintarCorazones();
+            } else {
+                console.warn('Respuesta inesperada:', data);
+            }
+        })
+        .catch(error => {
+            console.error('Error al obtener los favoritos:', error);
+        });
+
+
+    function pintarCorazones() {
+        document.querySelectorAll('.favorito-btn').forEach(btn => {
+            const restauranteId = parseInt(btn.dataset.restauranteId);
+            if (favoritosIds.includes(restauranteId)) {
+                btn.querySelector('i').classList.remove('fa-regular');
+                btn.querySelector('i').classList.add('fa-solid');
+            }
+        });
+    }
+
     // Listeners de filtros.
     checkboxVegano.addEventListener('change', actualizarFiltros);
     selectTipo.addEventListener('change', actualizarFiltros);

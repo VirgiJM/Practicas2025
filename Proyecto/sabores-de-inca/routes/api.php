@@ -122,13 +122,15 @@ Route::prefix('traducciones-restaurante')->group(function () {
 
 Route::middleware('auth:sanctum')->prefix('favoritos')->group(function () {
     Route::get('/ids', function (Request $request) {
-        return $request->user()->favoritos->pluck('fk_idRestaurante');
+        $ids = $request->user()->favoritos->pluck('idRestaurante');
+        Log::info('IDs de favoritos del usuario:', $ids->toArray());
+        return $ids;
     });
     Route::get('/', [FavoritoController::class, 'index']);
     Route::post('/toggle', function (Request $request) {
         $usuario = $request->user();
         $restauranteId = $request->input('fk_idRestaurante');
-        Log::info('Restaurante ID recibido: ' . $restauranteId); // Ya que el dd hace caput, con esto puedo ver si estoy pasando bien el id del restaurante.
+        Log::info('Restaurante ID recibido: ' . $restauranteId); // Ya que el dd hace caput, con esto puedo ver si estoy pasando bien el id del restaurante. // Da bien.
 
 
         if ($usuario->favoritos()->where('fk_idRestaurante', $restauranteId)->exists()) {
