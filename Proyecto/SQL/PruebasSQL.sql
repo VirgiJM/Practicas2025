@@ -38,4 +38,9 @@ ALTER TABLE Restaurante
 ADD COLUMN created_at TIMESTAMP NULL,
 ADD COLUMN updated_at TIMESTAMP NULL;
 
+-- Obtener las descripciones de cada restaurante.
 SELECT idRestauranteTraduccion, Descripcion FROM Restaurante_Traduccion WHERE fk_idIdioma = 1;
+
+
+-- Obtener los precios.
+SELECT DISTINCT RangoPrecio FROM Restaurante;
