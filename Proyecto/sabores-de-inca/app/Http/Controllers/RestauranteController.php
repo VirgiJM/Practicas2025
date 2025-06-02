@@ -75,18 +75,23 @@ class RestauranteController extends Controller
     public function showApi($id)
     {
         $restaurante = Restaurante::find($id); // Busca en la base de datos el elemento con ese ID
-
         if ($restaurante) {
             return response()->json($restaurante); // Si lo encuentra, lo devuelve en formato JSON
         } else {
             return response()->json(['mensaje' => 'Restaurante no encontrado'], 404); // Si no lo encuentra, error 404
         }
+
+        // $restaurante = Restaurante::where('Slug', $slug)->firstOrFail();
+        // return view('restaurantes.show', compact('restaurante'));
     }
 
     // Función para vista web.
-    public function show($id)
+    public function show($slug)
     {
-        $restaurante = Restaurante::findOrFail($id);
+        // $restaurante = Restaurante::findOrFail($id);
+        // return view('restaurantes.show', compact('restaurante'));
+        $restaurante = Restaurante::find($slug);
+        $restaurante = Restaurante::where('Slug', $slug)->firstOrFail();
         return view('restaurantes.show', compact('restaurante'));
     }
 

@@ -1,4 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        document.querySelectorAll('.favorito-btn').forEach(btn => btn.style.display = 'none');
+    }
     const map = L.map('map').setView([39.718, 2.911], 17); // Coordenadas de Inca.
 
     // Iconos por tipo de cocina.
