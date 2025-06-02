@@ -37,3 +37,5 @@ ADD COLUMN updated_at TIMESTAMP NULL;
 ALTER TABLE Restaurante
 ADD COLUMN created_at TIMESTAMP NULL,
 ADD COLUMN updated_at TIMESTAMP NULL;
+
+SELECT idRestauranteTraduccion, Descripcion FROM Restaurante_Traduccion WHERE fk_idIdioma = 1;
