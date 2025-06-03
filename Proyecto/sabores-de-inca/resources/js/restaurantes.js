@@ -70,6 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Función para cargar restaurantes en mapa y lista según filtros.
     function cargarRestaurantes(vegano = null, tipoCocina = 0, media = 0, rangoPrecio = 0) {
+        console.log("Filtros recibidos:", { vegano, tipoCocina, media, rangoPrecio });
         let urlApi = '/api/restaurantes?';
         if (vegano !== null) {
             urlApi += `vegano=${vegano}&`;
@@ -137,10 +138,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const vegano = checkboxVegano.checked ? 1 : 0;
         const tipoCocina = parseInt(selectTipo.value, 10) || 0;
         const media = parseInt(selectMedia.value, 10) || 0;
-        const rangoPrecio = parseInt(selectRangoPrecio.value, 10) || 0;
+        const rangoPrecio = selectRangoPrecio.value; // NO ES NUMÉRICO!!!
         cargarRestaurantes(vegano, tipoCocina, media, rangoPrecio);
     }
 
+    selectRangoPrecio.addEventListener('change', actualizarFiltros);
     // Inicializar carga.
     actualizarFiltros();
 
