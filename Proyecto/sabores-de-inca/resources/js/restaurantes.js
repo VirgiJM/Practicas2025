@@ -61,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const checkboxVegano = document.getElementById('vegano'); // Checkbox para opciones veganas.
     const selectMedia = document.getElementById('filtroMedia'); // Select para filtrar a partir de x cantidad de estrellas.
+    const selectRangoPrecio = document.getElementById('rangoPrecio');
 
     // Variable global para los marcadores en el mapa.
     if (!window.marcadoresLayer) {
@@ -68,7 +69,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Función para cargar restaurantes en mapa y lista según filtros.
-    function cargarRestaurantes(vegano = null, tipoCocina = 0, media = 0) {
+    function cargarRestaurantes(vegano = null, tipoCocina = 0, media = 0, rangoPrecio = 0) {
+        console.log("Filtros recibidos:", { vegano, tipoCocina, media, rangoPrecio });
         let urlApi = '/api/restaurantes?';
         if (vegano !== null) {
             urlApi += `vegano=${vegano}&`;
@@ -78,8 +80,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         if (media && media != 0) {
             urlApi += `mediaMinima=${media}&`;
+
         }
-        urlApi = urlApi.slice(0, -1); // Quitar último & si existe
+        if (rangoPrecio && rangoPrecio != 0) {
+            urlApi += `rangoPrecio=${rangoPrecio}&`;
+        }
+        urlApi = urlApi.slice(0, -1);
+
+        console.log("URL API que se está llamando:", urlApi);
 
         fetch(urlApi)
             .then(res => {
@@ -87,13 +95,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 return res.json();
             })
             .then(restaurantes => {
+                console.log('Datos recibidos de la API:', restaurantes);
                 window.marcadoresLayer.clearLayers();
 
                 restaurantes.forEach(rest => {
                     if (rest.Latitud && rest.Longitud) {
                         const icono = iconosPorTipo[rest.fk_idTipoCocina] || L.icon.default;
                         const marker = L.marker([rest.Latitud, rest.Longitud], { icon: icono });
-                        marker.bindPopup(`<strong>${rest.Nombre}</strong><br>${rest.Direccion || ''}`);
+                        // marker.bindPopup(`<strong>${rest.Nombre}</strong><br>${rest.Direccion || ''}`);
+                        marker.bindPopup(`<strong><a href="/restaurante/${encodeURIComponent(rest.Slug.toLowerCase().replace(/\s+/g, '-'))}" style="text-decoration: none; color: #007bff;">${rest.Nombre}</a></strong><br>${rest.Direccion || ''}
+`);
                         marker.addTo(window.marcadoresLayer);
                     }
                 });
@@ -129,9 +140,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const vegano = checkboxVegano.checked ? 1 : 0;
         const tipoCocina = parseInt(selectTipo.value, 10) || 0;
         const media = parseInt(selectMedia.value, 10) || 0;
-        cargarRestaurantes(vegano, tipoCocina, media);
+        const rangoPrecio = selectRangoPrecio.value; // NO ES NUMÉRICO!!!
+        cargarRestaurantes(vegano, tipoCocina, media, rangoPrecio);
     }
 
+    selectRangoPrecio.addEventListener('change', actualizarFiltros);
     // Inicializar carga.
     actualizarFiltros();
 
@@ -180,6 +193,8 @@ document.addEventListener("DOMContentLoaded", () => {
     checkboxVegano.addEventListener('change', actualizarFiltros);
     selectTipo.addEventListener('change', actualizarFiltros);
     selectMedia.addEventListener('change', actualizarFiltros);
+    selectRangoPrecio.addEventListener('change', actualizarFiltros);
+
 
     // Leyenda en el mapa.
     const leyenda = L.control({ position: 'bottomright' });
@@ -264,6 +279,5 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.error('Error al hacer toggle del favorito:', error);
             });
     });
-
 
 });

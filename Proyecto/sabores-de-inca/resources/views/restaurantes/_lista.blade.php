@@ -1,5 +1,5 @@
 @foreach ($restaurantes as $restaurante)
-<div class="restaurante-card">
+<div class="restaurante-card" data-id="{{ $restaurante->idRestaurante }}">
     <div class="image-container">
         <img src="{{ Storage::url($restaurante->Foto) }}" alt="Foto de {{$restaurante->Nombre}}">
         <div class="favorito-btn" data-restaurante-id="{{ $restaurante->idRestaurante }}">
@@ -14,6 +14,7 @@
         @else
         <p style="color:red">No vegano</p>
         @endif
+        <p>{{$restaurante->RangoPrecio}}</p>
         <p>{{ number_format($restaurante->promedio_valoracion ?? 0, 1, '.', '') }} ⭐</p>
         <a href="{{ url('/restaurante/' . $restaurante->Slug) }}" class="btn-ver-mas">Ver más</a>
     </div>

@@ -25,24 +25,48 @@ class RestauranteController extends Controller
             $query->where('Vegano', true);
         }
 
+        if ($request->has('mediaMinima')) {
+            $mediaMinima = (int) $request->mediaMinima;
+            $query->having('promedio_valoracion', '>=', $mediaMinima);
+        } else {
+            $mediaMinima = 0;  // Valor por defecto para evitar "variable indefinida".
+        }
+
+        // Filtrado tipo cocina
+        if ($request->has('tipoCocina') && $request->tipoCocina != 0) {
+            $query->where('fk_idTipoCocina', $request->tipoCocina);
+        }
+
+        // Filtrado rangoPrecio
+        if ($request->has('rangoPrecio') && $request->rangoPrecio != 0) {
+            Log::info('Filtro rangoPrecio recibido: ' . $request->rangoPrecio);
+            $query->where('RangoPrecio', $request->rangoPrecio);
+        }
+
         $query->orderByDesc('promedio_valoracion');
+
         $restaurantes = $query->get();
 
         /** @var \App\Models\User $usuario */
         $usuario = Auth::user();
-        // Log::info('Usuario:' . $usuario);
+
+        $rangosPrecio = Restaurante::select('RangoPrecio')
+            ->distinct()
+            ->orderBy('RangoPrecio')
+            ->pluck('RangoPrecio');
 
         if ($usuario) {
             $usuario->load('favoritos');
-            Log::info('Favoritos del usuario:', $usuario->favoritos->pluck('idRestaurante')->toArray()); // Log para ver si se devuelven bien los fav del usuario.
+            Log::info('Favoritos del usuario:', $usuario->favoritos->pluck('idRestaurante')->toArray());
         }
 
         if ($request->ajax()) {
-            return view('restaurantes._lista', compact('restaurantes', 'usuario'));
+            return view('restaurantes._lista', compact('restaurantes', 'usuario', 'rangosPrecio', 'mediaMinima'));
         }
 
-        return view('restaurantes.index', compact('restaurantes', 'usuario'));
+        return view('restaurantes.index', compact('restaurantes', 'usuario', 'rangosPrecio', 'mediaMinima'));
     }
+
 
 
 
@@ -66,10 +90,17 @@ class RestauranteController extends Controller
             $query->having('promedio_valoracion', '>=', $mediaMinima);
         }
 
+        // Filtrado rangoPrecio
+        if ($request->has('rangoPrecio') && $request->rangoPrecio != 0) {
+            Log::info('Filtro rangoPrecio recibido: ' . $request->rangoPrecio);
+            $query->where('RangoPrecio', $request->rangoPrecio);
+        }
+
         $query->orderByDesc('promedio_valoracion');
 
         return response()->json($query->get());
     }
+
 
     // Show es para mostrar un elemento en específico. Esta función será para pruebas de PostMan y tal. 
     public function showApi($id)
