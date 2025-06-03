@@ -37,7 +37,8 @@ Route::post('login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return response()->json([
         'username' => $request->user()->Username,
-        'email' => $request->user()->Email
+        'email' => $request->user()->Email,
+        'profile_image' => $request->user()->Profile_Image
     ]);
 });
 Route::middleware('auth:sanctum')->post('/valoracion', [ValoracionController::class, 'store']);
