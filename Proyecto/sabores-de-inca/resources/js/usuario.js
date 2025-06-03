@@ -1,9 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        window.location.href = '/login';
+        return;
+    }
     fetch('/api/user', {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('token')
+            // 'Authorization': 'Bearer ' + localStorage.getItem('token')
+            'Authorization': 'Bearer ' + token
 
         }
     })
