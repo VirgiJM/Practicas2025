@@ -102,7 +102,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (rest.Latitud && rest.Longitud) {
                         const icono = iconosPorTipo[rest.fk_idTipoCocina] || L.icon.default;
                         const marker = L.marker([rest.Latitud, rest.Longitud], { icon: icono });
-                        marker.bindPopup(`<strong>${rest.Nombre}</strong><br>${rest.Direccion || ''}`);
+                        // marker.bindPopup(`<strong>${rest.Nombre}</strong><br>${rest.Direccion || ''}`);
+                        marker.bindPopup(`<strong><a href="/restaurante/${encodeURIComponent(rest.Slug.toLowerCase().replace(/\s+/g, '-'))}" style="text-decoration: none; color: #007bff;">${rest.Nombre}</a></strong><br>${rest.Direccion || ''}
+`);
                         marker.addTo(window.marcadoresLayer);
                     }
                 });
