@@ -5,7 +5,9 @@
 @vite(['resources/js/usuario.js', 'resources/js/session-controller.js'])
 
 @section('contenido')
-<div id="perfil">
-    <p>Cargando información del perfil...</p>
-</div>
+<div id="perfil"></div>
+<section>
+    <h2>Tus restaurantes favoritos</h2>
+    <div id="favoritos"></div>
+</section>
 @endsection
