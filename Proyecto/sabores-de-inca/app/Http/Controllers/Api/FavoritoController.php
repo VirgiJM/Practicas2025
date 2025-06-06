@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Favorito;
 use App\Models\Restaurante;
+use Illuminate\Support\Facades\Log;
 
 class FavoritoController extends Controller
 {
@@ -13,10 +14,13 @@ class FavoritoController extends Controller
     {
         $usuario = $request->user();
 
-        $favoritos = Favorito::where('fk_idUsuario', $usuario->id)->pluck('fk_idRestaurante');
+        // Opción 1: Usar relación
+        $restaurantes = $usuario->favoritos;
 
-        return response()->json($favoritos);
+        Log::info('Restaurantes favoritos:', $restaurantes->toArray());
+        return response()->json($restaurantes);
     }
+
 
     public function toggle(Request $request)
     {

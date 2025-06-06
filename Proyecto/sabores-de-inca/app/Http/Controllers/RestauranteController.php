@@ -92,7 +92,7 @@ class RestauranteController extends Controller
 
         // Filtrado rangoPrecio
         if ($request->has('rangoPrecio') && $request->rangoPrecio != 0) {
-            Log::info('Filtro rangoPrecio recibido: ' . $request->rangoPrecio);
+            // Log::info('Filtro rangoPrecio recibido: ' . $request->rangoPrecio);
             $query->where('RangoPrecio', $request->rangoPrecio);
         }
 

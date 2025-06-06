@@ -247,7 +247,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.addEventListener('click', (e) => {
         const btn = e.target.closest('.favorito-btn');
-        if (!btn) return;
+        if (!btn) {
+            return;
+        }
 
         e.stopPropagation();
         const icon = btn.querySelector('i');
