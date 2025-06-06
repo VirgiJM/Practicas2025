@@ -24,13 +24,33 @@
 
     <p><strong>Precio medio:</strong><a> {{ $restaurante->RangoPrecio }}<a></p>
     <a href="tel:{{$restaurante->Telefono}}"><strong>📞</strong> {{ $restaurante->Telefono }}</p>
-    <strong><a href="{{ $restaurante->SitioWeb }}" target="_blank">Sitio Web</a></strong>
-    <p>{{ $restaurante->Descripcion }}</p>
+        <strong><a href="{{ $restaurante->SitioWeb }}" target="_blank">Sitio Web</a></strong>
+        <p>{{ $restaurante->Descripcion }}</p>
 
-    @if ($restaurante->Carta)
-    <a href="{{ asset('storage/' . $restaurante->Carta) }}" target="_blank">Ver carta PDF</a>
-    @else
-    <p>No hay carta disponible</p>
-    @endif
+        @if ($restaurante->Carta)
+        <a href="{{ asset('storage/' . $restaurante->Carta) }}" target="_blank">Ver carta PDF</a>
+        @else
+        <p>No hay carta disponible</p>
+        @endif
+
+        <section id="valoraciones">
+            <h2>Valoraciones</h2>
+
+            @if ($restaurante->valoraciones->count() > 0)
+            <ul class="lista-valoraciones">
+                @foreach ($restaurante->valoraciones as $valoracion)
+                <li class="valoracion">
+                    <strong>{{ $valoracion->usuario->Username ?? 'Usuario anónimo' }}</strong>
+                    - <em>{{ $valoracion->created_at->format('d/m/Y') }}</em>
+                    <p>Puntuación: {{ $valoracion->Valoracion }} ⭐</p>
+                    <p>{{ $valoracion->Comentario }}</p>
+                </li>
+                @endforeach
+            </ul>
+            @else
+            <p>Este restaurante aún no tiene valoraciones.</p>
+            @endif
+        </section>
+
 </div>
 @endsection
