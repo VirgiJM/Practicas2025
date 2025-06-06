@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Favorito;
 use App\Models\Restaurante;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class FavoritoController extends Controller
 {
@@ -14,8 +15,16 @@ class FavoritoController extends Controller
     {
         $usuario = $request->user();
 
-        // Opción 1: Usar relación
-        $restaurantes = $usuario->favoritos;
+        $restaurantes = $usuario->favoritos->map(function ($restaurante) {
+            return [
+                'Nombre' => $restaurante->Nombre,
+                'Descripcion' => $restaurante->Descripcion,
+                'Direccion' => $restaurante->Direccion,
+                'RangoPrecio' => $restaurante->RangoPrecio,
+                'Foto' => Storage::url($restaurante->Foto),
+                'Slug' => $restaurante->Slug,
+            ];
+        });
 
         Log::info('Restaurantes favoritos:', $restaurantes->toArray());
         return response()->json($restaurantes);

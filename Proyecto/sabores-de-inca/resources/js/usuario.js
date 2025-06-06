@@ -11,31 +11,31 @@ document.addEventListener('DOMContentLoaded', () => {
             'Authorization': 'Bearer ' + token
         }
     })
-    .then(response => {
-        if (!response.ok) throw new Error('No autenticado');
-        return response.json();
-    })
-    .then(data => {
-        renderPerfil(data);
-        return fetch('/api/favoritos', {
-            headers: {
-                'Accept': 'application/json',
-                'Authorization': 'Bearer ' + token
-            }
+        .then(response => {
+            if (!response.ok) throw new Error('No autenticado');
+            return response.json();
+        })
+        .then(data => {
+            renderPerfil(data);
+            return fetch('/api/favoritos', {
+                headers: {
+                    'Accept': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                }
+            });
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Error al cargar favoritos');
+            return response.json();
+        })
+        .then(favoritos => {
+            renderFavoritos(favoritos);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('perfil').innerHTML = '<p>No estás autenticada o se ha producido un error.</p>';
+            document.getElementById('favoritos').innerHTML = '';
         });
-    })
-    .then(response => {
-        if (!response.ok) throw new Error('Error al cargar favoritos');
-        return response.json();
-    })
-    .then(favoritos => {
-        renderFavoritos(favoritos);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        document.getElementById('perfil').innerHTML = '<p>No estás autenticada o hubo un error.</p>';
-        document.getElementById('favoritos').innerHTML = '';
-    });
 
     function renderPerfil(user) {
         const perfilDiv = document.getElementById('perfil');
@@ -53,20 +53,33 @@ document.addEventListener('DOMContentLoaded', () => {
             favDiv.innerHTML = '<p>No tienes restaurantes favoritos.</p>';
             return;
         }
+        favDiv.innerHTML = ''; // Limpiar contenido anterior.
 
-        let html = '';
         favoritos.forEach(restaurante => {
-            html += `
-                <div class="restaurante-favorito">
-                    <h4>${restaurante.Nombre}</h4>
-                    <img class="imagen-restaurante" src="/${restaurante.Foto}" alt="${restaurante.Nombre}" style="width:200px; height:auto;">
-                    <p>${restaurante.Descripcion || 'Sin descripción'}</p>
-                    <p><strong>Dirección:</strong> ${restaurante.Direccion}</p>
-                    <p><strong>Precio:</strong> ${restaurante.RangoPrecio}</p>
-                </div>
-                <hr>
-            `;
+            const slug = restaurante.Slug;
+
+            const card = document.createElement('div');
+            card.classList.add('fav-card');
+
+            const link = document.createElement('a');
+            link.href = `/restaurante/${slug}`;
+            link.classList.add('fav-card-link');
+
+            const img = document.createElement('img');
+            img.src = restaurante.Foto;
+            img.alt = restaurante.Nombre;
+            img.classList.add('fav-card-img');
+
+            link.appendChild(img);
+            card.appendChild(link);
+
+            const name = document.createElement('p');
+            name.textContent = restaurante.Nombre;
+            name.classList.add('fav-card-name');
+
+            card.appendChild(name);
+
+            favDiv.appendChild(card);
         });
-        favDiv.innerHTML = html;
     }
 });

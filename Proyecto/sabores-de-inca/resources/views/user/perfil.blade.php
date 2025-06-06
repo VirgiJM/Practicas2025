@@ -3,6 +3,8 @@
 @section('titulo', 'Mi perfil')
 
 @vite(['resources/js/usuario.js', 'resources/js/session-controller.js'])
+@vite('resources/css/perfil.css')
+
 
 @section('contenido')
 <div id="perfil"></div>
