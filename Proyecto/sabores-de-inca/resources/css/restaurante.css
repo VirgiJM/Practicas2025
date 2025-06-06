@@ -131,3 +131,45 @@ body {
     font-weight: bold;
     color: #f39c12;
 }
+
+/* Estilos para el fomrulario. */
+#formulario-valoracion {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 2px solid #eee;
+}
+
+#formulario-valoracion form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#formulario-valoracion label {
+    font-weight: bold;
+}
+
+#formulario-valoracion select,
+#formulario-valoracion textarea {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    resize: vertical;
+}
+
+#formulario-valoracion button {
+    align-self: flex-start;
+    background-color: #3498db;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#formulario-valoracion button:hover {
+    background-color: #2980b9;
+}

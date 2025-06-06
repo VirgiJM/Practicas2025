@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const token = localStorage.getItem('token');
+    console.log(token);
     if (!token) {
         document.querySelectorAll('.favorito-btn').forEach(btn => btn.style.display = 'none');
     }

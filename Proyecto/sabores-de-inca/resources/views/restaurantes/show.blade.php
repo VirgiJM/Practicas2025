@@ -2,6 +2,7 @@
 
 @section('titulo', $restaurante->Nombre)
 @vite('resources/css/restaurante.css')
+@vite('resources/js/restaurante.js')
 
 @section('contenido')
 <div class="restaurante-detalle">
@@ -50,6 +51,24 @@
             @else
             <p>Este restaurante aún no tiene valoraciones.</p>
             @endif
+        </section>
+        <section id="formulario-valoracion" style="display: none;">
+            <h3>Deja tu valoración</h3>
+            <form id="nueva-valoracion">
+                <label for="valoracion">Puntuación:</label>
+                <select id="valoracion" name="valoracion" required>
+                    <option value="1">1 ⭐</option>
+                    <option value="2">2 ⭐</option>
+                    <option value="3">3 ⭐</option>
+                    <option value="4">4 ⭐</option>
+                    <option value="5">5 ⭐</option>
+                </select>
+
+                <label for="comentario">Comentario (opcional):</label>
+                <textarea id="comentario" name="comentario" rows="3" placeholder="Escribe algo si quieres..."></textarea>
+
+                <button type="submit">Enviar valoración</button>
+            </form>
         </section>
 
 </div>
