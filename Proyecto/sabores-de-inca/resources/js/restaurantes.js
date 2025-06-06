@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const token = localStorage.getItem('token');
+    console.log(token);
     if (!token) {
         document.querySelectorAll('.favorito-btn').forEach(btn => btn.style.display = 'none');
     }
@@ -247,7 +248,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.addEventListener('click', (e) => {
         const btn = e.target.closest('.favorito-btn');
-        if (!btn) return;
+        if (!btn) {
+            return;
+        }
 
         e.stopPropagation();
         const icon = btn.querySelector('i');
