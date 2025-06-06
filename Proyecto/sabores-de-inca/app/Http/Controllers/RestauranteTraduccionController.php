@@ -33,16 +33,13 @@ class RestauranteTraduccionController extends Controller
     public function store(RestauranteTraduccionCreateRequest $request)
     {
         try {
-            // Valida y obtén los datos del request
+            // Para validar y obtener los datos del request.
             $validated = $request->validated();
 
-            // Crea la nueva traducción en la base de datos
+            // Crear la nueva traducción en la base de datos.
             RestauranteTraduccion::create($validated);
-
-            // Respuesta de éxito
             return response()->json(['mensaje' => 'Traducción de restaurante creada correctamente.'], 201);
         } catch (\Exception $e) {
-            // Respuesta de error en caso de excepciones
             return response()->json([
                 'mensaje' => 'Error al crear la traducción.',
                 'error' => $e->getMessage()
@@ -54,7 +51,7 @@ class RestauranteTraduccionController extends Controller
     {
         $restauranteTraduccion = RestauranteTraduccion::findOrFail($id);
 
-        // Actualiza el restauranteTraduccion con los datos validados
+        // Actualiza el restauranteTraduccion con los datos validados.
         $restauranteTraduccion->update($request->validated());
 
         return response()->json([
@@ -63,7 +60,7 @@ class RestauranteTraduccionController extends Controller
         ], 200);
     }
 
-    // Método para eliminar una accesibilidad
+    // Método para eliminar una accesibilidad.
     public function destroy($id)
     {
         try {

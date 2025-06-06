@@ -2,7 +2,7 @@
 
 @section('titulo', 'Lista de Restaurantes')
 
-@vite('resources/js/restaurantes.js') <!-- Esto importa el JS solo en esta vista -->
+@vite('resources/js/restaurantes.js') <!-- Esto importa el JS solo en esta vista. -->
 
 @section('contenido')
 <h2>Filtrar</h2>

@@ -19,12 +19,12 @@ class TipoCocinaController extends Controller
     // Show es para mostrar un elemento en específico.
     public function show($id)
     {
-        $tipoCocina = TipoCocina::find($id); // Busca en la base de datos el elemento con ese ID
+        $tipoCocina = TipoCocina::find($id); // Busca en la base de datos el elemento con ese ID.
 
         if ($tipoCocina) {
-            return response()->json($tipoCocina); // Si lo encuentra, lo devuelve en formato JSON
+            return response()->json($tipoCocina); // Si lo encuentra, lo devuelve en formato JSON.
         } else {
-            return response()->json(['mensaje' => 'Tipo Cocina no encontrado'], 404); // Si no lo encuentra, error 404
+            return response()->json(['mensaje' => 'Tipo Cocina no encontrado'], 404); // Si no lo encuentra, error 404.
         }
     }
 

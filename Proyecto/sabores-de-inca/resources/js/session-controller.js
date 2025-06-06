@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 profileLink.textContent = 'Mi perfil';
             }
         } else {
-            // Token inválido, borramos y mostramos menú login/registro
+            // Token inválido, borramos y mostramos menú login/registro.
             localStorage.removeItem('token');
             if (noLogin) noLogin.style.display = 'block';
         }

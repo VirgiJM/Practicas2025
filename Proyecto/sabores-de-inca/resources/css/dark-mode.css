@@ -2,7 +2,7 @@
 
 body.dark-mode {
     background-color: #121212;
-    color: #ddd;
+    color: navy;
 }
 
 body.dark-mode header {
@@ -46,3 +46,16 @@ body.dark-mode #dark-mode-toggle {
     background: #ddd;
     color: #222;
 }
+
+
+
+body.dark-mode section.ventajas,
+body.dark-mode #quien-soy, body.dark-mode h2 {
+    color: #f0f0f0;
+}
+
+
+body.dark-mode .restaurante-card, body.dark-mode .filtro-container, body.dark-mode .presentacion, body.dark-mode #perfil, body.dark-mode .fav-card {
+    background-color: #c3bebe;
+}
+

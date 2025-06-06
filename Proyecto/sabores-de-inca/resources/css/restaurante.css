@@ -1,4 +1,4 @@
-/* Contenedor principal */
+/* Contenedor principal. */
 .restaurante-detalle {
     max-width: 800px;
     margin: 2rem auto;
@@ -9,14 +9,14 @@
     font-family: 'Segoe UI', sans-serif;
 }
 
-/* Nombre */
+/* Nombre. */
 .restaurante-detalle h1 {
     font-size: 2rem;
     color: #2c3e50;
     margin-bottom: 1rem;
 }
 
-/* Descripción o resumen */
+/* Descripción o resumen. */
 .restaurante-detalle .descripcion {
     font-size: 1rem;
     color: #555;
@@ -24,7 +24,7 @@
     line-height: 1.6;
 }
 
-/* Datos */
+/* Datos. */
 .restaurante-detalle .info {
     font-size: 1rem;
     margin-bottom: 1.25rem;

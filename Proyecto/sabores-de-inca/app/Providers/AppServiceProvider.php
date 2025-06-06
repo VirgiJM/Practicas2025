@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Esto asegura que se carguen las rutas de api.php bajo /api
+        // Esto asegura que se carguen las rutas de api.php bajo /api.
         Route::middleware('api')
             ->prefix('api')
             ->group(base_path('routes/api.php'));

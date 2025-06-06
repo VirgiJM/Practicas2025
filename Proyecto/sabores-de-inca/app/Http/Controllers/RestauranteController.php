@@ -71,7 +71,7 @@ class RestauranteController extends Controller
 
 
 
-    // Este método sería usado desde `api.php`. Devuelve datos en json.
+    // Este método sería usado desde api.php (el de las rutas). Devuelve datos en json.
     public function indexApi(Request $request)
     {
         $query = Restaurante::with('valoraciones')
@@ -136,7 +136,7 @@ class RestauranteController extends Controller
             $validated = $request->validated();
             Restaurante::create($validated);
 
-            return response()->json(['mensaje' => 'Restaurante creado correctamente'], 201); // 201: creado
+            return response()->json(['mensaje' => 'Restaurante creado correctamente'], 201); // 201: Creado.
         } catch (\Exception $e) {
             return response()->json([
                 'mensaje' => 'Error al crear el restaurante.',
@@ -149,9 +149,9 @@ class RestauranteController extends Controller
     public function update(RestauranteUpdateRequest $request, $id)
     {
         try {
-            $restaurante = Restaurante::findOrFail($id); // Lanza 404 si no existe
+            $restaurante = Restaurante::findOrFail($id); // Lanza 404 si no existe.
 
-            $datos = $request->validated(); // Solo los campos válidos
+            $datos = $request->validated(); // Solo los campos válidos.
             $restaurante->update($datos);
 
             return response()->json(['mensaje' => 'Restaurante actualizado correctamente'], 200);
@@ -176,7 +176,7 @@ class RestauranteController extends Controller
         if ($request->hasFile('Carta')) {
             $path = $request->file('Carta')->store('/cartas', 'public'); // Carpeta storage/app/public/cartas.
 
-            // Guardar la ruta relativa en la base de datos
+            // Guardar la ruta relativa en la base de datos.
             $restaurante->Carta = $path;
             $restaurante->save();
 
@@ -188,7 +188,7 @@ class RestauranteController extends Controller
 
 
 
-    // Método para eliminar una accesibilidad
+    // Método para eliminar un restaurante.
     public function destroy($id)
     {
         try {
