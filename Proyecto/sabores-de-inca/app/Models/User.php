@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Notifications\HasFactory;
 use Laravel\Sanctum\HasApiTokens; // Añadirlo una vez se han hecho las migraciones.
 use App\Models\Restaurante;
 
@@ -19,7 +20,8 @@ class User extends Authenticatable
         'Username',
         'Email',
         'Password',
-        'Profile_Image'
+        'Profile_Image',
+        'esAdmin'
     ];
     protected $hidden = [
         'Password',

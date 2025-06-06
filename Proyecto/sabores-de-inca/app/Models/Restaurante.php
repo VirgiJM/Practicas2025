@@ -30,6 +30,7 @@ class Restaurante extends Model
     public function valoraciones()
     {
         return $this->hasMany(Valoracion::class, 'fk_idRestaurante', 'idRestaurante');
+        // Este restaurante tiene muchas valoraciones. Para relacionarlas, busca en la tabla valoración el campo fk_idRestaurante, y compáralo con el campo idRetsaurante de la tabla restaurante.
     }
     // public function tipoCocina()
     // {

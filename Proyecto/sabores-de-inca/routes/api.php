@@ -37,7 +37,8 @@ Route::post('login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return response()->json([
         'username' => $request->user()->Username,
-        'email' => $request->user()->Email
+        'email' => $request->user()->Email,
+        'profile_image' => $request->user()->Profile_Image
     ]);
 });
 Route::middleware('auth:sanctum')->post('/valoracion', [ValoracionController::class, 'store']);
@@ -121,17 +122,23 @@ Route::prefix('traducciones-restaurante')->group(function () {
 //     return $request->user()->favoritos->pluck('id'); // Devuelve un array con los IDs de los restaurantes favoritos
 
 Route::middleware('auth:sanctum')->prefix('favoritos')->group(function () {
+    Route::get('/', [FavoritoController::class, 'index']);
+
     Route::get('/ids', function (Request $request) {
         $ids = $request->user()->favoritos->pluck('idRestaurante');
         Log::info('IDs de favoritos del usuario:', $ids->toArray());
-        return $ids;
+        return response()->json($ids);
     });
-    Route::get('/', [FavoritoController::class, 'index']);
+
     Route::post('/toggle', function (Request $request) {
         $usuario = $request->user();
         $restauranteId = $request->input('fk_idRestaurante');
-        Log::info('Restaurante ID recibido: ' . $restauranteId); // Ya que el dd hace caput, con esto puedo ver si estoy pasando bien el id del restaurante. // Da bien.
 
+        if (!$restauranteId) {
+            return response()->json(['error' => 'No se recibió el ID del restaurante'], 400);
+        }
+
+        Log::info('Restaurante ID recibido: ' . $restauranteId);
 
         if ($usuario->favoritos()->where('fk_idRestaurante', $restauranteId)->exists()) {
             $usuario->favoritos()->detach($restauranteId);

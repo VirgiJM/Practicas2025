@@ -25,24 +25,48 @@ class RestauranteController extends Controller
             $query->where('Vegano', true);
         }
 
+        if ($request->has('mediaMinima')) {
+            $mediaMinima = (int) $request->mediaMinima;
+            $query->having('promedio_valoracion', '>=', $mediaMinima);
+        } else {
+            $mediaMinima = 0;  // Valor por defecto para evitar lo de variable indefinida.
+        }
+
+        // Filtrar por tipo cocina.
+        if ($request->has('tipoCocina') && $request->tipoCocina != 0) {
+            $query->where('fk_idTipoCocina', $request->tipoCocina);
+        }
+
+        // Filtrar por rangoPrecio.
+        if ($request->has('rangoPrecio') && $request->rangoPrecio != 0) {
+            Log::info('Filtro rangoPrecio recibido: ' . $request->rangoPrecio);
+            $query->where('RangoPrecio', $request->rangoPrecio);
+        }
+
         $query->orderByDesc('promedio_valoracion');
+
         $restaurantes = $query->get();
 
         /** @var \App\Models\User $usuario */
-        $usuario = Auth::user();
-        // Log::info('Usuario:' . $usuario);
+        $usuario = Auth::user(); // La línea de encima es para que no se queje tanto.
+
+        $rangosPrecio = Restaurante::select('RangoPrecio')
+            ->distinct()
+            ->orderBy('RangoPrecio')
+            ->pluck('RangoPrecio');
 
         if ($usuario) {
             $usuario->load('favoritos');
-            Log::info('Favoritos del usuario:', $usuario->favoritos->pluck('idRestaurante')->toArray()); // Log para ver si se devuelven bien los fav del usuario.
+            Log::info('Favoritos del usuario:', $usuario->favoritos->pluck('idRestaurante')->toArray());
         }
 
         if ($request->ajax()) {
-            return view('restaurantes._lista', compact('restaurantes', 'usuario'));
+            return view('restaurantes._lista', compact('restaurantes', 'usuario', 'rangosPrecio', 'mediaMinima'));
         }
 
-        return view('restaurantes.index', compact('restaurantes', 'usuario'));
+        return view('restaurantes.index', compact('restaurantes', 'usuario', 'rangosPrecio', 'mediaMinima'));
     }
+
 
 
 
@@ -66,19 +90,26 @@ class RestauranteController extends Controller
             $query->having('promedio_valoracion', '>=', $mediaMinima);
         }
 
+        // Filtrar por rangoPrecio.
+        if ($request->has('rangoPrecio') && $request->rangoPrecio != 0) {
+            // Log::info('Filtro rangoPrecio recibido: ' . $request->rangoPrecio);
+            $query->where('RangoPrecio', $request->rangoPrecio);
+        }
+
         $query->orderByDesc('promedio_valoracion');
 
         return response()->json($query->get());
     }
 
+
     // Show es para mostrar un elemento en específico. Esta función será para pruebas de PostMan y tal. 
     public function showApi($id)
     {
-        $restaurante = Restaurante::find($id); // Busca en la base de datos el elemento con ese ID
+        $restaurante = Restaurante::find($id); // Busca en la base de datos el elemento con ese ID.
         if ($restaurante) {
-            return response()->json($restaurante); // Si lo encuentra, lo devuelve en formato JSON
+            return response()->json($restaurante); // Si lo encuentra, lo devuelve en formato JSON.
         } else {
-            return response()->json(['mensaje' => 'Restaurante no encontrado'], 404); // Si no lo encuentra, error 404
+            return response()->json(['mensaje' => 'Restaurante no encontrado'], 404); // Si no lo encuentra, error 404.
         }
 
         // $restaurante = Restaurante::where('Slug', $slug)->firstOrFail();
@@ -86,12 +117,15 @@ class RestauranteController extends Controller
     }
 
     // Función para vista web.
+    // $restaurante = Restaurante::findOrFail($id);
+    // return view('restaurantes.show', compact('restaurante'));
     public function show($slug)
     {
-        // $restaurante = Restaurante::findOrFail($id);
-        // return view('restaurantes.show', compact('restaurante'));
-        $restaurante = Restaurante::find($slug);
-        $restaurante = Restaurante::where('Slug', $slug)->firstOrFail();
+        $restaurante = Restaurante::with(['valoraciones.usuario'])
+            ->where('Slug', $slug)
+            ->firstOrFail();
+
+        Log::info("Info: ". $restaurante);
         return view('restaurantes.show', compact('restaurante'));
     }
 

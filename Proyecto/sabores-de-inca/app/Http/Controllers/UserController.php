@@ -18,6 +18,7 @@ class UserController extends Controller
                 'Username' => 'required|string|max:100|unique:Usuario',
                 'Email' => 'required|email|max:30|unique:Usuario',
                 'Password' => 'required|string|min:8|confirmed', // El confirmed es para cuando quieres que dos contraseñas coincidan.
+                'esAdmin' => 'sometimes|boolean'
                 // 'Profile_Image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Necesario únicamente si voy a subir yo una imagen mientras creo el usuario.
             ]);
 
@@ -44,6 +45,7 @@ class UserController extends Controller
                 'Email' => $validatedData['Email'],
                 'Password' => Hash::make($validatedData['Password']),
                 'Profile_Image' => $profileImagePath,  // Asignamos la ruta de la imagen.
+                'esAdmin' => $request->has('esAdmin') ? (bool)$request->esAdmin : false,
             ]);
             return response()->json($user, 201);  // Devuelve el usuario creado.
         } catch (\Exception $e) {

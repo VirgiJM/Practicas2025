@@ -33,7 +33,7 @@ Route::get('/restaurantes', [RestauranteController::class, 'index'])->name('rest
 
 
 
-// // Una ruta por cada tabla.
+// Una ruta por cada tabla.
 // Route::get('/accesibilidad', [AccesibilidadController::class, 'index']);
 // Route::get('/accesibilidad/{id}', [AccesibilidadController::class, 'show']);
 
@@ -77,6 +77,7 @@ Route::post('/logout', function () {
     return redirect('/');
 })->name('logout');
 
+// En web.php no puedo comprobar si hay token o no. La comprobación se hará en la vista.
 Route::get('/perfil', function () {
     return view('user.perfil');
 })->name('perfil');

@@ -16,4 +16,14 @@ class Valoracion extends Model
         'Comentario',
         'Valoracion'
     ];
+
+    public function restaurante()
+    {
+        return $this->belongsTo(\App\Models\Restaurante::class, 'idRestaurante', 'fk_idRestaurante');
+    }
+
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'fk_idUsuario', 'idUsuario');
+    }
 }

@@ -102,6 +102,7 @@ CREATE TABLE Usuario (
     Email VARCHAR(30) UNIQUE NOT NULL,
     Password VARCHAR(255) NOT NULL,
     Profile_Image VARCHAR(255) DEFAULT 'images/default-profile.png',
+    esAdmin Boolean DEFAULT 0,
     created_at TIMESTAMP NULL DEFAULT current_timestamp,
     updated_at TIMESTAMP NULL DEFAULT current_timestamp
 );
