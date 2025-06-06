@@ -1,4 +1,4 @@
-/* Fuente general */
+/* Fuente general. */
 body {
     font-family: 'Inter', sans-serif;
     background-color: #f4f6f8;
@@ -7,7 +7,7 @@ body {
     color: #333;
 }
 
-/* Contenedor de restaurantes */
+/* Contenedor de restaurantes. */
 .restaurantes-container {
     display: flex;
     flex-wrap: wrap;
@@ -16,7 +16,7 @@ body {
     padding: 40px 20px;
 }
 
-/* Tarjetas */
+/* Tarjetas. */
 .restaurante-card {
     background-color: #fff;
     border-radius: 10px;
@@ -38,7 +38,7 @@ body {
     object-fit: cover;
 }
 
-/* Detalles */
+/* Detalles. */
 .restaurante-card .details {
     padding: 15px;
     text-align: center;
@@ -57,7 +57,7 @@ body {
     color: black;
 }
 
-/* Filtros y formularios */
+/* Filtros y formularios. */
 form {
     background-color: #fff;
     padding: 20px;
@@ -83,7 +83,7 @@ form select {
     margin-bottom: 15px;
 }
 
-/* Botones */
+/* Botones. */
 button,
 input[type="submit"] {
     background-color: #1abc9c;
@@ -101,7 +101,7 @@ input[type="submit"]:hover {
     background-color: #17a689;
 }
 
-/* Estilos generales de la leyenda */
+/* Estilos generales de la leyenda. */
 .info.legend {
     background: white;
     padding: 10px;
@@ -109,10 +109,10 @@ input[type="submit"]:hover {
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
     font-size: 14px;
     max-width: 90vw;
-    /* Asegura que no se salga del viewport en móvil */
+    /* Para que no se salga del viewport en móvil. */
 }
 
-/* Elementos individuales */
+/* Elementos individuales. */
 .leyenda-item {
     display: flex;
     align-items: center;
@@ -120,7 +120,7 @@ input[type="submit"]:hover {
     flex-wrap: nowrap;
 }
 
-/* Iconos */
+/* Iconos. */
 .leyenda-item img {
     width: 20px;
     height: 30px;
@@ -162,7 +162,7 @@ input[type="submit"]:hover {
     }
 }
 
-/* HEADER GENERAL */
+/* HEADER GENERAL. */
 .main-header {
     background-color: rgb(253, 0, 0);
     color: white;
@@ -186,7 +186,7 @@ input[type="submit"]:hover {
 
 }
 
-/* Logo responsive en móviles */
+/* Logo responsive en móviles. */
 @media (max-width: 768px) {
     .main-header .logo {
         width: 50%;
@@ -195,7 +195,7 @@ input[type="submit"]:hover {
     }
 }
 
-/* Links de login y usuario */
+/* Links de login y usuario. */
 .auth-links {
     display: flex;
     gap: 1rem;
@@ -220,7 +220,7 @@ input[type="submit"]:hover {
     background: #ffe5e5;
 }
 
-/* Botón modo oscuro */
+/* Botón modo oscuro. */
 #dark-mode-toggle {
     background-color: white;
     color: rgb(253, 0, 0);
@@ -246,7 +246,7 @@ input[type="submit"]:hover {
     background-color: #ffe5e5;
 }
 
-/* RESPONSIVE HEADER */
+/* RESPONSIVE HEADER. */
 @media (max-width: 768px) {
     .main-header .container {
         flex-direction: column;
@@ -268,7 +268,7 @@ a {
     text-decoration: none;
 }
 
-/* NAV GENERAL */
+/* NAV GENERAL. */
 .barra-nav {
     background-color: #ffe5e5;
     /* tono suave que combina con el rojo */
@@ -321,7 +321,7 @@ a {
     }
 }
 
-/* Favoritos */
+/* Favoritos. */
 .favorito-btn {
     position: absolute;
     top: 10px;
@@ -379,7 +379,7 @@ main {
 }
 
 
-/* Contenedor para organizar */
+/* Contenedor para organizar. */
 .filtro-container {
     display: flex;
     flex-wrap: wrap;
@@ -393,7 +393,7 @@ main {
     box-shadow: 0 4px 10px rgb(0 0 0 / 0.05);
 }
 
-/* Título */
+/* Título. */
 h2 {
     width: 100%;
     font-weight: 700;
@@ -402,7 +402,7 @@ h2 {
     margin-bottom: 15px;
 }
 
-/* Select estilo “botón” */
+/* Select estilo botón. */
 select {
     appearance: none;
     -webkit-appearance: none;
@@ -457,7 +457,7 @@ label[for="vegano"] {
 }
 
 
-/* Ajustes para filtros en móvil */
+/* Ajustes para filtros en móvil. */
 @media (max-width: 768px) {
     .filtro-container {
         flex-direction: column;
@@ -465,22 +465,22 @@ label[for="vegano"] {
         gap: 15px;
     }
 
-    /* Los selects e input checkbox ocupan 100% en móviles para mejor usabilidad */
+    /* Los selects e input checkbox ocupan 100% en móviles para mejor usabilidad. */
     .filtro-container select,
     .filtro-container label[for="vegano"] {
         width: 100%;
         min-width: unset;
-        /* Elimina el min-width para móviles */
+        /* Elimina el min-width para móviles. */
     }
 
-    /* Ajustar el checkbox para que no ocupe tanto espacio */
+    /* Ajustar el checkbox para que no ocupe tanto espacio. */
     input[type="checkbox"] {
         width: 18px;
         height: 18px;
     }
 }
 
-/* Ajustar tarjetas para móviles */
+/* Ajustar tarjetas para móviles. */
 @media (max-width: 768px) {
     .restaurantes-container {
         flex-direction: column;
@@ -495,23 +495,12 @@ label[for="vegano"] {
     }
 }
 
-/* Ajustar mapa para que no tenga tanto margen arriba en móvil */
+/* Ajustar mapa para que no tenga tanto margen arriba en móvil. */
 @media (max-width: 768px) {
     #map {
         margin-top: 2rem !important;
         height: 400px !important;
-        /* Más compacto en móviles */
     }
-}
-
-
-#yo {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 1rem auto;
-    border-radius: 12px;
-    /* opcional: para que tenga bordes redondeados */
 }
 
 .container-tarjetas {
@@ -543,9 +532,9 @@ label[for="vegano"] {
 .details {
   display: flex;
   flex-direction: column;
-  flex-grow: 1; /* ocupa espacio para empujar botón abajo */
+  flex-grow: 1;
   gap: 0.3rem;
-  font-size: 0.9rem; /* un poco más pequeño */
+  font-size: 0.9rem;
   line-height: 1.3;
 }
 
@@ -565,7 +554,7 @@ h3 {
 }
 
 .btn-ver-mas {
-  margin-top: auto; /* empuja botón abajo */
+  margin-top: auto;
   display: inline-block;
   padding: 0.5rem 1rem;
   background-color: #007bff;
@@ -579,4 +568,13 @@ h3 {
 
 .btn-ver-mas:hover {
   background-color: #0056b3;
+}
+
+/* Quién Soy */
+#yo {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1rem auto;
+    border-radius: 12px;
 }

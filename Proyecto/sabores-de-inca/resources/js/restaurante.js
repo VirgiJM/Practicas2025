@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
 
                     if (response.ok) {
-                        alert('¡Valoración enviada correctamente!');
-                        location.reload(); // recarga para ver la valoración en la lista
+                        alert('¡Gracias por valorar el restaurante!');
+                        location.reload(); // Recarga para ver la valoración en la lista.
                     } else {
                         const error = await response.json();
                         alert('Error al enviar valoración: ' + (error.mensaje || 'Desconocido'));

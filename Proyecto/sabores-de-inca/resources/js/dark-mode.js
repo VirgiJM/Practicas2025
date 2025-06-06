@@ -1,7 +1,7 @@
 const toggleBoton = document.getElementById('dark-mode-toggle');
 const body = document.body;
 
-// Al cargar la página, aplicar modo oscuro si estaba activado
+// Al cargar la página, aplicar modo oscuro si estaba activado.
 if(localStorage.getItem('dark-mode') === 'enabled') {
     body.classList.add('dark-mode'); // Classlist sirve para gestionar clases css desde js.
 }
