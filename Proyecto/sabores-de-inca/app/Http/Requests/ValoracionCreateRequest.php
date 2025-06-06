@@ -22,9 +22,9 @@ class ValoracionCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'Comentario' => 'string|max:1000',
+            'Comentario' => 'nullable|string|max:1000',
             'Valoracion' => 'required|integer|min:1|max:5',
-            'fk_idUsuario' => 'required|exists:usuario,idUsuario',
+            // 'fk_idUsuario' => 'required|exists:usuario,idUsuario',
             'fk_idRestaurante' => 'required|exists:restaurante,idRestaurante'
 
         ];

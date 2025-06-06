@@ -52,6 +52,8 @@
             <p>Este restaurante aún no tiene valoraciones.</p>
             @endif
         </section>
+        <meta name="restaurante-id" content="{{ $restaurante->idRestaurante }}">
+
         <section id="formulario-valoracion" style="display: none;">
             <h3>Deja tu valoración</h3>
             <form id="nueva-valoracion">
@@ -64,8 +66,8 @@
                     <option value="5">5 ⭐</option>
                 </select>
 
-                <label for="comentario">Comentario (opcional):</label>
-                <textarea id="comentario" name="comentario" rows="3" placeholder="Escribe algo si quieres..."></textarea>
+                <label for="comentario">Comentario:</label>
+                <textarea id="comentario" name="comentario" rows="3" placeholder="(Opcional)"></textarea>
 
                 <button type="submit">Enviar valoración</button>
             </form>
