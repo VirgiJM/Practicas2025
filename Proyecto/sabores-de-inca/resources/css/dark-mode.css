@@ -54,6 +54,10 @@ body.dark-mode #quien-soy, body.dark-mode h2 {
     color: #f0f0f0;
 }
 
+body.dark-mode .restaurante-detalle h2 {
+    color: navy;
+}
+
 
 body.dark-mode .restaurante-card, body.dark-mode .filtro-container, body.dark-mode .presentacion, body.dark-mode #perfil, body.dark-mode .fav-card {
     background-color: #c3bebe;
