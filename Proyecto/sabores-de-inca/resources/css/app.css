@@ -7,6 +7,328 @@ body {
     color: #333;
 }
 
+/* HEADER GENERAL. */
+.main-header {
+    background-color: #f00;
+    padding: 5rem 0;
+    position: relative;
+    z-index: 10;
+}
+
+.main-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* separa logo y botones */
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.logo {
+    height: 190px;
+    max-width: 160px;
+    object-fit: contain;
+    margin: 0 auto;
+}
+
+/* Logo centrado */
+.center-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 60px;
+    max-width: 140px;
+    object-fit: contain;
+    margin: 0 auto;
+}
+
+
+/* Logo responsive en móviles. */
+@media (max-width: 768px) {
+    .main-header .logo {
+        width: 50%;
+        max-width: 200px;
+        margin-right: 70px;
+    }
+}
+
+.top-bar {
+    background-color: #ffe5e5;
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+}
+
+.top-bar .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+}
+
+.auth-links a,
+.auth-links button {
+    margin-left: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    text-decoration: none;
+}
+
+.auth-links button:hover,
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+#dark-mode-toggle {
+    background-color: white;
+    color: rgb(253, 0, 0);
+    font-weight: 600;
+    border-radius: 4px;
+    padding: 0.4rem 0.8rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 0 !important;
+    margin-bottom: 0;
+}
+
+@media (max-width: 675px) {
+    #dark-mode-toggle {
+        position: static;
+        margin-top: -40px !important;
+    }
+}
+
+#dark-mode-toggle:hover {
+    background-color: #ffe5e5;
+}
+
+@media (max-width: 768px) {
+    .top-bar .container {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .auth-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: flex-end;
+        width: 100%;
+    }
+
+    .auth-links p {
+        margin: 0;
+    }
+
+    .auth-links a,
+    .auth-links button {
+        font-size: 0.9rem;
+    }
+
+
+    .barra-nav .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .barra-nav .nav-links a {
+        font-size: 1rem;
+    }
+
+    .dark-mode-wrapper {
+        align-self: flex-end;
+        margin-top: 0.5rem;
+        margin-right: 0.2rem;
+    }
+
+    #dark-mode-toggle {
+        font-size: 1.2rem;
+        padding: 0.3rem 0.5rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .center-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-top: 0;
+    }
+
+    .center-logo img.logo {
+        max-width: 300px;
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .main-header .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        min-height: unset;
+    }
+
+    .logo {
+        height: 100px;
+        max-width:ç 160px;
+        object-fit: contain;
+        margin: 0 auto;
+    }
+}
+
+.auth-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    max-width: 100%;
+}
+
+.auth-links>* {
+    flex-shrink: 0;
+    /* Evita que los botones desaparezcan al reducirse el tamaño */
+}
+
+.dark-mode-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    /* Alinea al centro verticalmente */
+}
+
+.main-header .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/* RESPONSIVE HEADER. */
+@media (max-width: 768px) {
+    .main-header {
+        padding: 0.5rem 0;
+        margin: 0;
+    }
+
+    .main-header .container {
+        flex-direction: column;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+    }
+
+    .auth-links {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    #dark-mode-toggle {
+        align-self: flex-start;
+    }
+}
+
+a {
+    text-decoration: none;
+}
+
+/* NAV GENERAL. */
+.barra-nav {
+    background-color: #ffe5e5;
+    /* tono suave que combina con el rojo */
+    padding: 0.75rem 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.barra-nav .nav-links {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.barra-nav .nav-links a {
+    text-decoration: none;
+    color: rgb(253, 0, 0);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color 0.2s ease, border-bottom 0.2s ease;
+    position: relative;
+}
+
+.barra-nav .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 2px;
+    width: 100%;
+    background-color: rgb(253, 0, 0);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.2s ease;
+}
+
+.barra-nav .nav-links a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+@media (max-width: 600px) {
+    .barra-nav .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+}
+
+/* Centrar el logo en el header */
+.center-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    text-align: center;
+}
+
+/* Contenedor general del header */
+.main-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 1rem 1rem;
+}
+
+
+/* Este div empuja todo lo que viene después hacia la derecha */
+.espaciador {
+    flex-grow: 1;
+}
+
+
+
 /* Contenedor de restaurantes. */
 .restaurantes-container {
     display: flex;
@@ -162,165 +484,6 @@ input[type="submit"]:hover {
     }
 }
 
-/* HEADER GENERAL. */
-.main-header {
-    background-color: rgb(253, 0, 0);
-    color: white;
-    padding: 1rem 0;
-}
-
-.main-header .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-}
-
-.main-header .logo {
-    width: 10%;
-    max-width: 140px;
-
-}
-
-/* Logo responsive en móviles. */
-@media (max-width: 768px) {
-    .main-header .logo {
-        width: 50%;
-        max-width: 200px;
-        margin-right: 70px;
-    }
-}
-
-/* Links de login y usuario. */
-.auth-links {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-}
-
-.auth-links a,
-.auth-links button {
-    background: white;
-    color: rgb(253, 0, 0);
-    border: none;
-    padding: 0.4rem 0.8rem;
-    border-radius: 4px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s ease;
-    text-decoration: none;
-}
-
-.auth-links a:hover,
-.auth-links button:hover {
-    background: #ffe5e5;
-}
-
-/* Botón modo oscuro. */
-#dark-mode-toggle {
-    background-color: white;
-    color: rgb(253, 0, 0);
-    font-weight: 600;
-    border-radius: 4px;
-    padding: 0.4rem 0.8rem;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    margin-top: 0 !important;
-    margin-bottom: 0;
-
-}
-
-@media (max-width: 675px) {
-    #dark-mode-toggle {
-        position: static;
-        margin-top: -40px !important;
-    }
-}
-
-#dark-mode-toggle:hover {
-    background-color: #ffe5e5;
-}
-
-/* RESPONSIVE HEADER. */
-@media (max-width: 768px) {
-    .main-header .container {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .auth-links {
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        width: 100%;
-    }
-
-    #dark-mode-toggle {
-        align-self: flex-start;
-    }
-}
-
-a {
-    text-decoration: none;
-}
-
-/* NAV GENERAL. */
-.barra-nav {
-    background-color: #ffe5e5;
-    /* tono suave que combina con el rojo */
-    padding: 0.75rem 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.barra-nav .nav-links {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-}
-
-.barra-nav .nav-links a {
-    text-decoration: none;
-    color: rgb(253, 0, 0);
-    font-weight: 600;
-    font-size: 1rem;
-    transition: color 0.2s ease, border-bottom 0.2s ease;
-    position: relative;
-}
-
-.barra-nav .nav-links a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -4px;
-    height: 2px;
-    width: 100%;
-    background-color: rgb(253, 0, 0);
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.2s ease;
-}
-
-.barra-nav .nav-links a:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
-}
-
-@media (max-width: 600px) {
-    .barra-nav .nav-links {
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-    }
-}
-
 /* Favoritos. */
 .favorito-btn {
     position: absolute;
@@ -359,10 +522,10 @@ a {
     color: red;
 }
 
-#dark-mode-toggle {
-    margin-left: 20rem;
+/* #dark-mode-toggle { */
+    /* margin-left: 80rem; */
 
-}
+/* } */
 
 
 html,
@@ -504,70 +667,70 @@ label[for="vegano"] {
 }
 
 .container-tarjetas {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
-  padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
 }
 
 .restaurante-card {
-  display: flex;
-  flex-direction: column;
-  height: 350px; 
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  background-color: white;
-  overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    overflow: hidden;
 }
 
 .image-container img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 1rem;
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1rem;
 }
 
 .details {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  gap: 0.3rem;
-  font-size: 0.9rem;
-  line-height: 1.3;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 0.3rem;
+    font-size: 0.9rem;
+    line-height: 1.3;
 }
 
 .details p {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
 }
 
 h3 {
-  font-size: 1.1rem;
-  margin: 0 0 0.5rem 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    font-size: 1.1rem;
+    margin: 0 0 0.5rem 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .btn-ver-mas {
-  margin-top: auto;
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  background-color: #007bff;
-  color: white;
-  border-radius: 0.5rem;
-  text-decoration: none;
-  text-align: center;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
+    margin-top: auto;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
 .btn-ver-mas:hover {
-  background-color: #0056b3;
+    background-color: #0056b3;
 }
 
 /* Quién Soy */

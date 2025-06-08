@@ -29,12 +29,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             // Mostrar botones de favorito (sólo en la página de restaurantes).
             const favoritoBtns = document.querySelectorAll('.favorito-btn');
-            if (favoritoBtns.length > 0) { // Si es menor que 0, no dará error, pero devolverá una lista vacía.
+            if (favoritoBtns.length > 0) {
                 favoritoBtns.forEach(btn => {
                     btn.style.display = 'block';
                 });
             }
-
 
             // Token válido, mostramos menú de usuario
             if (userMenu) userMenu.style.display = 'inline-block';
@@ -47,11 +46,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (profileLink) {
                 profileLink.textContent = 'Mi perfil';
             }
-        } else {
-            // Token inválido, borramos y mostramos menú login/registro.
-            localStorage.removeItem('token');
-            if (noLogin) noLogin.style.display = 'block';
+
+            // 👇 Aquí añadimos la lógica para mostrar el botón de admin
+            const adminButton = document.getElementById('admin-button');
+            if (adminButton && user.esAdmin) {
+                adminButton.style.display = 'inline-block';
+            }
         }
+
     } catch (error) {
         console.error('Error al verificar el token:', error);
         localStorage.removeItem('token');

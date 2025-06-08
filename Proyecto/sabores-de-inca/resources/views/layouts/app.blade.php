@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
-    <title>@yield('titulo', 'Sabors d\'Inca')</title> <!-- Esto del yield es como los block que hay en Flask. Este bloque es el del título. -->
+    <title>@yield('titulo', 'Sabores de Inca')</title> <!-- Esto del yield es como los block que hay en Flask. Este bloque es el del título. -->
     @vite('resources/css/app.css')
     @vite('resources/css/dark-mode.css')
     @vite('resources/js/dark-mode.js')
@@ -21,13 +21,27 @@
 </head>
 
 <body>
+
     <header class="main-header">
         <div class="container">
-            <div class="espaciador"></div>
-            <!-- Logo -->
-            <img class="logo" src="{{ asset('Logo.png')}}" alt='Logo-Sabores-Inca'>
+            <a href="/" class="center-logo">
+                <img class="logo" src="{{ asset('Logo.png') }}" alt="Logo-Sabores-Inca">
+            </a>
+            <div class="dark-mode-wrapper">
+                <button id="dark-mode-toggle" aria-label="Cambiar modo oscuro">🌓</button>
+            </div>
+        </div>
+    </header>
 
-            <!-- Sección de enlaces y modo oscuro -->
+    <nav class="barra-nav">
+        <div class="nav-links">
+            <a href="/">Inicio</a>
+            <a href="/restaurantes">Restaurantes</a>
+            <a href="/quien-soy">Quién soy</a>
+        </div>
+    </nav>
+    <div class="top-bar">
+        <div class="container">
             <div class="auth-links">
                 <div id="no-login" style="display: none;">
                     <a id="register-link" href="/register">Registrarse</a>
@@ -40,23 +54,13 @@
                     <button id="logout-button">Cerrar sesión</button>
                 </div>
 
-                <!-- Botón separado -->
-                <div class="dark-mode-wrapper">
-                    <button id="dark-mode-toggle" aria-label="Cambiar modo oscuro">🌓</button>
+                <div id="admin-button" style="display: none;">
+                    <a href="/admin" class="admin-link"><i class="fas fa-tools"></i> Administración</a>
                 </div>
+
             </div>
-
-    </header>
-
-
-    <nav class="barra-nav">
-        <div class="nav-links">
-            <a href="/">Inicio</a>
-            <a href="/restaurantes">Restaurantes</a>
-            <a href="/quien-soy">Quién soy</a>
         </div>
-    </nav>
-
+    </div>
     <main style="padding: 2rem;">
         @yield('contenido')
     </main>
