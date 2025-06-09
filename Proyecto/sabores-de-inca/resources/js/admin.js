@@ -56,6 +56,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
+    const btnEdit = document.getElementById("add-btn");
+    btnEdit.addEventListener("click", (event) => {
+        // alert("BU");
+        window.location.href = `/restaurantes/crear`;
+
+    })
+
+
     async function cargarRestaurantes() {
         const token = localStorage.getItem('token');
         const restRes = await fetch('/api/restaurantes', {

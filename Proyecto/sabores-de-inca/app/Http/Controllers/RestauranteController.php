@@ -152,6 +152,15 @@ class RestauranteController extends Controller
         }
     }
 
+    // Para crear un restaurante en la parte de admin.
+    public function create()
+    {
+        $tiposCocina = TipoCocinaTraduccion::select('fk_idTipoCocina', 'Nombre')
+            ->where("fk_idIdioma", 1)
+            ->get();
+        return view('admin.crear', compact('tiposCocina'));
+    }
+
     // Función para controlar los updates.
     public function update(RestauranteUpdateRequest $request, $id)
     {

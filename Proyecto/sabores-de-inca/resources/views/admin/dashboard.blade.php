@@ -9,6 +9,7 @@
     <p>Bienvenida, <span id="admin-username"></span>.</p>
 
     <h2>Restaurantes registrados</h2>
+    <button class="add-btn" id="add-btn" data-idRestaurante-restaurante="${rest.idRestaurante}">Añadir</button>
     <table border="1" cellpadding="10">
         <thead>
             <tr>
