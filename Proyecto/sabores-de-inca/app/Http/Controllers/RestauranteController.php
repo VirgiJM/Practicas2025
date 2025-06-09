@@ -18,7 +18,10 @@ class RestauranteController extends Controller
     // Index para mostrar todos los elementos de la tabla. 
     public function index(Request $request)
     {
-        $query = Restaurante::with('valoraciones')
+        $query = Restaurante::with([
+            'valoraciones',
+            'tipoCocina.traduccionEsp'  // Carga la traducción en español
+        ])
             ->withAvg('valoraciones as promedio_valoracion', 'Valoracion');
 
         if ($request->has('vegano') && $request->vegano == 1) {
@@ -44,9 +47,8 @@ class RestauranteController extends Controller
         }
 
         $query->orderByDesc('promedio_valoracion');
-
         $restaurantes = $query->get();
-
+        
         /** @var \App\Models\User $usuario */
         $usuario = Auth::user(); // La línea de encima es para que no se queje tanto.
 
@@ -59,49 +61,53 @@ class RestauranteController extends Controller
             $usuario->load('favoritos');
             Log::info('Favoritos del usuario:', $usuario->favoritos->pluck('idRestaurante')->toArray());
         }
-
+        
         if ($request->ajax()) {
             return view('restaurantes._lista', compact('restaurantes', 'usuario', 'rangosPrecio', 'mediaMinima'));
         }
-
+        
         return view('restaurantes.index', compact('restaurantes', 'usuario', 'rangosPrecio', 'mediaMinima'));
     }
-
-
-
-
-
+    
+    
+    
+    
+    
     // Este método sería usado desde api.php (el de las rutas). Devuelve datos en json.
     public function indexApi(Request $request)
     {
-        $query = Restaurante::with('valoraciones')
-            ->withAvg('valoraciones as promedio_valoracion', 'Valoracion');
-
-        if ($request->has('vegano') && $request->vegano == 1) {
-            $query->where('Vegano', true);
+        
+        $query = Restaurante::with([
+            'valoraciones',
+            'tipoCocina.traduccionEsp'  // Carga la traducción en español
+            ])->withAvg('valoraciones as promedio_valoracion', 'Valoracion');
+            
+            if ($request->has('vegano') && $request->vegano == 1) {
+                $query->where('Vegano', true);
+            }
+            
+            if ($request->has('tipoCocina') && $request->tipoCocina != 0) {
+                $query->where('fk_idTipoCocina', $request->tipoCocina);
         }
-
-        if ($request->has('tipoCocina') && $request->tipoCocina != 0) {
-            $query->where('fk_idTipoCocina', $request->tipoCocina);
-        }
-
+        
         if ($request->has('mediaMinima')) {
             $mediaMinima = (int) $request->mediaMinima;
             $query->having('promedio_valoracion', '>=', $mediaMinima);
         }
-
+        
         // Filtrar por rangoPrecio.
         if ($request->has('rangoPrecio') && $request->rangoPrecio != 0) {
             // Log::info('Filtro rangoPrecio recibido: ' . $request->rangoPrecio);
             $query->where('RangoPrecio', $request->rangoPrecio);
         }
-
+        
         $query->orderByDesc('promedio_valoracion');
-
+        // dd($query);
+        
         return response()->json($query->get());
     }
-
-
+    
+    
     // Show es para mostrar un elemento en específico. Esta función será para pruebas de PostMan y tal. 
     public function showApi($id)
     {
@@ -125,7 +131,7 @@ class RestauranteController extends Controller
             ->where('Slug', $slug)
             ->firstOrFail();
 
-        Log::info("Info: ". $restaurante);
+        Log::info("Info: " . $restaurante);
         return view('restaurantes.show', compact('restaurante'));
     }
 

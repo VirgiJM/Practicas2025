@@ -47,4 +47,9 @@ class Restaurante extends Model
             $restaurante->Slug = Str::slug($restaurante->Nombre);
         });
     }
+
+    public function tipoCocina()
+    {
+        return $this->belongsTo(TipoCocina::class, 'fk_idTipoCocina');
+    }
 }
