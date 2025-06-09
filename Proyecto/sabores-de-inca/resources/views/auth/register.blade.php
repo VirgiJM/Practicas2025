@@ -7,7 +7,7 @@
 @vite('resources/js/register.js')
 @section('contenido')
 <div class="register-container">
-    <h2>Crear cuenta</h2>
+    <h2 style="max-width: 940px; margin: 0 auto; padding: 2rem;">Crear cuenta</h2>
     <form id="register-form">
         <label for="Username">Nombre</label>
         <input type="text" name="Username">
