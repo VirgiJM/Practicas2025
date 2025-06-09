@@ -44,13 +44,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         window.location.href = '/login';
     }
 
-    // Delegación de eventos para botones eliminar
+    // Botones para editar o eliminar.
     document.getElementById('restaurant-table-body').addEventListener('click', (event) => {
         if (event.target.classList.contains('delete-btn')) {
             const idRestaurante = event.target.getAttribute('data-idRestaurante-restaurante');
             borrarRestaurante(idRestaurante);
         }
-        // Aquí podrías añadir también para el botón editar si quieres
+        if (event.target.classList.contains('edit-btn')) {
+            const idRestaurante = event.target.getAttribute('data-idRestaurante-restaurante');
+            window.location.href = `/restaurantes/editar/${idRestaurante}`;
+        }
     });
 
     async function cargarRestaurantes() {

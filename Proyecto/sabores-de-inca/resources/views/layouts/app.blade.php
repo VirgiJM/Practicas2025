@@ -10,7 +10,7 @@
     @vite('resources/css/app.css')
     @vite('resources/css/dark-mode.css')
     @vite('resources/js/dark-mode.js')
-    @vite('resources/js/session-controller.js')
+    @vite('resources/js/session-controller.js', 'module', ['defer'])
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">

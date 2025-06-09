@@ -156,4 +156,5 @@ Route::middleware('auth:sanctum')->prefix('favoritos')->group(function () {
 // Restaurante en concreto
 Route::middleware('auth:sanctum')->prefix('restaurante')->group(function () {
     Route::delete('/{id}', [RestauranteController::class, 'destroy']);
+    Route::put('/{id}', [RestauranteController::class, 'update']);
 });

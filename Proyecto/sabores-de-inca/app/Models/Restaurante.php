@@ -22,7 +22,9 @@ class Restaurante extends Model
         'SitioWeb',
         'Direccion',
         'Carta',
-        'fk_idTipoCocina'
+        'fk_idTipoCocina',
+        'Descripcion',
+        'Slug'
     ];
 
     // Para obtener la media de las valoraciones. Primero, necesitamos una relación entre ambas tablas. Mirar la línea extra del controlador.

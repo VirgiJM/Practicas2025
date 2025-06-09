@@ -92,3 +92,6 @@ Route::get('/perfil', function () {
 Route::get('/admin', function () {
     return view('admin.dashboard');
 });
+
+
+Route::get('/restaurantes/editar/{id}', [RestauranteController::class, 'editarVista']);
