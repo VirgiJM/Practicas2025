@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('titulo', 'Quién soy | Sabores de Inca')
+@vite('resources/css/dark-mode.css')
 
 @section('contenido')
 <section id="quien-soy" style="max-width: 800px; margin: 0 auto; padding: 2rem;">

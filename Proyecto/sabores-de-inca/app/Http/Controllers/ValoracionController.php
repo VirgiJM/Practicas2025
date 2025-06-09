@@ -17,12 +17,12 @@ class ValoracionController extends Controller
 
     public function show($id)
     {
-        $valoracion = Valoracion::find($id); // Busca en la base de datos el elemento con ese ID
+        $valoracion = Valoracion::find($id); // Busca en la base de datos el elemento con ese ID.
 
         if ($valoracion) {
-            return response()->json($valoracion); // Si lo encuentra, lo devuelve en formato JSON
+            return response()->json($valoracion); // Si lo encuentra, lo devuelve en formato JSON.
         } else {
-            return response()->json(['mensaje' => 'Valoración no encontrada'], 404); // Si no lo encuentra, error 404
+            return response()->json(['mensaje' => 'Valoración no encontrada'], 404); // Si no lo encuentra, error 404.
         }
     }
 

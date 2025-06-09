@@ -38,7 +38,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return response()->json([
         'username' => $request->user()->Username,
         'email' => $request->user()->Email,
-        'profile_image' => $request->user()->Profile_Image
+        'profile_image' => $request->user()->Profile_Image,
+        'esAdmin' => $request->user()->esAdmin
     ]);
 });
 Route::middleware('auth:sanctum')->post('/valoracion', [ValoracionController::class, 'store']);
@@ -51,10 +52,11 @@ Route::prefix('restaurantes')->group(function () {
     Route::post('/{id}/subir-carta', [RestauranteController::class, 'subirCarta']);
     Route::post('/', [RestauranteController::class, 'store']);
     Route::put('/{id}', [RestauranteController::class, 'update']);
-    Route::delete('/{id}', [RestauranteController::class, 'destroy']);
+    Route::delete('/{slug}', [RestauranteController::class, 'destroy']);
     Route::post('/{id}/imagen', [RestauranteController::class, 'subirImagen']); // Ruta para subir imágenes.
 
 });
+
 
 // Rutas API para tipo de cocina.
 Route::prefix('tipos-cocina')->group(function () {
@@ -119,7 +121,7 @@ Route::prefix('traducciones-restaurante')->group(function () {
 // Route::middleware('auth:sanctum')->get('/favoritos', [FavoritoController::class, 'index']);
 // Route::middleware('auth:sanctum')->post('/favoritos/toggle', [FavoritoController::class, 'toggle']);
 // Route::middleware('auth:sanctum')->get('/favoritos', function (Request $request) {
-//     return $request->user()->favoritos->pluck('id'); // Devuelve un array con los IDs de los restaurantes favoritos
+//     return $request->user()->favoritos->pluck('id'); // Devuelve un array con los IDs de los restaurantes favoritos.
 
 Route::middleware('auth:sanctum')->prefix('favoritos')->group(function () {
     Route::get('/', [FavoritoController::class, 'index']);
@@ -148,4 +150,11 @@ Route::middleware('auth:sanctum')->prefix('favoritos')->group(function () {
             return response()->json(['estado' => 'añadido']);
         }
     });
+});
+
+
+// Restaurante en concreto
+Route::middleware('auth:sanctum')->prefix('restaurante')->group(function () {
+    Route::delete('/{id}', [RestauranteController::class, 'destroy']);
+    Route::put('/{id}', [RestauranteController::class, 'update']);
 });

@@ -2,9 +2,10 @@
 
 @section('titulo', 'Lista de Restaurantes')
 
-@vite('resources/js/restaurantes.js') <!-- Esto importa el JS solo en esta vista -->
+@vite('resources/js/restaurantes.js') <!-- Esto importa el JS solo en esta vista. -->
 
 @section('contenido')
+<div style="max-width: 1550px; margin: 0 auto; padding: 2rem;">
 <h2>Filtrar</h2>
 <div class="filtro-container">
     <select id="tipoCocina">
@@ -33,8 +34,8 @@
     </label>
 
 </div>
-
 <h2>Lista de restaurantes</h2>
+</div>
 
 @if ($restaurantes->isEmpty())
 <p>No hay restaurantes todavía.</p>

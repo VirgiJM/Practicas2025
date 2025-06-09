@@ -11,4 +11,15 @@ class TipoCocina extends Model
     // public $timestamps = false;
     protected $fillable = []; // Esto se hace cuando en la base de datos sólo hay un atributo y es autoincremental.
     // Esto le dice a Laravel: "puedes crear modelos aunque no haya campos editables definidos, porque no voy a enviar nada más".
+
+    public function traducciones()
+    {
+        return $this->hasMany(TipoCocinaTraduccion::class, 'fk_idTipoCocina');
+    }
+
+    public function traduccionEsp()
+    {
+        return $this->hasOne(TipoCocinaTraduccion::class, 'fk_idTipoCocina')
+            ->where('fk_idIdioma', 1);
+    }
 }

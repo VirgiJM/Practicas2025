@@ -23,7 +23,9 @@ class RestauranteUpdateRequest extends FormRequest
             'SitioWeb' => 'nullable|string|max:100',
             'Direccion' => 'sometimes|required|string|max:150',
             'Carta' => 'nullable|string|max:255',
-            'fk_idTipoCocina' => 'sometimes|required|exists:tipo_cocina,idTipoCocina'
+            'fk_idTipoCocina' => 'sometimes|required|exists:tipo_cocina,idTipoCocina',
+            'Descripcion' => 'sometimes|string|max:65535',
+
         ];
     }
 

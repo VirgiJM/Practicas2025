@@ -17,7 +17,7 @@ class RestauranteTraduccionUpdateRequest extends FormRequest
         Log::info('Entró al FormRequest');
 
         return [
-            'Descripcion' => 'required|string|max:255',
+            'Descripcion' => 'sometimes|string|max:65535',
             'Horario' => 'required|string|max:350',
             'fk_idRestaurante' => 'required|integer|exists:restaurante,idRestaurante',
             'fk_idIdioma' => 'required|integer|exists:idioma,idIdioma',

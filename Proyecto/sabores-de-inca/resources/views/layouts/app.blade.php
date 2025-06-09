@@ -6,11 +6,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
-    <title>@yield('titulo', 'Sabors d\'Inca')</title> <!-- Esto del yield es como los block que hay en Flask. Este bloque es el del título. -->
+    <title>@yield('titulo', 'Sabores de Inca')</title> <!-- Esto del yield es como los block que hay en Flask. Este bloque es el del título. -->
     @vite('resources/css/app.css')
     @vite('resources/css/dark-mode.css')
     @vite('resources/js/dark-mode.js')
-    @vite('resources/js/session-controller.js')
+    @vite('resources/js/session-controller.js', 'module', ['defer'])
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
@@ -21,39 +21,40 @@
 </head>
 
 <body>
+
     <header class="main-header">
         <div class="container">
-            <div class="espaciador"></div>
-            <!-- Logo -->
-            <img class="logo" src="{{ asset('Logo.png')}}" alt='Logo-Sabores-Inca'>
-
-            <!-- Sección de enlaces y modo oscuro -->
-            <div class="auth-links">
-                <div id="no-login" style="display: none;">
-                    <a id="register-link" href="/register">Registrarse</a>
-                    <a id="login-link" href="/login">Iniciar sesión</a>
-                </div>
-
-                <div id="user-menu" style="display: none;">
-                    <p id="nombre-usuario"></p>
-                    <a id="profile-link" href="/perfil">Mi perfil</a>
-                    <button id="logout-button">Cerrar sesión</button>
-                </div>
-
-                <!-- Botón separado -->
-                <div class="dark-mode-wrapper">
-                    <button id="dark-mode-toggle" aria-label="Cambiar modo oscuro">🌓</button>
-                </div>
-            </div>
-
+            <a href="/" class="center-logo">
+                <img class="logo" src="{{ asset('Logo.png') }}" alt="Logo-Sabores-Inca">
+            </a>
+        </div>
     </header>
-
 
     <nav class="barra-nav">
         <div class="nav-links">
             <a href="/">Inicio</a>
             <a href="/restaurantes">Restaurantes</a>
             <a href="/quien-soy">Quién soy</a>
+
+            <!-- Botones login / perfil al mismo nivel que los enlaces -->
+            <div class="auth-links">
+                <div id="no-login" style="display: none;">
+                    <a id="register-link" href="/register">Registrarse</a>
+                    <a id="login-link" href="/login">Iniciar sesión</a>
+                </div>
+                <div id="user-menu" class="dropdown" style="display: none;">
+                    <button id="user-dropdown-toggle"></button>
+                    <div id="user-dropdown-content" class="dropdown-content">
+                        <a id="profile-link" href="/perfil">Mi perfil</a>
+                        <a href="/admin" class="admin-link" id=admin-button style="display: none;">Administración</a>
+                        <button id="logout-button">Cerrar sesión</button>
+                    </div>
+                </div>
+                <!-- Modo oscuro -->
+                <div class="dark-mode-wrapper">
+                    <button id="dark-mode-toggle" aria-label="Cambiar modo oscuro">🌓</button>
+                </div>
+            </div>
         </div>
     </nav>
 

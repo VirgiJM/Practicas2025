@@ -56,6 +56,7 @@
 
         <section id="formulario-valoracion" style="display: none;">
             <h3>Deja tu valoración</h3>
+            <p><i>Por favor, recuerda ser respetuoso. Los comentarios ofensivos serán eliminados.</i></p>
             <form id="nueva-valoracion">
                 <label for="valoracion">Puntuación:</label>
                 <select id="valoracion" name="valoracion" required>

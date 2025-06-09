@@ -11,14 +11,18 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Log; // Pruebas.
-
+use App\Models\TipoCocina;
+use App\Models\TipoCocinaTraduccion;
 
 class RestauranteController extends Controller
 {
     // Index para mostrar todos los elementos de la tabla. 
     public function index(Request $request)
     {
-        $query = Restaurante::with('valoraciones')
+        $query = Restaurante::with([
+            'valoraciones',
+            'tipoCocina.traduccionEsp'  // Carga la traducción en español
+        ])
             ->withAvg('valoraciones as promedio_valoracion', 'Valoracion');
 
         if ($request->has('vegano') && $request->vegano == 1) {
@@ -44,7 +48,6 @@ class RestauranteController extends Controller
         }
 
         $query->orderByDesc('promedio_valoracion');
-
         $restaurantes = $query->get();
 
         /** @var \App\Models\User $usuario */
@@ -71,11 +74,14 @@ class RestauranteController extends Controller
 
 
 
-    // Este método sería usado desde `api.php`. Devuelve datos en json.
+    // Este método sería usado desde api.php (el de las rutas). Devuelve datos en json.
     public function indexApi(Request $request)
     {
-        $query = Restaurante::with('valoraciones')
-            ->withAvg('valoraciones as promedio_valoracion', 'Valoracion');
+
+        $query = Restaurante::with([
+            'valoraciones',
+            'tipoCocina.traduccionEsp'  // Carga la traducción en español
+        ])->withAvg('valoraciones as promedio_valoracion', 'Valoracion');
 
         if ($request->has('vegano') && $request->vegano == 1) {
             $query->where('Vegano', true);
@@ -97,6 +103,7 @@ class RestauranteController extends Controller
         }
 
         $query->orderByDesc('promedio_valoracion');
+        // dd($query);
 
         return response()->json($query->get());
     }
@@ -125,7 +132,7 @@ class RestauranteController extends Controller
             ->where('Slug', $slug)
             ->firstOrFail();
 
-        Log::info("Info: ". $restaurante);
+        Log::info("Info: " . $restaurante);
         return view('restaurantes.show', compact('restaurante'));
     }
 
@@ -136,7 +143,7 @@ class RestauranteController extends Controller
             $validated = $request->validated();
             Restaurante::create($validated);
 
-            return response()->json(['mensaje' => 'Restaurante creado correctamente'], 201); // 201: creado
+            return response()->json(['mensaje' => 'Restaurante creado correctamente'], 201); // 201: Creado.
         } catch (\Exception $e) {
             return response()->json([
                 'mensaje' => 'Error al crear el restaurante.',
@@ -149,9 +156,9 @@ class RestauranteController extends Controller
     public function update(RestauranteUpdateRequest $request, $id)
     {
         try {
-            $restaurante = Restaurante::findOrFail($id); // Lanza 404 si no existe
+            $restaurante = Restaurante::findOrFail($id); // Lanza 404 si no existe.
 
-            $datos = $request->validated(); // Solo los campos válidos
+            $datos = $request->validated(); // Solo los campos válidos.
             $restaurante->update($datos);
 
             return response()->json(['mensaje' => 'Restaurante actualizado correctamente'], 200);
@@ -176,7 +183,7 @@ class RestauranteController extends Controller
         if ($request->hasFile('Carta')) {
             $path = $request->file('Carta')->store('/cartas', 'public'); // Carpeta storage/app/public/cartas.
 
-            // Guardar la ruta relativa en la base de datos
+            // Guardar la ruta relativa en la base de datos.
             $restaurante->Carta = $path;
             $restaurante->save();
 
@@ -188,7 +195,7 @@ class RestauranteController extends Controller
 
 
 
-    // Método para eliminar una accesibilidad
+    // Método para eliminar un restaurante.
     public function destroy($id)
     {
         try {
@@ -225,5 +232,16 @@ class RestauranteController extends Controller
         }
 
         return response()->json(['error' => 'Se ha producido un error. No se ha subido ninguna Foto.'], 400);
+    }
+
+    public function editarVista($id)
+    {
+        $restaurante = Restaurante::findOrFail($id);
+        $tiposCocina = TipoCocinaTraduccion::select('fk_idTipoCocina', 'Nombre')
+            ->where("fk_idIdioma", 1)
+            ->get();
+        // $tiposCocina = TipoCocina::with('traduccion_esp')->get();
+
+        return view('admin.editar', compact('restaurante', 'tiposCocina'));
     }
 }

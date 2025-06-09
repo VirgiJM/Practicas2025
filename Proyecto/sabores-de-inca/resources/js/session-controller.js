@@ -4,8 +4,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const userMenu = document.getElementById('user-menu');
     const logoutButton = document.getElementById('logout-button');
     const profileLink = document.getElementById('profile-link');
-    const username = document.getElementById('nombre-usuario');
-
+    const toggleBtn = document.getElementById('user-dropdown-toggle');
     // Por defecto, ocultamos ambos para que el JS decida cuál mostrar:
     if (noLogin) noLogin.style.display = 'none';
     if (userMenu) userMenu.style.display = 'none';
@@ -27,31 +26,25 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (res.ok) {
             const user = await res.json();
 
-            // Mostrar botones de favorito (sólo en la página de restaurantes).
-            const favoritoBtns = document.querySelectorAll('.favorito-btn');
-            if (favoritoBtns.length > 0) { // Si es menor que 0, no dará error, pero devolverá una lista vacía.
-                favoritoBtns.forEach(btn => {
-                    btn.style.display = 'block';
-                });
-            }
-
-
-            // Token válido, mostramos menú de usuario
+            // Mostrar menú de usuario
             if (userMenu) userMenu.style.display = 'inline-block';
 
-            // Mostrar saludo con usuario
-            if (username && user.username) {
-                username.textContent = `¡Hola, ${user.username}!`;
+            // Mostrar el nombre del usuario en el botón
+            if (toggleBtn && user.username) {
+                toggleBtn.textContent = `${user.username} ▼`;
             }
 
             if (profileLink) {
                 profileLink.textContent = 'Mi perfil';
             }
-        } else {
-            // Token inválido, borramos y mostramos menú login/registro
-            localStorage.removeItem('token');
-            if (noLogin) noLogin.style.display = 'block';
+
+            // Mostrar enlace de administración si el usuario es administrador o no.
+            const adminButton = document.getElementById('admin-button');
+            if (adminButton && user.esAdmin) {
+                adminButton.style.display = 'inline-block';
+            }
         }
+
     } catch (error) {
         console.error('Error al verificar el token:', error);
         localStorage.removeItem('token');
@@ -64,5 +57,26 @@ document.addEventListener('DOMContentLoaded', async () => {
             window.location.href = '/login';
         });
     }
+
+    // Menú desplegable
+    // const toggleBtn = document.getElementById('user-dropdown-toggle');
+    const dropdown = document.getElementById('user-dropdown-content');
+    // toggleBtn.textContent = user.username;
+    // console.log(username);
+
+    toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+    });
+
+    // Cierra el menú al hacer clic fuera
+    document.addEventListener('click', () => {
+        dropdown.style.display = 'none';
+    });
+
+    // Evita que el clic dentro del menú lo cierre
+    dropdown.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
 
 });

@@ -1,4 +1,4 @@
-/* Fuente general */
+/* Fuente general. */
 body {
     font-family: 'Inter', sans-serif;
     background-color: #f4f6f8;
@@ -7,7 +7,324 @@ body {
     color: #333;
 }
 
-/* Contenedor de restaurantes */
+/* HEADER GENERAL. */
+.main-header {
+    background-color: #f00;
+    padding: 5rem 0;
+    position: relative;
+    z-index: 10;
+}
+
+.main-header .container {
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+    /* separa logo y botones */
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+#links-nav {
+    color: white;
+}
+
+.logo {
+    height: 190px;
+    max-width: 160px;
+    object-fit: contain;
+    margin: 0 auto;
+}
+
+/* Logo centrado */
+.center-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 60px;
+    max-width: 140px;
+    object-fit: contain;
+    margin: 0 auto;
+}
+
+
+/* Logo responsive en móviles. */
+@media (max-width: 768px) {
+    .main-header .logo {
+        width: 50%;
+        max-width: 200px;
+        margin-right: 70px;
+    }
+}
+
+.top-bar {
+    /* background-color: #ffe5e5; */
+    /* padding: 0.5rem 1rem; */
+    font-size: 0.95rem;
+}
+
+/* #links-nav {
+    display: grid;
+    justify-content: end;
+} */
+
+.auth-links a,
+.auth-links button {
+    margin-left: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    text-decoration: none;
+}
+
+#dark-mode-toggle {
+    background-color: white;
+    /* color: rgb(253, 0, 0); */
+    font-weight: 600;
+    border-radius: 4px;
+    padding: 0.4rem 0.8rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 0 !important;
+    margin-bottom: 0;
+    /* transform: translateY(-3px); */
+}
+
+@media (max-width: 675px) {
+    #dark-mode-toggle {
+        position: static;
+        /* margin-top: -40px !important; */
+    }
+}
+
+@media (max-width: 768px) {
+    /* .top-bar .container {
+        flex-direction: column;
+        align-items: flex-end;
+    } */
+
+    .auth-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: flex-end;
+        width: 100%;
+    }
+
+    .auth-links p {
+        margin: 0;
+        
+    }
+
+    .auth-links a,
+    .auth-links button {
+        font-size: 0.9rem;
+        
+    }
+
+
+    .barra-nav .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .barra-nav .nav-links a {
+        font-size: 1rem;
+    }
+
+    .dark-mode-wrapper {
+        align-self: flex-end;
+        margin-top: 0.5rem;
+        margin-right: 0.2rem;
+    }
+
+    #dark-mode-toggle {
+        font-size: 1.2rem;
+        padding: 0.3rem 0.5rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .center-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-top: 0;
+    }
+
+    .center-logo img.logo {
+        max-width: 300px;
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .main-header .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        min-height: unset;
+    }
+
+    .logo {
+        height: 100px;
+        max-width: 160px;
+        object-fit: contain;
+        margin: 0 auto;
+    }
+}
+
+.auth-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    max-width: 100%;
+    transform: translateY(-4px);
+}
+
+.auth-links>* {
+    flex-shrink: 0;
+    /* Evita que los botones desaparezcan al reducirse el tamaño */
+}
+
+.dark-mode-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    /* Alinea al centro verticalmente */
+}
+
+.main-header .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/* RESPONSIVE HEADER. */
+@media (max-width: 768px) {
+    .main-header {
+        padding: 0.5rem 0;
+        margin: 0;
+    }
+
+    .main-header .container {
+        flex-direction: column;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+    }
+
+    .auth-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+
+    /* #dark-mode-toggle {
+        align-self: flex-start;
+    } */
+}
+
+a {
+    text-decoration: none;
+}
+
+/* NAV GENERAL. */
+.barra-nav {
+    background-color: #ffe5e5;
+    /* tono suave que combina con el rojo */
+    padding: 0.75rem 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.barra-nav .nav-links {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: center; /* Cambiado de 'end' a 'center' */
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.barra-nav .nav-links a {
+    text-decoration: none;
+    color: rgb(253, 0, 0);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color 0.2s ease, border-bottom 0.2s ease;
+    position: relative;
+}
+
+.barra-nav .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 2px;
+    width: 100%;
+    background-color: deeppink;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.2s ease;
+}
+
+.barra-nav .nav-links a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+@media (max-width: 600px) {
+    .barra-nav .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+}
+
+/* Centrar el logo en el header */
+.center-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    text-align: center;
+}
+
+/* Contenedor general del header */
+.main-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 1rem 1rem;
+}
+
+
+/* Este div empuja todo lo que viene después hacia la derecha */
+.espaciador {
+    flex-grow: 1;
+}
+
+
+
+/* Contenedor de restaurantes. */
 .restaurantes-container {
     display: flex;
     flex-wrap: wrap;
@@ -16,7 +333,7 @@ body {
     padding: 40px 20px;
 }
 
-/* Tarjetas */
+/* Tarjetas. */
 .restaurante-card {
     background-color: #fff;
     border-radius: 10px;
@@ -38,7 +355,7 @@ body {
     object-fit: cover;
 }
 
-/* Detalles */
+/* Detalles. */
 .restaurante-card .details {
     padding: 15px;
     text-align: center;
@@ -57,7 +374,7 @@ body {
     color: black;
 }
 
-/* Filtros y formularios */
+/* Filtros y formularios. */
 form {
     background-color: #fff;
     padding: 20px;
@@ -83,7 +400,7 @@ form select {
     margin-bottom: 15px;
 }
 
-/* Botones */
+/* Botones. */
 button,
 input[type="submit"] {
     background-color: #1abc9c;
@@ -101,7 +418,7 @@ input[type="submit"]:hover {
     background-color: #17a689;
 }
 
-/* Estilos generales de la leyenda */
+/* Estilos generales de la leyenda. */
 .info.legend {
     background: white;
     padding: 10px;
@@ -109,10 +426,10 @@ input[type="submit"]:hover {
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
     font-size: 14px;
     max-width: 90vw;
-    /* Asegura que no se salga del viewport en móvil */
+    /* Para que no se salga del viewport en móvil. */
 }
 
-/* Elementos individuales */
+/* Elementos individuales. */
 .leyenda-item {
     display: flex;
     align-items: center;
@@ -120,7 +437,7 @@ input[type="submit"]:hover {
     flex-wrap: nowrap;
 }
 
-/* Iconos */
+/* Iconos. */
 .leyenda-item img {
     width: 20px;
     height: 30px;
@@ -162,166 +479,7 @@ input[type="submit"]:hover {
     }
 }
 
-/* HEADER GENERAL */
-.main-header {
-    background-color: rgb(253, 0, 0);
-    color: white;
-    padding: 1rem 0;
-}
-
-.main-header .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-}
-
-.main-header .logo {
-    width: 10%;
-    max-width: 140px;
-
-}
-
-/* Logo responsive en móviles */
-@media (max-width: 768px) {
-    .main-header .logo {
-        width: 50%;
-        max-width: 200px;
-        margin-right: 70px;
-    }
-}
-
-/* Links de login y usuario */
-.auth-links {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-}
-
-.auth-links a,
-.auth-links button {
-    background: white;
-    color: rgb(253, 0, 0);
-    border: none;
-    padding: 0.4rem 0.8rem;
-    border-radius: 4px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s ease;
-    text-decoration: none;
-}
-
-.auth-links a:hover,
-.auth-links button:hover {
-    background: #ffe5e5;
-}
-
-/* Botón modo oscuro */
-#dark-mode-toggle {
-    background-color: white;
-    color: rgb(253, 0, 0);
-    font-weight: 600;
-    border-radius: 4px;
-    padding: 0.4rem 0.8rem;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    margin-top: 0 !important;
-    margin-bottom: 0;
-
-}
-
-@media (max-width: 675px) {
-    #dark-mode-toggle {
-        position: static;
-        margin-top: -40px !important;
-    }
-}
-
-#dark-mode-toggle:hover {
-    background-color: #ffe5e5;
-}
-
-/* RESPONSIVE HEADER */
-@media (max-width: 768px) {
-    .main-header .container {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .auth-links {
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        width: 100%;
-    }
-
-    #dark-mode-toggle {
-        align-self: flex-start;
-    }
-}
-
-a {
-    text-decoration: none;
-}
-
-/* NAV GENERAL */
-.barra-nav {
-    background-color: #ffe5e5;
-    /* tono suave que combina con el rojo */
-    padding: 0.75rem 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.barra-nav .nav-links {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-}
-
-.barra-nav .nav-links a {
-    text-decoration: none;
-    color: rgb(253, 0, 0);
-    font-weight: 600;
-    font-size: 1rem;
-    transition: color 0.2s ease, border-bottom 0.2s ease;
-    position: relative;
-}
-
-.barra-nav .nav-links a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -4px;
-    height: 2px;
-    width: 100%;
-    background-color: rgb(253, 0, 0);
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.2s ease;
-}
-
-.barra-nav .nav-links a:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
-}
-
-@media (max-width: 600px) {
-    .barra-nav .nav-links {
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-    }
-}
-
-/* Favoritos */
+/* Favoritos. */
 .favorito-btn {
     position: absolute;
     top: 10px;
@@ -359,10 +517,10 @@ a {
     color: red;
 }
 
-#dark-mode-toggle {
-    margin-left: 20rem;
+/* #dark-mode-toggle { */
+/* margin-left: 80rem; */
 
-}
+/* } */
 
 
 html,
@@ -379,7 +537,7 @@ main {
 }
 
 
-/* Contenedor para organizar */
+/* Contenedor para organizar. */
 .filtro-container {
     display: flex;
     flex-wrap: wrap;
@@ -393,7 +551,7 @@ main {
     box-shadow: 0 4px 10px rgb(0 0 0 / 0.05);
 }
 
-/* Título */
+/* Título. */
 h2 {
     width: 100%;
     font-weight: 700;
@@ -402,7 +560,7 @@ h2 {
     margin-bottom: 15px;
 }
 
-/* Select estilo “botón” */
+/* Select estilo botón. */
 select {
     appearance: none;
     -webkit-appearance: none;
@@ -457,7 +615,7 @@ label[for="vegano"] {
 }
 
 
-/* Ajustes para filtros en móvil */
+/* Ajustes para filtros en móvil. */
 @media (max-width: 768px) {
     .filtro-container {
         flex-direction: column;
@@ -465,22 +623,22 @@ label[for="vegano"] {
         gap: 15px;
     }
 
-    /* Los selects e input checkbox ocupan 100% en móviles para mejor usabilidad */
+    /* Los selects e input checkbox ocupan 100% en móviles para mejor usabilidad. */
     .filtro-container select,
     .filtro-container label[for="vegano"] {
         width: 100%;
         min-width: unset;
-        /* Elimina el min-width para móviles */
+        /* Elimina el min-width para móviles. */
     }
 
-    /* Ajustar el checkbox para que no ocupe tanto espacio */
+    /* Ajustar el checkbox para que no ocupe tanto espacio. */
     input[type="checkbox"] {
         width: 18px;
         height: 18px;
     }
 }
 
-/* Ajustar tarjetas para móviles */
+/* Ajustar tarjetas para móviles. */
 @media (max-width: 768px) {
     .restaurantes-container {
         flex-direction: column;
@@ -495,88 +653,150 @@ label[for="vegano"] {
     }
 }
 
-/* Ajustar mapa para que no tenga tanto margen arriba en móvil */
+/* Ajustar mapa para que no tenga tanto margen arriba en móvil. */
 @media (max-width: 768px) {
     #map {
         margin-top: 2rem !important;
         height: 400px !important;
-        /* Más compacto en móviles */
     }
 }
 
+.container-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+}
 
+.restaurante-card {
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    overflow: hidden;
+}
+
+.image-container img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 0.3rem;
+    font-size: 0.9rem;
+    line-height: 1.3;
+}
+
+.details p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+}
+
+h3 {
+    font-size: 1.1rem;
+    margin: 0 0 0.5rem 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btn-ver-mas {
+    margin-top: auto;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-ver-mas:hover {
+    background-color: #0056b3;
+}
+
+/* Quién Soy */
 #yo {
     max-width: 100%;
     height: auto;
     display: block;
     margin: 1rem auto;
     border-radius: 12px;
-    /* opcional: para que tenga bordes redondeados */
 }
 
-.container-tarjetas {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
-  padding: 1rem;
+.dropdown {
+    position: relative;
+    display: inline-block;
 }
 
-.restaurante-card {
-  display: flex;
-  flex-direction: column;
-  height: 350px; 
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  background-color: white;
-  overflow: hidden;
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-.image-container img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 1rem;
+.dropdown-content a,
+.dropdown-content button {
+    padding: 12px 16px;
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+    text-decoration: none;
 }
 
-.details {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1; /* ocupa espacio para empujar botón abajo */
-  gap: 0.3rem;
-  font-size: 0.9rem; /* un poco más pequeño */
-  line-height: 1.3;
+.dropdown-content a:hover,
+.dropdown-content button:hover {
+    background-color: #f0f0f0;
 }
 
-.details p {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin: 0;
+
+#user-dropdown-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    color: rgb(253, 0, 0);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0;
+    /* transform: translateY(-3px); */
+}
+#user-dropdown-toggle::after {
+    margin-left: 0.3rem;
+    font-size: 0.8rem;
 }
 
-h3 {
-  font-size: 1.1rem;
-  margin: 0 0 0.5rem 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.barra-nav .nav-links a:hover {
+    color: deeppink;
 }
 
-.btn-ver-mas {
-  margin-top: auto; /* empuja botón abajo */
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  background-color: #007bff;
-  color: white;
-  border-radius: 0.5rem;
-  text-decoration: none;
-  text-align: center;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
+@media screen and (max-width: 768px) {
+.main-header {
+    padding: 100px;
+    margin-top: -100px;
 }
 
-.btn-ver-mas:hover {
-  background-color: #0056b3;
 }
