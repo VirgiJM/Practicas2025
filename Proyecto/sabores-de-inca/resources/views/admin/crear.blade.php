@@ -5,7 +5,7 @@
 @section('titulo', 'Añadir restaurante | Sabores de Inca')
 @section('contenido')
 <h3>Añadir restaurante</h3>
-<form id="formCrearRestaurante" method="POST" action="/restaurantes">
+<form id="formCrearRestaurante" method="POST" action="/restaurantes" enctype="multipart/form-data">
     @csrf
     <label for="nombre">Nombre:</label>
     <input type="text" id="nombre" name="Nombre" required><br>
@@ -39,6 +39,12 @@
         <option value="{{ $tipo->fk_idTipoCocina }}">{{ $tipo->Nombre }}</option>
         @endforeach
     </select>
+
+    <label for="slug">Slug:</label>
+    <input type="text" id="slug" name="Slug" required disabled><br>
+
+    <label for="foto">Foto del restaurante:</label>
+    <input type="file" id="foto" name="Foto" accept="image/*"><br>
 
     <button type="submit">Guardar restaurante</button>
 </form>

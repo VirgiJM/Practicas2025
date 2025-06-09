@@ -31,6 +31,7 @@ class RestauranteCreateRequest extends FormRequest
             'SitioWeb' => 'nullable|string|max:100',
             'Direccion' => 'required|string|max:150',
             'Carta' => 'nullable|string|max:255',
+            'Foto' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'fk_idTipoCocina' => 'required|exists:tipo_cocina,idTipoCocina' // Para las foreign keys. Primero se pone el nombre de la tabla relacionada y luego la primary key.
             // ⚠🚨 IMPORTNATE: DONDE LAS FOREIGN KEYS NO PUEDE HABER ESPACIOS, POR EJEMPLO, 'required|exists:tipo_cocina, idTipoCocina' DARÁ ERROR POR EL ESPACIO ENTRE tipo_cocina, y idTipoCocina ⚠🚨.
             /* 

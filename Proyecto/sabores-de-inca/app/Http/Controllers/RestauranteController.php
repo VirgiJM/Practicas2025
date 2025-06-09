@@ -140,10 +140,23 @@ class RestauranteController extends Controller
     public function store(RestauranteCreateRequest $request)
     {
         try {
+            // Validar y recoger los datos validados del formulario
             $validated = $request->validated();
+
+            // Generar el slug desde el nombre
+            $validated['Slug'] = \Str::slug($validated['Nombre']);
+
+            // Comprobar si se ha subido una imagen
+            if ($request->hasFile('Foto')) {
+                $foto = $request->file('Foto');
+                $ruta = $foto->store('imagenes', 'public'); // Guardar en storage/app/public/imagenes
+                $validated['Foto'] = $ruta; // Guardar la ruta en la BD
+            }
+
+            // Crear el restaurante con todos los datos
             Restaurante::create($validated);
 
-            return response()->json(['mensaje' => 'Restaurante creado correctamente'], 201); // 201: Creado.
+            return response()->json(['mensaje' => 'Restaurante creado correctamente'], 201);
         } catch (\Exception $e) {
             return response()->json([
                 'mensaje' => 'Error al crear el restaurante.',
@@ -151,6 +164,7 @@ class RestauranteController extends Controller
             ], 400);
         }
     }
+
 
     // Para crear un restaurante en la parte de admin.
     public function create()

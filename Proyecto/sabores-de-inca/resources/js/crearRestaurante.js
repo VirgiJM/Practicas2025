@@ -1,4 +1,17 @@
 const form = document.getElementById('formCrearRestaurante');
+const nombreInput = document.getElementById('nombre');
+const slugInput = document.getElementById('slug');
+
+nombreInput.addEventListener('input', () => {
+    const slug = nombreInput.value
+        .toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // quita tildes
+        .replace(/[^a-z0-9\s-]/g, '') // elimina caracteres no válidos
+        .trim()
+        .replace(/\s+/g, '-'); // convierte espacios en guiones
+    slugInput.value = slug;
+});
+
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -6,8 +19,8 @@ form.addEventListener('submit', async (e) => {
     const formData = new FormData(form);
 
     for (let [key, value] of formData.entries()) {
-    console.log(`${key}: ${value}`);
-}
+        console.log(`${key}: ${value}`);
+    }
     const response = await fetch('/restaurantes', {
         method: 'POST',
         headers: {
