@@ -177,7 +177,7 @@ body {
 
     .logo {
         height: 100px;
-        max-width: ç 160px;
+        max-width: 160px;
         object-fit: contain;
         margin: 0 auto;
     }
@@ -231,13 +231,13 @@ body {
 
     .auth-links {
         flex-wrap: wrap;
-        justify-content: flex-start;
+        justify-content: center;
         width: 100%;
     }
 
-    #dark-mode-toggle {
+    /* #dark-mode-toggle {
         align-self: flex-start;
-    }
+    } */
 }
 
 a {
@@ -254,10 +254,10 @@ a {
 
 .barra-nav .nav-links {
     max-width: 1200px;
-    /* margin: 0 auto; */
+    margin: 0 auto;
     padding: 0 1rem;
     display: flex;
-    justify-content: end;
+    justify-content: center; /* Cambiado de 'end' a 'center' */
     gap: 2rem;
     flex-wrap: wrap;
 }
@@ -278,7 +278,7 @@ a {
     bottom: -4px;
     height: 2px;
     width: 100%;
-    background-color: rgb(253, 0, 0);
+    background-color: deeppink;
     transform: scaleX(0);
     transform-origin: right;
     transition: transform 0.2s ease;
@@ -787,4 +787,16 @@ h3 {
 #user-dropdown-toggle::after {
     margin-left: 0.3rem;
     font-size: 0.8rem;
+}
+
+.barra-nav .nav-links a:hover {
+    color: deeppink;
+}
+
+@media screen and (max-width: 768px) {
+.main-header {
+    padding: 100px;
+    margin-top: -100px;
+}
+
 }

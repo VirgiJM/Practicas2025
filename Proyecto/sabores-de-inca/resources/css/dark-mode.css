@@ -20,7 +20,7 @@ body.dark-mode nav a {
 
 body.dark-mode nav a:hover {
     color: #fff;
-    text-decoration: underline;
+    /* text-decoration: underline; */
 }
 
 body.dark-mode footer {
@@ -50,7 +50,8 @@ body.dark-mode #dark-mode-toggle {
 
 
 body.dark-mode section.ventajas,
-body.dark-mode #quien-soy, body.dark-mode h2 {
+body.dark-mode #quien-soy,
+body.dark-mode h2 {
     color: #f0f0f0;
 }
 
@@ -59,7 +60,10 @@ body.dark-mode .restaurante-detalle h2 {
 }
 
 
-body.dark-mode .restaurante-card, body.dark-mode .filtro-container, body.dark-mode .presentacion, body.dark-mode #perfil, body.dark-mode .fav-card {
+body.dark-mode .restaurante-card,
+body.dark-mode .filtro-container,
+body.dark-mode .presentacion,
+body.dark-mode #perfil,
+body.dark-mode .fav-card {
     background-color: #c3bebe;
 }
-
