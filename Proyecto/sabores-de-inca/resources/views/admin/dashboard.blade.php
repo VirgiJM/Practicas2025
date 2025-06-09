@@ -7,9 +7,9 @@
 <div id="admin-content" style="display: none;">
     <h1>Panel de Administración</h1>
     <p>Bienvenida, <span id="admin-username"></span>.</p>
+    <button class="add-btn" id="add-btn" data-idRestaurante-restaurante="${rest.idRestaurante}">Añadir restaurante</button>
 
     <h2>Restaurantes registrados</h2>
-    <button class="add-btn" id="add-btn" data-idRestaurante-restaurante="${rest.idRestaurante}">Añadir</button>
     <table border="1" cellpadding="10">
         <thead>
             <tr>
