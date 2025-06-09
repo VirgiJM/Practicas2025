@@ -27,9 +27,6 @@
             <a href="/" class="center-logo">
                 <img class="logo" src="{{ asset('Logo.png') }}" alt="Logo-Sabores-Inca">
             </a>
-            <div class="dark-mode-wrapper">
-                <button id="dark-mode-toggle" aria-label="Cambiar modo oscuro">🌓</button>
-            </div>
         </div>
     </header>
 
@@ -38,29 +35,29 @@
             <a href="/">Inicio</a>
             <a href="/restaurantes">Restaurantes</a>
             <a href="/quien-soy">Quién soy</a>
-        </div>
-    </nav>
-    <div class="top-bar">
-        <div class="container">
+
+            <!-- Botones login / perfil al mismo nivel que los enlaces -->
             <div class="auth-links">
                 <div id="no-login" style="display: none;">
                     <a id="register-link" href="/register">Registrarse</a>
                     <a id="login-link" href="/login">Iniciar sesión</a>
                 </div>
-
-                <div id="user-menu" style="display: none;">
-                    <p id="nombre-usuario"></p>
-                    <a id="profile-link" href="/perfil">Mi perfil</a>
-                    <button id="logout-button">Cerrar sesión</button>
+                <div id="user-menu" class="dropdown" style="display: none;">
+                    <button id="user-dropdown-toggle"></button>
+                    <div id="user-dropdown-content" class="dropdown-content">
+                        <a id="profile-link" href="/perfil">Mi perfil</a>
+                        <a href="/admin" class="admin-link" id=admin-button style="display: none;">Administración</a>
+                        <button id="logout-button">Cerrar sesión</button>
+                    </div>
                 </div>
-
-                <div id="admin-button" style="display: none;">
-                    <a href="/admin" class="admin-link"><i class="fas fa-tools"></i> Administración</a>
+                <!-- Modo oscuro -->
+                <div class="dark-mode-wrapper">
+                    <button id="dark-mode-toggle" aria-label="Cambiar modo oscuro">🌓</button>
                 </div>
-
             </div>
         </div>
-    </div>
+    </nav>
+
     <main style="padding: 2rem;">
         @yield('contenido')
     </main>
