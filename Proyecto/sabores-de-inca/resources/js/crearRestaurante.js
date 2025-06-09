@@ -19,8 +19,13 @@ form.addEventListener('submit', async (e) => {
     const formData = new FormData(form);
 
     for (let [key, value] of formData.entries()) {
-        console.log(`${key}: ${value}`);
+        if (value instanceof File && value.name) {
+            console.log(`${key}: archivo con nombre ${value.name} (${value.type})`);
+        } else {
+            console.log(`${key}: ${value}`);
+        }
     }
+
     const response = await fetch('/restaurantes', {
         method: 'POST',
         headers: {

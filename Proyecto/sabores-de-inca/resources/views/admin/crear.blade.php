@@ -26,8 +26,8 @@
     <label for="sitioWeb">Sitio Web:</label>
     <input type="text" id="sitioWeb" name="SitioWeb"><br>
 
-    <label for="carta">Carta (URL):</label>
-    <input type="text" id="carta" name="Carta"><br>
+    <label for="carta">Carta (PDF):</label>
+    <input type="file" id="carta" name="Carta" accept="application/pdf"><br>
 
     <label for="descripcion">Descripción:</label>
     <textarea id="descripcion" name="Descripcion" rows="5" cols="60"></textarea><br>

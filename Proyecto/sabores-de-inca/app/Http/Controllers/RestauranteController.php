@@ -13,6 +13,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Log; // Pruebas.
 use App\Models\TipoCocina;
 use App\Models\TipoCocinaTraduccion;
+use Illuminate\Support\Str;
 
 class RestauranteController extends Controller
 {
@@ -69,9 +70,6 @@ class RestauranteController extends Controller
 
         return view('restaurantes.index', compact('restaurantes', 'usuario', 'rangosPrecio', 'mediaMinima'));
     }
-
-
-
 
 
     // Este método sería usado desde api.php (el de las rutas). Devuelve datos en json.
@@ -140,20 +138,23 @@ class RestauranteController extends Controller
     public function store(RestauranteCreateRequest $request)
     {
         try {
-            // Validar y recoger los datos validados del formulario
             $validated = $request->validated();
 
-            // Generar el slug desde el nombre
-            $validated['Slug'] = \Str::slug($validated['Nombre']);
+            // Generar el slug a partir del nombre.
+            $validated['Slug'] = Str::slug($validated['Nombre']);
 
-            // Comprobar si se ha subido una imagen
+            // Subir imagen si se ha enviado.
             if ($request->hasFile('Foto')) {
-                $foto = $request->file('Foto');
-                $ruta = $foto->store('imagenes', 'public'); // Guardar en storage/app/public/imagenes
-                $validated['Foto'] = $ruta; // Guardar la ruta en la BD
+                $rutaImagen = $request->file('Foto')->store('imagenes', 'public');
+                $validated['Foto'] = $rutaImagen;
             }
 
-            // Crear el restaurante con todos los datos
+            // Subir carta PDF si se ha enviado.
+            if ($request->hasFile('Carta')) {
+                $rutaCarta = $request->file('Carta')->store('cartas', 'public');
+                $validated['Carta'] = $rutaCarta;
+            }
+
             Restaurante::create($validated);
 
             return response()->json(['mensaje' => 'Restaurante creado correctamente'], 201);
@@ -164,6 +165,7 @@ class RestauranteController extends Controller
             ], 400);
         }
     }
+
 
 
     // Para crear un restaurante en la parte de admin.
