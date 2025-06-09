@@ -11,6 +11,8 @@ use App\Http\Controllers\RestauranteTraduccionController;
 use App\Http\Controllers\TipoCocinaController;
 use App\Http\Controllers\TipoCocinaTraduccionController;
 use Illuminate\Support\Facades\Auth; // Para el logout.
+use App\Http\Controllers\AdminController;
+
 
 // Prueba
 // Route::get('/debug-api', function () {
@@ -82,3 +84,14 @@ Route::get('/perfil', function () {
     return view('user.perfil');
 })->name('perfil');
 // })->middleware('auth');
+
+
+// Parte de admin
+
+
+Route::get('/admin', function () {
+    return view('admin.dashboard');
+});
+
+
+Route::get('/restaurantes/editar/{id}', [RestauranteController::class, 'editarVista']);

@@ -23,8 +23,8 @@ fk_idIdioma INT,
 fk_idTipoCocina INT,
 created_at TIMESTAMP NULL DEFAULT current_timestamp,
 updated_at TIMESTAMP NULL DEFAULT current_timestamp,
-FOREIGN KEY (fk_idIdioma) REFERENCES Idioma(idIdioma),
-FOREIGN KEY (fk_idTipoCocina) REFERENCES Tipo_Cocina(idTipoCocina)
+FOREIGN KEY (fk_idIdioma) REFERENCES Idioma(idIdioma) ON DELETE CASCADE,
+FOREIGN KEY (fk_idTipoCocina) REFERENCES Tipo_Cocina(idTipoCocina) ON DELETE CASCADE
 );
 
 CREATE TABLE Accesibilidad(
@@ -38,8 +38,8 @@ fk_idIdioma INT,
 fk_idAccesibilidad INT,
 created_at TIMESTAMP NULL DEFAULT current_timestamp,
 updated_at TIMESTAMP NULL DEFAULT current_timestamp,
-FOREIGN KEY (fk_idIdioma) REFERENCES Idioma(idIdioma),
-FOREIGN KEY (fk_idAccesibilidad) REFERENCES Accesibilidad(idAccesibilidad)
+FOREIGN KEY (fk_idIdioma) REFERENCES Idioma(idIdioma) ON DELETE CASCADE,
+FOREIGN KEY (fk_idAccesibilidad) REFERENCES Accesibilidad(idAccesibilidad) ON DELETE CASCADE
 );
 
 CREATE TABLE Restaurante(
@@ -59,7 +59,7 @@ Descripcion Text,
 created_at TIMESTAMP NULL DEFAULT current_timestamp,
 updated_at TIMESTAMP NULL DEFAULT current_timestamp,
 fk_idTipoCocina INT,
-FOREIGN KEY (fk_idTipoCocina) REFERENCES Tipo_Cocina(idTipoCocina)
+FOREIGN KEY (fk_idTipoCocina) REFERENCES Tipo_Cocina(idTipoCocina) ON DELETE CASCADE
 );
 # ALTER TABLE restaurante CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 -- ALTER TABLE Restaurante ADD COLUMN Slug Varchar(100);
@@ -70,8 +70,8 @@ fk_idRestaurante INT,
 fk_idAccesibilidad INT,
 created_at TIMESTAMP NULL DEFAULT current_timestamp,
 updated_at TIMESTAMP NULL DEFAULT current_timestamp,
-FOREIGN KEY (fk_idRestaurante) REFERENCES Restaurante (idRestaurante),
-FOREIGN KEY (fk_idAccesibilidad) REFERENCES Accesibilidad (idAccesibilidad)
+FOREIGN KEY (fk_idRestaurante) REFERENCES Restaurante (idRestaurante) ON DELETE CASCADE,
+FOREIGN KEY (fk_idAccesibilidad) REFERENCES Accesibilidad (idAccesibilidad) ON DELETE CASCADE
 );
 
 CREATE TABLE Restaurante_Traduccion(
@@ -82,8 +82,8 @@ fk_idRestaurante INT,
 fk_idIdioma INT,
 created_at TIMESTAMP NULL DEFAULT current_timestamp,
 updated_at TIMESTAMP NULL DEFAULT current_timestamp,
-FOREIGN KEY (fk_idRestaurante) REFERENCES Restaurante(idRestaurante),
-FOREIGN KEY (fk_idIdioma) REFERENCES Idioma(idIdioma)
+FOREIGN KEY (fk_idRestaurante) REFERENCES Restaurante(idRestaurante) ON DELETE CASCADE,
+FOREIGN KEY (fk_idIdioma) REFERENCES Idioma(idIdioma) ON DELETE CASCADE
 );
 
 CREATE TABLE Imagen(
@@ -93,7 +93,7 @@ Url Varchar(255),
 AltText Varchar(50),
 created_at TIMESTAMP NULL DEFAULT current_timestamp,
 updated_at TIMESTAMP NULL DEFAULT current_timestamp,
-FOREIGN KEY (fk_idRestaurante) REFERENCES Restaurante (idRestaurante)
+FOREIGN KEY (fk_idRestaurante) REFERENCES Restaurante (idRestaurante) ON DELETE CASCADE
 );
 
 CREATE TABLE Usuario (
@@ -115,13 +115,13 @@ Comentario TEXT,
 Valoracion INT,
 created_at TIMESTAMP NULL DEFAULT current_timestamp,
 updated_at TIMESTAMP NULL DEFAULT current_timestamp,
-FOREIGN KEY (fk_idUsuario) REFERENCES Usuario (idUsuario),
-FOREIGN KEY (fk_idRestaurante) REFERENCES Restaurante(idRestaurante)
+FOREIGN KEY (fk_idUsuario) REFERENCES Usuario (idUsuario) ON DELETE CASCADE,
+FOREIGN KEY (fk_idRestaurante) REFERENCES Restaurante(idRestaurante) ON DELETE CASCADE
 );
 
 CREATE TABLE Favorito (
     fk_idUsuario INT,
     fk_idRestaurante INT,
-    FOREIGN KEY (fk_idUsuario) REFERENCES Usuario(idUsuario),
-    FOREIGN KEY (fk_idRestaurante) REFERENCES Restaurante(idRestaurante)
+    FOREIGN KEY (fk_idUsuario) REFERENCES Usuario(idUsuario) ON DELETE CASCADE,
+    FOREIGN KEY (fk_idRestaurante) REFERENCES Restaurante(idRestaurante) ON DELETE CASCADE
 );
