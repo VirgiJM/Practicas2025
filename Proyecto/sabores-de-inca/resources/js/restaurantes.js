@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Variable para almacenar el tipo seleccionado, 0 = todos.
+    let tipoSeleccionado = 0;
     const token = localStorage.getItem('token');
     console.log(token);
     if (!token) {
@@ -149,6 +151,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // Inicializar carga.
     actualizarFiltros();
 
+    // Asegurar que el select y la leyenda estén sincronizados al inicio
+    if (selectTipo) {
+        tipoSeleccionado = parseInt(selectTipo.value, 10) || 0;
+        actualizarEstiloLeyenda(tipoSeleccionado);
+    }
+
     // Pintar los favoritos.
     let favoritosIds = [];
 
@@ -216,9 +224,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     leyenda.addTo(map);
 
-    // Variable para almacenar el tipo seleccionado, 0 = todos.
-    let tipoSeleccionado = 0;
-
     // Esperar a que el div de leyenda se inyecte antes de añadir el listener.
     setTimeout(() => {
         const leyendaDiv = document.querySelector('.info.legend');
@@ -231,17 +236,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const tipo = parseInt(item.dataset.tipo, 10);
 
-            // Toggle del filtro.
+            // Toggle del filtro
             tipoSeleccionado = (tipoSeleccionado === tipo) ? 0 : tipo;
 
+            // Sincronizar el select
+            if (selectTipo) {
+                selectTipo.value = tipoSeleccionado;
+            }
+
+            // Actualizar estilo de la leyenda
+            actualizarEstiloLeyenda(tipoSeleccionado);
+
+            // Recargar restaurantes
             const vegano = checkboxVegano.checked ? 1 : 0;
             cargarRestaurantes(vegano, tipoSeleccionado);
-
-            // Negrita para el tipo activo.
-            document.querySelectorAll('.leyenda-item').forEach(el => el.style.fontWeight = '');
-            if (tipoSeleccionado !== 0) {
-                item.style.fontWeight = 'bold';
-            }
         });
     }, 0);
 
@@ -283,4 +291,27 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     });
 
+    // Función para actualizar el estilo de la leyenda
+    function actualizarEstiloLeyenda(tipo) {
+        document.querySelectorAll('.leyenda-item').forEach(el => {
+            el.style.fontWeight = '';
+        });
+
+        if (tipo !== 0) {
+            const activeItem = document.querySelector(`.leyenda-item[data-tipo="${tipo}"]`);
+            if (activeItem) {
+                activeItem.style.fontWeight = 'bold';
+            }
+        }
+    }
+
+    // Escuchar cambios en el select de tipo de cocina
+    if (selectTipo) {
+        selectTipo.addEventListener('change', function () {
+            tipoSeleccionado = parseInt(this.value, 10) || 0;
+            actualizarEstiloLeyenda(tipoSeleccionado);
+            const vegano = checkboxVegano.checked ? 1 : 0;
+            cargarRestaurantes(vegano, tipoSeleccionado);
+        });
+    }
 });

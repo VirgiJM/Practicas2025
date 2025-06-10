@@ -1,4 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const btnAtras = document.getElementById("atras");
+
+    btnAtras.addEventListener("click", () => {
+        // alert("Bu");
+        window.location.href = "/admin";
+    });
     document.getElementById('formEditar').addEventListener('submit', async function (event) {
         event.preventDefault();
 
@@ -20,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (response.ok) {
             alert('Restaurante actualizado');
-            window.location.href = '/';
+            window.location.href = '/admin';
         } else {
             alert('Error al actualizar');
         }

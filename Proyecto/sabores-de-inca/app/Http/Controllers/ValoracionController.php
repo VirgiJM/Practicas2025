@@ -42,19 +42,37 @@ class ValoracionController extends Controller
     // }
     public function store(ValoracionCreateRequest $request)
     {
+        $userId = $request->user()->idUsuario;
+        $restauranteId = $request->input('fk_idRestaurante');
+
+        // Buscar si ya existe valoración de este usuario para este restaurante
+        $existing = Valoracion::where('fk_idUsuario', $userId)
+            ->where('fk_idRestaurante', $restauranteId)
+            ->first();
+
+        if ($existing) {
+            return response()->json(['mensaje' => 'Ya has valorado este restaurante.'], 400);
+        }
+
+        $validated = $request->validated();
+        $valoracion = new Valoracion($validated);
+        $valoracion->fk_idUsuario = $userId;
+        $valoracion->save();
+
+        return response()->json(['mensaje' => 'Valoración creada correctamente'], 201);
+    }
+
+    // Esta función la usaré para eliminar un comentario siendo admin.
+    public function destroy($id)
+    {
         try {
-            $validated = $request->validated();
-
-            $valoracion = new Valoracion($validated);
-            $valoracion->fk_idUsuario = $request->user()->idUsuario; // <- Obtenemos el usuario desde el token.
-            $valoracion->save();
-
-            return response()->json(['mensaje' => 'Valoración creada correctamente'], 201);
+            $valoracion = Valoracion::findOrFail($id);
+            $valoracion->delete();
+            return response()->json(['mensaje' => 'Valoración eliminada correctamente']);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['mensaje' => 'Valoración no encontrada'], 404);
         } catch (\Exception $e) {
-            return response()->json([
-                'mensaje' => 'Error al crear la valoración.',
-                'error' => $e->getMessage()
-            ], 400);
+            return response()->json(['mensaje' => 'Error al eliminar la valoración', 'error' => $e->getMessage()], 500);
         }
     }
 }

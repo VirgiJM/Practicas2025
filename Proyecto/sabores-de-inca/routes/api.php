@@ -158,3 +158,7 @@ Route::middleware('auth:sanctum')->prefix('restaurante')->group(function () {
     Route::delete('/{id}', [RestauranteController::class, 'destroy']);
     Route::put('/{id}', [RestauranteController::class, 'update']);
 });
+
+// Borrar un comentario
+Route::middleware('auth:sanctum')->delete('/valoracion/{id}', [ValoracionController::class, 'destroy']);
+Route::get('/valoraciones', [ValoracionController::class, 'index']);

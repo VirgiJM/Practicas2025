@@ -6,35 +6,35 @@
 
 @section('contenido')
 <div style="max-width: 1550px; margin: 0 auto; padding: 2rem;">
-<h2>Filtrar</h2>
-<div class="filtro-container">
-    <select id="tipoCocina">
-        <!-- Esto se llena con JS. -->
-    </select>
+    <h2 class="h2-modo-oscuro">Filtrar</h2>
+    <div class="filtro-container">
+        <select id="tipoCocina">
+            <!-- Esto se llena con JS. -->
+        </select>
 
-    <select id="filtroMedia">
-        <option value="0">Cualquier media</option>
-        <option value="1">⭐</option>
-        <option value="2">⭐⭐</option>
-        <option value="3">⭐⭐⭐</option>
-        <option value="4">⭐⭐⭐⭐</option>
-        <option value="5">⭐⭐⭐⭐⭐</option>
-    </select>
+        <select id="filtroMedia">
+            <option value="0">Cualquier media</option>
+            <option value="1">⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="5">⭐⭐⭐⭐⭐</option>
+        </select>
 
-    <select id="rangoPrecio">
-        <option value="0">Rango de precio</option>
-        @foreach ($rangosPrecio as $rango)
-        <option value="{{ $rango }}">{{ $rango }}</option>
-        @endforeach
-    </select>
+        <select id="rangoPrecio">
+            <option value="0">Rango de precio</option>
+            @foreach ($rangosPrecio as $rango)
+            <option value="{{ $rango }}">{{ $rango }}</option>
+            @endforeach
+        </select>
 
-    <label for="vegano">
-        ¿Vegano?
-        <input type="checkbox" id="vegano">
-    </label>
+        <label for="vegano" id="es-vegano">
+            ¿Vegano?
+            <input type="checkbox" id="vegano">
+        </label>
 
-</div>
-<h2>Lista de restaurantes</h2>
+    </div>
+    <h2 class="h2-modo-oscuro">Lista de restaurantes</h2>
 </div>
 
 @if ($restaurantes->isEmpty())

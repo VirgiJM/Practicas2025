@@ -13,6 +13,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Log; // Pruebas.
 use App\Models\TipoCocina;
 use App\Models\TipoCocinaTraduccion;
+use Illuminate\Support\Str;
 
 class RestauranteController extends Controller
 {
@@ -69,9 +70,6 @@ class RestauranteController extends Controller
 
         return view('restaurantes.index', compact('restaurantes', 'usuario', 'rangosPrecio', 'mediaMinima'));
     }
-
-
-
 
 
     // Este método sería usado desde api.php (el de las rutas). Devuelve datos en json.
@@ -141,15 +139,42 @@ class RestauranteController extends Controller
     {
         try {
             $validated = $request->validated();
+
+            // Generar el slug a partir del nombre.
+            $validated['Slug'] = Str::slug($validated['Nombre']);
+
+            // Subir imagen si se ha enviado.
+            if ($request->hasFile('Foto')) {
+                $rutaImagen = $request->file('Foto')->store('imagenes', 'public');
+                $validated['Foto'] = $rutaImagen;
+            }
+
+            // Subir carta PDF si se ha enviado.
+            if ($request->hasFile('Carta')) {
+                $rutaCarta = $request->file('Carta')->store('cartas', 'public');
+                $validated['Carta'] = $rutaCarta;
+            }
+
             Restaurante::create($validated);
 
-            return response()->json(['mensaje' => 'Restaurante creado correctamente'], 201); // 201: Creado.
+            return response()->json(['mensaje' => 'Restaurante creado correctamente'], 201);
         } catch (\Exception $e) {
             return response()->json([
                 'mensaje' => 'Error al crear el restaurante.',
                 'error' => $e->getMessage()
             ], 400);
         }
+    }
+
+
+
+    // Para crear un restaurante en la parte de admin.
+    public function create()
+    {
+        $tiposCocina = TipoCocinaTraduccion::select('fk_idTipoCocina', 'Nombre')
+            ->where("fk_idIdioma", 1)
+            ->get();
+        return view('admin.crear', compact('tiposCocina'));
     }
 
     // Función para controlar los updates.

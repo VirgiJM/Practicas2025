@@ -95,3 +95,6 @@ Route::get('/admin', function () {
 
 
 Route::get('/restaurantes/editar/{id}', [RestauranteController::class, 'editarVista']);
+
+Route::get('/restaurantes/crear', [RestauranteController::class, 'create']);
+Route::post('/restaurantes', [RestauranteController::class, 'store']);

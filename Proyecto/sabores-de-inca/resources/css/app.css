@@ -116,13 +116,13 @@ body {
 
     .auth-links p {
         margin: 0;
-        
+
     }
 
     .auth-links a,
     .auth-links button {
         font-size: 0.9rem;
-        
+
     }
 
 
@@ -257,7 +257,8 @@ a {
     margin: 0 auto;
     padding: 0 1rem;
     display: flex;
-    justify-content: center; /* Cambiado de 'end' a 'center' */
+    justify-content: center;
+    /* Cambiado de 'end' a 'center' */
     gap: 2rem;
     flex-wrap: wrap;
 }
@@ -278,7 +279,7 @@ a {
     bottom: -4px;
     height: 2px;
     width: 100%;
-    background-color: deeppink;
+    background-color: #ba4d50;
     transform: scaleX(0);
     transform-origin: right;
     transition: transform 0.2s ease;
@@ -371,7 +372,7 @@ a {
 .restaurante-card p {
     font-size: 0.95rem;
     margin: 8px 0 0 0;
-    color: black;
+    /* color: black; */
 }
 
 /* Filtros y formularios. */
@@ -392,7 +393,7 @@ form label {
 
 form input,
 form select {
-    width: 100%;
+    width: 95%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 6px;
@@ -737,6 +738,11 @@ h3 {
     border-radius: 12px;
 }
 
+#quien-soy h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
 .dropdown {
     position: relative;
     display: inline-block;
@@ -748,7 +754,7 @@ h3 {
     right: 0;
     background-color: white;
     min-width: 160px;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
     border-radius: 8px;
     overflow: hidden;
@@ -784,19 +790,32 @@ h3 {
     padding: 0;
     /* transform: translateY(-3px); */
 }
+
 #user-dropdown-toggle::after {
     margin-left: 0.3rem;
     font-size: 0.8rem;
 }
 
 .barra-nav .nav-links a:hover {
-    color: deeppink;
+    color: #ba4d50;
 }
 
 @media screen and (max-width: 768px) {
-.main-header {
-    padding: 100px;
-    margin-top: -100px;
+    .main-header {
+        padding: 100px;
+        margin-top: -100px;
+    }
+
 }
 
+.color-vegano {
+    color: #299a56;
+}
+
+.color-no-vegano {
+    color: #ba4d50;
+}
+
+.leyenda-item {
+    color: black;
 }

@@ -6,12 +6,12 @@
 
 @section('contenido')
 <section class="presentacion">
-    <h2>Descubre los mejores sabores de Inca</h2>
+    <h2 id="sabores-inca-inicio">Descubre los mejores sabores de Inca</h2>
     <p>
         Guía gastronómica para explorar restaurantes locales, ver cartas, precios, ubicación y más.
     </p>
     <a href="/restaurantes" class="boton-rojo">
-        Ver restaurantes
+        <strong>Ver restaurantes</strong>
     </a>
 </section>
 

@@ -2,6 +2,7 @@
 
 @section('titulo', $restaurante->Nombre)
 @vite('resources/js/editarRestaurante.js')
+@vite('resources/css/admin.css')
 
 @section('contenido')
 <h1>Editar Restaurante</h1>
@@ -29,7 +30,8 @@
         @endforeach
     </select>
 
-    <button type="submit">Guardar cambios</button>
+    <button type="submit" class="boton-aceptar">Guardar cambios</button>
+    <button type="button" id="atras" class="boton-atras">Atrás</button>
 </form>
 
 
