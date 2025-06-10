@@ -1,6 +1,35 @@
 const form = document.getElementById('formCrearRestaurante');
 const nombreInput = document.getElementById('nombre');
 const slugInput = document.getElementById('slug');
+const btnAtras = document.getElementById("atras");
+const token = localStorage.getItem('token');
+
+console.log(token);
+
+if (!token) {
+    window.location.href = '/login';
+    // return;
+}
+
+const res = await fetch('/api/user', {
+    headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json'
+    }
+});
+
+if (!res.ok) {
+    window.location.href = '/login';
+    // return;
+}
+
+const user = await res.json();
+
+if (!user.esAdmin) {
+    alert('No tienes permiso para acceder a esta página');
+    window.location.href = '/';
+    // return;
+}
 
 nombreInput.addEventListener('input', () => {
     const slug = nombreInput.value
@@ -43,4 +72,8 @@ form.addEventListener('submit', async (e) => {
         alert("Error al crear el restaurante.");
         console.error(data);
     }
+
+    btnAtras.document.addEventListener("click", () => {
+        window.location.href = "/admin";
+    })
 });
