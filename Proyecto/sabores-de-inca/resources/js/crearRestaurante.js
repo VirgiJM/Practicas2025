@@ -1,8 +1,12 @@
 const form = document.getElementById('formCrearRestaurante');
 const nombreInput = document.getElementById('nombre');
 const slugInput = document.getElementById('slug');
-const btnAtras = document.getElementById("atras");
+const btnAtras = document.getElementById("btn-atras");
 const token = localStorage.getItem('token');
+
+btnAtras.addEventListener("click", () => {
+    window.location.href = "/admin";
+})
 
 console.log(token);
 
@@ -72,8 +76,4 @@ form.addEventListener('submit', async (e) => {
         alert("Error al crear el restaurante.");
         console.error(data);
     }
-
-    btnAtras.document.addEventListener("click", () => {
-        window.location.href = "/admin";
-    })
 });
