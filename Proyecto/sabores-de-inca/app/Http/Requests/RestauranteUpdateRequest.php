@@ -24,6 +24,7 @@ class RestauranteUpdateRequest extends FormRequest
             'Direccion' => 'sometimes|required|string|max:150',
             'Carta' => 'nullable|string|max:255',
             'fk_idTipoCocina' => 'sometimes|required|exists:tipo_cocina,idTipoCocina',
+            'Foto' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'Descripcion' => 'sometimes|string|max:65535',
 
         ];

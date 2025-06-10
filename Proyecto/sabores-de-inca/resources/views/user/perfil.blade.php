@@ -9,7 +9,7 @@
 @section('contenido')
 <div id="perfil"></div>
 <section>
-    <h2>Tus restaurantes favoritos</h2>
+    <h2 id="restaurantes-favoritos">Tus restaurantes favoritos</h2>
     <div id="favoritos"></div>
 </section>
 @endsection

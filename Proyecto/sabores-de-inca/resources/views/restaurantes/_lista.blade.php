@@ -10,9 +10,9 @@
         <h3 title="{{ $restaurante->Nombre }}">{{ $restaurante->Nombre }}</h3>
         <p title="{{ $restaurante->Direccion }}">{{ $restaurante->Direccion }} 📍</p>
         @if ($restaurante->Vegano)
-        <p style="color:green">Vegano</p>
+        <p class="color-vegano">Vegano</p>
         @else
-        <p style="color:red">No vegano</p>
+        <p class="color-no-vegano">No vegano</p>
         @endif
         <p>{{$restaurante->RangoPrecio}}</p>
         <p>{{ number_format($restaurante->promedio_valoracion ?? 0, 1, '.', '') }} ⭐</p>

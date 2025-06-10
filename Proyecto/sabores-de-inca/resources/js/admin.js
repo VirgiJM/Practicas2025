@@ -185,10 +185,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             const tdVegano = document.createElement('td');
             if (rest.Vegano == 1) {
                 tdVegano.textContent = "Vegano";
-                tdVegano.style.color = "green";
+                tdVegano.style.color = "#299a56";
             } else {
                 tdVegano.textContent = "No vegano";
-                tdVegano.style.color = "red";
+                tdVegano.style.color = "#ba4d50";
             }
 
             const tdAcciones = document.createElement('td');
@@ -227,6 +227,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (response.ok) {
                 alert('Restaurante eliminado correctamente');
                 await cargarRestaurantes();
+                window.location.reload();
             } else {
                 const errorData = await response.json();
                 console.error('Error al eliminar:', errorData);

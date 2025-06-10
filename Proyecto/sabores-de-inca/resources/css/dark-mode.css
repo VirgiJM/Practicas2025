@@ -2,7 +2,7 @@
 
 body.dark-mode {
     background-color: #121212;
-    color: navy;
+    /* color: #ef6148; */
 }
 
 body.dark-mode header {
@@ -50,22 +50,18 @@ body.dark-mode #dark-mode-toggle {
 
 
 body.dark-mode section.ventajas,
-body.dark-mode #quien-soy,
-body.dark-mode h2 {
+body.dark-mode #quien-soy {
     color: #f0f0f0;
 }
-
-body.dark-mode .restaurante-detalle h2 {
-    color: navy;
-}
-
 
 body.dark-mode .restaurante-card,
 body.dark-mode .filtro-container,
 body.dark-mode .presentacion,
 body.dark-mode #perfil,
-body.dark-mode .fav-card {
-    background-color: #c3bebe;
+body.dark-mode .fav-card,
+body.dark-mode .restaurante-detalle,
+body.dark-mode #admin-content {
+    background-color: #1a2b2b;
 }
 
 
@@ -107,8 +103,35 @@ body.dark-mode .add-btn:hover {
     background-color: #d43c24;
 }
 
-body.dark-mode .tablas-admin {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+body.dark-mode h3,
+body.dark-mode p,
+body.dark-mode h1,
+body.dark-mode .valoracion {
+    color: white;
+}
+
+body.dark-mode .color-vegano {
+    color: #cdff81;
+}
+
+body.dark-mode .color-no-vegano {
+    color: #ee9694;
+}
+
+body.dark-mode #perfil h2,
+body.dark-mode #perfil p,
+body.dark-mode #restaurantes-favoritos,
+body.dark-mode .fav-card-img,
+body.dark-mode #sabores-inca-inicio,
+body.dark-mode #es-vegano,
+body.dark-mode .h2-modo-oscuro {
+    color: white;
+}
+
+body.dark-mode #formCrearRestaurante p {
     color: black;
+}
+
+.image-container {
+    color: white;
 }

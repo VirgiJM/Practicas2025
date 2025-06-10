@@ -5,10 +5,11 @@
     background-color: #f9f9f9;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h1, h2 {
+h1,
+h2 {
     color: #333;
     border-bottom: 2px solid #f04e30;
     padding-bottom: 8px;
@@ -20,7 +21,8 @@ table {
     margin-bottom: 30px;
 }
 
-th, td {
+th,
+td {
     border: 1px solid #ccc;
     padding: 10px;
     text-align: center;
@@ -44,4 +46,36 @@ th {
 
 .add-btn:hover {
     background-color: #d43c24;
+}
+
+.edit-btn, .boton-aceptar {
+    background-color: white;
+    border-style: solid;
+    border-color: #299a56;
+    color: #299a56;
+}
+
+button.edit-btn:hover,
+input[type="submit"]:hover,
+button.boton-aceptar:hover,
+input[type="submit"]:hover {
+    background-color: #a7ffca;
+}
+
+.delete-btn,
+.delete-valoracion-btn,
+.boton-atras {
+    background-color: white;
+    border-style: solid;
+    border-color: #ef6148;
+    color: #ef6148;
+}
+
+button.delete-btn:hover,
+input[type="submit"]:hover,
+button.delete-valoracion-btn:hover,
+input[type="submit"]:hover,
+button.boton-atras:hover,
+input[type="submit"]:hover {
+    background-color: #ffd4cd;
 }

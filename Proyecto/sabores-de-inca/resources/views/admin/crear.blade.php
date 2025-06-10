@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @vite('resources/js/crearRestaurante.js')
+@vite('resources/css/admin.css')
 
 
 @section('titulo', 'Añadir restaurante | Sabores de Inca')
@@ -46,7 +47,7 @@
     <label for="foto">Foto del restaurante:</label>
     <input type="file" id="foto" name="Foto" accept="image/*"><br>
 
-    <button type="submit">Guardar restaurante</button>
-    <button type="button">Atrás</button>
+    <button type="submit" class="boton-aceptar">Guardar restaurante</button>
+    <button type="button" class="boton-atras" id="btn-atras">Atrás</button>
 </form>
 @endsection
