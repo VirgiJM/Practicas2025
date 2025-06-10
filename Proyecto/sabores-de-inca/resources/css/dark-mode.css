@@ -67,3 +67,48 @@ body.dark-mode #perfil,
 body.dark-mode .fav-card {
     background-color: #c3bebe;
 }
+
+
+/* Tablas en la parte de admin */
+body.dark-mode {
+    background-color: #121212;
+    /* fondo muy oscuro */
+}
+
+body.dark-mode table {
+    background-color: #1e1e1e;
+    /* fondo tabla oscuro */
+    color: #e0e0e0;
+    /* texto tabla */
+    border-color: #333;
+    /* bordes suaves */
+}
+
+body.dark-mode th {
+    background-color: #333;
+    /* encabezado tabla */
+    color: #fff;
+    border-bottom: 2px solid #f04e30;
+    /* un toque de color para destacar */
+}
+
+body.dark-mode td {
+    border-bottom: 1px solid #444;
+    /* separación entre filas */
+}
+
+/* Botones */
+body.dark-mode .add-btn {
+    background-color: #f04e30;
+    color: white;
+}
+
+body.dark-mode .add-btn:hover {
+    background-color: #d43c24;
+}
+
+body.dark-mode .tablas-admin {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: black;
+}

@@ -1,0 +1,47 @@
+#admin-content {
+    max-width: 900px;
+    margin: 20px auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1, h2 {
+    color: #333;
+    border-bottom: 2px solid #f04e30;
+    padding-bottom: 8px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #f04e30;
+    color: white;
+}
+
+.add-btn {
+    background-color: #f04e30;
+    border: none;
+    color: white;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.add-btn:hover {
+    background-color: #d43c24;
+}

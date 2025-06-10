@@ -47,5 +47,6 @@
     <input type="file" id="foto" name="Foto" accept="image/*"><br>
 
     <button type="submit">Guardar restaurante</button>
+    <button type="button">Atrás</button>
 </form>
 @endsection

@@ -1,34 +1,4 @@
-const token = localStorage.getItem('token');
-
-console.log(token);
-
-if (!token) {
-    window.location.href = '/login';
-    // return;
-}
-
-const res = await fetch('/api/user', {
-    headers: {
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'application/json'
-    }
-});
-
-if (!res.ok) {
-    window.location.href = '/login';
-    // return;
-}
-
-const user = await res.json();
-
-if (!user.esAdmin) {
-    alert('No tienes permiso para acceder a esta página');
-    window.location.href = '/';
-    // return;
-}
-
 document.addEventListener('DOMContentLoaded', () => {
-
     document.getElementById('formEditar').addEventListener('submit', async function (event) {
         event.preventDefault();
 

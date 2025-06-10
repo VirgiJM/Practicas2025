@@ -30,6 +30,7 @@
     </select>
 
     <button type="submit">Guardar cambios</button>
+    <button type="button" id="atras">Atrás</button>
 </form>
 
 

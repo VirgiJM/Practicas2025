@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @vite('resources/js/admin.js')
-
+@vite(['resources/js/admin.js', 'resources/css/admin.css'])
 
 @section('titulo', 'Administración | Sabores de Inca')
 @section('contenido')
@@ -9,7 +9,7 @@
     <p>Bienvenida, <span id="admin-username"></span>.</p>
     <button class="add-btn" id="add-btn" data-idRestaurante-restaurante="${rest.idRestaurante}">Añadir restaurante</button>
 
-    <h2>Restaurantes registrados</h2>
+    <h2 class="tablas-admin">Restaurantes registrados</h2>
     <table border="1" cellpadding="10">
         <thead>
             <tr>
@@ -24,7 +24,7 @@
             <!-- Las filas se insertarán de forma dinámica. -->
         </tbody>
     </table>
-    <h2>Valoraciones registradas</h2>
+    <h2 class="tablas-admin">Valoraciones registradas</h2>
     <table border="1" cellpadding="10">
         <thead>
             <tr>
