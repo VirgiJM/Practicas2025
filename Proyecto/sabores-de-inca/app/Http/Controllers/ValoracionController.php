@@ -57,4 +57,18 @@ class ValoracionController extends Controller
             ], 400);
         }
     }
+
+    // Esta función la usaré para eliminar un comentario siendo admin.
+    public function destroy($id)
+    {
+        try {
+            $valoracion = Valoracion::findOrFail($id);
+            $valoracion->delete();
+            return response()->json(['mensaje' => 'Valoración eliminada correctamente']);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['mensaje' => 'Valoración no encontrada'], 404);
+        } catch (\Exception $e) {
+            return response()->json(['mensaje' => 'Error al eliminar la valoración', 'error' => $e->getMessage()], 500);
+        }
+    }
 }

@@ -24,5 +24,22 @@
             <!-- Las filas se insertarán de forma dinámica. -->
         </tbody>
     </table>
+    <h2>Valoraciones registradas</h2>
+    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Restaurante</th>
+                <th>Usuario</th>
+                <th>Comentario</th>
+                <th>Puntuación</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="valoraciones-table-body">
+            <!-- Las filas se insertarán dinámicamente -->
+        </tbody>
+    </table>
+
 </div>
 @endsection
