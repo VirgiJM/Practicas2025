@@ -111,10 +111,10 @@ body {
     border-top: none;
 }
 
-.valoracion strong {
+/* .valoracion strong {
     color: #2c3e50;
     font-size: 1rem;
-}
+} */
 
 .valoracion em {
     color: #888;
@@ -172,4 +172,8 @@ body {
 
 #formulario-valoracion button:hover {
     background-color: #2980b9;
+}
+
+.enlace {
+    color: #16495F ;
 }

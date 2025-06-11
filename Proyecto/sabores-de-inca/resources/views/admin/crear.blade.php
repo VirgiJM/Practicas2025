@@ -5,7 +5,7 @@
 
 @section('titulo', 'Añadir restaurante | Sabores de Inca')
 @section('contenido')
-<h3>Añadir restaurante</h3>
+<h1>Añadir restaurante</h1>
 <form id="formCrearRestaurante" method="POST" action="/restaurantes" enctype="multipart/form-data">
     @csrf
     <label for="nombre">Nombre:</label>

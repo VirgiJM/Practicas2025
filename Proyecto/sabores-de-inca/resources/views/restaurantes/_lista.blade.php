@@ -1,7 +1,7 @@
 @foreach ($restaurantes as $restaurante)
 <div class="restaurante-card" data-id="{{ $restaurante->idRestaurante }}">
     <div class="image-container">
-        <img src="{{ Storage::url($restaurante->Foto) }}" alt="Foto de {{$restaurante->Nombre}}">
+        <img src="{{ Storage::url($restaurante->Foto) }}" alt="Foto de {{$restaurante->Nombre}}" class="imagen-restaurante">
         <div class="favorito-btn" data-restaurante-id="{{ $restaurante->idRestaurante }}">
             <i class="fa-regular fa-heart"></i>
         </div>
