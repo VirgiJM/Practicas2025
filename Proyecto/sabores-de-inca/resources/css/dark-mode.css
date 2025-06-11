@@ -166,3 +166,7 @@ body.dark-mode .enlace {
         background-color: #1e1e1e;
     }
 }
+
+body.dark-mode .valoracion, body.dark-mode .valoracion p {
+    color: black;
+}

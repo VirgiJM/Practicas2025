@@ -36,6 +36,7 @@ Route::post('login', [AuthController::class, 'login']);
 // });
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return response()->json([
+        'idUsuario' => $request->user()->idUsuario,
         'username' => $request->user()->Username,
         'email' => $request->user()->Email,
         'profile_image' => $request->user()->Profile_Image,
@@ -161,4 +162,6 @@ Route::middleware('auth:sanctum')->prefix('restaurante')->group(function () {
 
 // Borrar un comentario
 Route::middleware('auth:sanctum')->delete('/valoracion/{id}', [ValoracionController::class, 'destroy']);
-Route::get('/valoraciones', [ValoracionController::class, 'index']);
+Route::get('/valoraciones', [ValoracionController::class, 'index']); // Como administrador cualquier comentario.
+Route::middleware('auth:sanctum')->delete('/valoraciones/{id}', [ValoracionController::class, 'destroyAutenticado']);
+ // Como usuario su propio comentario.

@@ -6,6 +6,7 @@ use App\Http\Requests\ValoracionCreateRequest;
 use App\Models\Valoracion;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Auth;
 
 class ValoracionController extends Controller
 {
@@ -68,6 +69,27 @@ class ValoracionController extends Controller
         try {
             $valoracion = Valoracion::findOrFail($id);
             $valoracion->delete();
+            return response()->json(['mensaje' => 'Valoración eliminada correctamente']);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['mensaje' => 'Valoración no encontrada'], 404);
+        } catch (\Exception $e) {
+            return response()->json(['mensaje' => 'Error al eliminar la valoración', 'error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function destroyAutenticado($id)
+    {
+        try {
+            $valoracion = Valoracion::findOrFail($id);
+
+            $user = Auth::user();  // Cambio auth()->user() por Auth::user()
+
+            if (!$user || $user->idUsuario !== $valoracion->fk_idUsuario) {
+                return response()->json(['mensaje' => 'No autorizado'], 403);
+            }
+
+            $valoracion->delete();
+
             return response()->json(['mensaje' => 'Valoración eliminada correctamente']);
         } catch (ModelNotFoundException $e) {
             return response()->json(['mensaje' => 'Valoración no encontrada'], 404);
