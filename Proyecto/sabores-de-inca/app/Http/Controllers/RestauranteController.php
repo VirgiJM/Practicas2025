@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Log; // Pruebas.
 use App\Models\TipoCocina;
 use App\Models\TipoCocinaTraduccion;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+
 
 class RestauranteController extends Controller
 {
@@ -177,13 +179,46 @@ class RestauranteController extends Controller
         return view('admin.crear', compact('tiposCocina'));
     }
 
-    // Función para controlar los updates.
     public function update(RestauranteUpdateRequest $request, $id)
     {
         try {
-            $restaurante = Restaurante::findOrFail($id); // Lanza 404 si no existe.
+            $restaurante = Restaurante::findOrFail($id);
+            $datos = $request->validated();
 
-            $datos = $request->validated(); // Solo los campos válidos.
+            // ACTUALIZAR FOTO
+            if ($request->hasFile('Foto')) {
+                // Validar formato imagen (mismo criterio que en subirImagen)
+                $request->validate([
+                    'Foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                ]);
+
+                // Eliminar la foto anterior si existe
+                if ($restaurante->Foto && Storage::disk('public')->exists($restaurante->Foto)) {
+                    Storage::disk('public')->delete($restaurante->Foto);
+                }
+
+                // Guardar nueva imagen
+                $imagenPath = $request->file('Foto')->store('imagenes', 'public');
+                $datos['Foto'] = $imagenPath;
+            }
+
+            // ACTUALIZAR CARTA
+            if ($request->hasFile('Carta')) {
+                // Validar formato PDF (mismo criterio que en subirCarta)
+                $request->validate([
+                    'Carta' => 'file|mimes:pdf|max:6144',
+                ]);
+
+                // Eliminar la carta anterior si existe
+                if ($restaurante->Carta && Storage::disk('public')->exists($restaurante->Carta)) {
+                    Storage::disk('public')->delete($restaurante->Carta);
+                }
+
+                // Guardar nueva carta
+                $cartaPath = $request->file('Carta')->store('cartas', 'public');
+                $datos['Carta'] = $cartaPath;
+            }
+
             $restaurante->update($datos);
 
             return response()->json(['mensaje' => 'Restaurante actualizado correctamente'], 200);
@@ -194,6 +229,8 @@ class RestauranteController extends Controller
             ], 400);
         }
     }
+
+
 
     // Función para subir la carta de un restaurante con PostMan.
     public function subirCarta(Request $request, $id)

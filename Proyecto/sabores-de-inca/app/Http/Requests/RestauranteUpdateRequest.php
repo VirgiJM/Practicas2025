@@ -22,7 +22,7 @@ class RestauranteUpdateRequest extends FormRequest
             'Telefono' => 'sometimes|required|string|max:20',
             'SitioWeb' => 'nullable|string|max:100',
             'Direccion' => 'sometimes|required|string|max:150',
-            'Carta' => 'nullable|string|max:255',
+            'Carta' => 'nullable|file|mimes:pdf|max:6144',
             'fk_idTipoCocina' => 'sometimes|required|exists:tipo_cocina,idTipoCocina',
             'Foto' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'Descripcion' => 'sometimes|string|max:65535',

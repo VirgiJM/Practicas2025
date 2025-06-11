@@ -169,9 +169,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             const tdId = document.createElement('td');
             tdId.textContent = rest.idRestaurante;
+            tdId.setAttribute('data-label', 'ID');
 
             const tdNombre = document.createElement('td');
             tdNombre.textContent = rest.Nombre;
+            tdNombre.setAttribute('data-label', 'Nombre');
 
             const tdTipo = document.createElement('td');
             let nombreTipoCocina = 'Sin especificar';
@@ -181,8 +183,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
 
             tdTipo.textContent = nombreTipoCocina;
-
+            tdTipo.setAttribute('data-label', 'Tipo Cocina');
+            
             const tdVegano = document.createElement('td');
+            tdVegano.setAttribute('data-label', '¿Vegano?');
             if (rest.Vegano == 1) {
                 tdVegano.textContent = "Vegano";
                 tdVegano.style.color = "#299a56";
@@ -196,6 +200,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             <button class="edit-btn" data-idRestaurante-restaurante="${rest.idRestaurante}">Editar</button>
             <button class="delete-btn" data-idRestaurante-restaurante="${rest.idRestaurante}">Eliminar</button>
             `;
+
+            tdAcciones.setAttribute('data-label', 'Acciones');
 
             tr.appendChild(tdId);
             tr.appendChild(tdNombre);
