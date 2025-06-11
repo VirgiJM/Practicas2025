@@ -1,0 +1,206 @@
+#admin-content {
+    max-width: 900px;
+    margin: 20px auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1,
+h2 {
+    color: #333;
+    border-bottom: 2px solid #f04e30;
+    padding-bottom: 8px;
+    max-width: 940px;
+    margin: 0 auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+th,
+td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #f04e30;
+    color: white;
+}
+
+.add-btn {
+    background-color: #f04e30;
+    border: none;
+    color: white;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.add-btn:hover {
+    background-color: #d43c24;
+}
+
+.edit-btn,
+.boton-aceptar {
+    background-color: white;
+    border-style: solid;
+    border-color: #299a56;
+    color: #176436;
+}
+
+button.edit-btn:hover,
+input[type="submit"]:hover,
+button.boton-aceptar:hover,
+input[type="submit"]:hover {
+    background-color: #a7ffca;
+}
+
+.delete-btn,
+.delete-valoracion-btn,
+.boton-atras {
+    background-color: white;
+    border-style: solid;
+    border-color: #ef6148;
+    color: #903B2C;
+}
+
+button.delete-btn:hover,
+input[type="submit"]:hover,
+button.delete-valoracion-btn:hover,
+input[type="submit"]:hover,
+button.boton-atras:hover,
+input[type="submit"]:hover {
+    background-color: #ffd4cd;
+}
+
+@media (max-width: 768px) {
+
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tr {
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+
+    td {
+        position: relative;
+        padding-left: 50%;
+    }
+
+    td::before {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        white-space: nowrap;
+        font-weight: bold;
+        content: attr(data-label);
+    }
+
+    .add-btn {
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    h1,
+    h2 {
+        font-size: 1.4rem;
+        text-align: center;
+    }
+}
+
+.responsive-table {
+    overflow-x: auto;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+    background-color: #fff;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+}
+
+@media (max-width: 768px) {
+
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tr {
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 0.5rem;
+        padding: 0.5rem;
+        background: #f8f8f8;
+    }
+
+    td {
+        position: relative;
+        padding-left: 50%;
+        text-align: left;
+        border: none;
+        border-bottom: 1px solid #eee;
+    }
+
+    td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 1rem;
+        top: 0.75rem;
+        font-weight: bold;
+        white-space: nowrap;
+    }
+}
+
+textarea {
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+    /* Para que el padding no desborde */
+}
+
+/* textarea para móviles */
+@media (max-width: 768px) {
+    textarea {
+        max-width: 100%;
+    }
+}

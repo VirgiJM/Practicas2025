@@ -13,6 +13,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Log; // Pruebas.
 use App\Models\TipoCocina;
 use App\Models\TipoCocinaTraduccion;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+
 
 class RestauranteController extends Controller
 {
@@ -69,9 +72,6 @@ class RestauranteController extends Controller
 
         return view('restaurantes.index', compact('restaurantes', 'usuario', 'rangosPrecio', 'mediaMinima'));
     }
-
-
-
 
 
     // Este método sería usado desde api.php (el de las rutas). Devuelve datos en json.
@@ -141,9 +141,25 @@ class RestauranteController extends Controller
     {
         try {
             $validated = $request->validated();
+
+            // Generar el slug a partir del nombre.
+            $validated['Slug'] = Str::slug($validated['Nombre']);
+
+            // Subir imagen si se ha enviado.
+            if ($request->hasFile('Foto')) {
+                $rutaImagen = $request->file('Foto')->store('imagenes', 'public');
+                $validated['Foto'] = $rutaImagen;
+            }
+
+            // Subir carta PDF si se ha enviado.
+            if ($request->hasFile('Carta')) {
+                $rutaCarta = $request->file('Carta')->store('cartas', 'public');
+                $validated['Carta'] = $rutaCarta;
+            }
+
             Restaurante::create($validated);
 
-            return response()->json(['mensaje' => 'Restaurante creado correctamente'], 201); // 201: Creado.
+            return response()->json(['mensaje' => 'Restaurante creado correctamente'], 201);
         } catch (\Exception $e) {
             return response()->json([
                 'mensaje' => 'Error al crear el restaurante.',
@@ -152,13 +168,57 @@ class RestauranteController extends Controller
         }
     }
 
-    // Función para controlar los updates.
+
+
+    // Para crear un restaurante en la parte de admin.
+    public function create()
+    {
+        $tiposCocina = TipoCocinaTraduccion::select('fk_idTipoCocina', 'Nombre')
+            ->where("fk_idIdioma", 1)
+            ->get();
+        return view('admin.crear', compact('tiposCocina'));
+    }
+
     public function update(RestauranteUpdateRequest $request, $id)
     {
         try {
-            $restaurante = Restaurante::findOrFail($id); // Lanza 404 si no existe.
+            $restaurante = Restaurante::findOrFail($id);
+            $datos = $request->validated();
 
-            $datos = $request->validated(); // Solo los campos válidos.
+            // ACTUALIZAR FOTO
+            if ($request->hasFile('Foto')) {
+                // Validar formato imagen (mismo criterio que en subirImagen)
+                $request->validate([
+                    'Foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                ]);
+
+                // Eliminar la foto anterior si existe
+                if ($restaurante->Foto && Storage::disk('public')->exists($restaurante->Foto)) {
+                    Storage::disk('public')->delete($restaurante->Foto);
+                }
+
+                // Guardar nueva imagen
+                $imagenPath = $request->file('Foto')->store('imagenes', 'public');
+                $datos['Foto'] = $imagenPath;
+            }
+
+            // ACTUALIZAR CARTA
+            if ($request->hasFile('Carta')) {
+                // Validar formato PDF (mismo criterio que en subirCarta)
+                $request->validate([
+                    'Carta' => 'file|mimes:pdf|max:6144',
+                ]);
+
+                // Eliminar la carta anterior si existe
+                if ($restaurante->Carta && Storage::disk('public')->exists($restaurante->Carta)) {
+                    Storage::disk('public')->delete($restaurante->Carta);
+                }
+
+                // Guardar nueva carta
+                $cartaPath = $request->file('Carta')->store('cartas', 'public');
+                $datos['Carta'] = $cartaPath;
+            }
+
             $restaurante->update($datos);
 
             return response()->json(['mensaje' => 'Restaurante actualizado correctamente'], 200);
@@ -169,6 +229,8 @@ class RestauranteController extends Controller
             ], 400);
         }
     }
+
+
 
     // Función para subir la carta de un restaurante con PostMan.
     public function subirCarta(Request $request, $id)

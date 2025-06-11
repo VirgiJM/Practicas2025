@@ -24,7 +24,8 @@ class Restaurante extends Model
         'Carta',
         'fk_idTipoCocina',
         'Descripcion',
-        'Slug'
+        'Slug',
+        'Foto'
     ];
 
     // Para obtener la media de las valoraciones. Primero, necesitamos una relación entre ambas tablas. Mirar la línea extra del controlador.

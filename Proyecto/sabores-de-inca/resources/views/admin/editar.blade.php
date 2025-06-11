@@ -2,10 +2,12 @@
 
 @section('titulo', $restaurante->Nombre)
 @vite('resources/js/editarRestaurante.js')
+@vite('resources/css/admin.css')
 
 @section('contenido')
-<h1>Editar Restaurante</h1>
-<form id="formEditar">
+<h1 style="max-width: 940px; margin: 0 auto; padding: 2rem;">Editar Restaurante</h1>
+<form id="formEditar" method="POST" action="/restaurantes" enctype="multipart/form-data">
+    <input type="hidden" name="_method" value="PUT">
     <input type="hidden" name="idRestaurante" id="idRestaurante" value="{{ $restaurante->idRestaurante }}">
 
     <label for="nombre">Nombre:</label>
@@ -29,7 +31,14 @@
         @endforeach
     </select>
 
-    <button type="submit">Guardar cambios</button>
+    <label for="foto">Foto del restaurante:</label>
+    <input type="file" id="foto" name="Foto" accept="image/*"><br>
+
+    <label for="carta">Carta (PDF):</label>
+    <input type="file" id="carta" name="Carta" accept="application/pdf"><br>
+
+    <button type="submit" class="boton-aceptar">Guardar cambios</button>
+    <button type="button" id="atras" class="boton-atras">Atrás</button>
 </form>
 
 

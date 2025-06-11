@@ -11,68 +11,76 @@
     </div>
 
     <h1>{{ $restaurante->Nombre }}</h1>
-    <img src="{{ Storage::url($restaurante->Foto) }}" alt="{{ $restaurante->Nombre }}">
+    <img src="{{ Storage::url($restaurante->Foto) }}" alt="{{ $restaurante->Nombre }}" class="imagen-restaurante">
 
     @php
     $query = urlencode($restaurante->Nombre . ', ' . $restaurante->Direccion);
     @endphp
     <p>
         <strong>📍</strong>
-        <a href="https://www.google.com/maps/search/?api=1&query={{ $query }}" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.google.com/maps/search/?api=1&query={{ $query }}" target="_blank" rel="noopener noreferrer" class="enlace">
             {{ $restaurante->Direccion }}
         </a>
     </p>
+    <p><strong>Precio medio:</strong> {{ $restaurante->RangoPrecio }}</p>
 
-    <p><strong>Precio medio:</strong><a> {{ $restaurante->RangoPrecio }}<a></p>
-    <a href="tel:{{$restaurante->Telefono}}"><strong>📞</strong> {{ $restaurante->Telefono }}</p>
-        <strong><a href="{{ $restaurante->SitioWeb }}" target="_blank">Sitio Web</a></strong>
-        <p>{{ $restaurante->Descripcion }}</p>
+    <p>
+        <a href="tel:{{$restaurante->Telefono}}" class="enlace"><strong>📞</strong> {{ $restaurante->Telefono }}</a>
+    </p>
 
-        @if ($restaurante->Carta)
-        <a href="{{ asset('storage/' . $restaurante->Carta) }}" target="_blank">Ver carta PDF</a>
+    @if (!empty($restaurante->SitioWeb))
+    <p>
+        <strong><a href="{{ $restaurante->SitioWeb }}" target="_blank" class="enlace">Sitio Web</a></strong>
+    </p>
+    @endif
+    <p>{{ $restaurante->Descripcion }}</p>
+
+    @if ($restaurante->Carta)
+    <a href="{{ asset('storage/' . $restaurante->Carta) }}" target="_blank" class="enlace">Ver carta</a>
+    @else
+    <p>No hay carta disponible</p>
+    @endif
+
+
+    <section id="valoraciones">
+        <h2>Valoraciones</h2>
+
+        @if ($restaurante->valoraciones->count() > 0)
+        <ul class="lista-valoraciones">
+            @foreach ($restaurante->valoraciones as $valoracion)
+            <li class="valoracion" data-usuario="{{ $valoracion->fk_idUsuario }}" data-id="{{ $valoracion->idValoracion }}">
+                <strong>{{ $valoracion->usuario->Username ?? 'Usuario anónimo' }}</strong>
+                - <em>{{ $valoracion->created_at->format('d/m/Y') }}</em>
+                <p>Puntuación: {{ $valoracion->Valoracion }} ⭐</p>
+                <p>{{ $valoracion->Comentario }}</p>
+            </li>
+            @endforeach
+        </ul>
         @else
-        <p>No hay carta disponible</p>
+        <p>Este restaurante aún no tiene valoraciones.</p>
         @endif
+    </section>
+    <meta name="restaurante-id" content="{{ $restaurante->idRestaurante }}">
 
-        <section id="valoraciones">
-            <h2>Valoraciones</h2>
+    <section id="formulario-valoracion" style="display: none;">
+        <h3>Deja tu valoración</h3>
+        <p><i>Por favor, recuerda ser respetuoso. Los comentarios ofensivos serán eliminados.</i></p>
+        <form id="nueva-valoracion">
+            <label for="valoracion">Puntuación:</label>
+            <select id="valoracion" name="valoracion" required>
+                <option value="1">1 ⭐</option>
+                <option value="2">2 ⭐</option>
+                <option value="3">3 ⭐</option>
+                <option value="4">4 ⭐</option>
+                <option value="5">5 ⭐</option>
+            </select>
 
-            @if ($restaurante->valoraciones->count() > 0)
-            <ul class="lista-valoraciones">
-                @foreach ($restaurante->valoraciones as $valoracion)
-                <li class="valoracion">
-                    <strong>{{ $valoracion->usuario->Username ?? 'Usuario anónimo' }}</strong>
-                    - <em>{{ $valoracion->created_at->format('d/m/Y') }}</em>
-                    <p>Puntuación: {{ $valoracion->Valoracion }} ⭐</p>
-                    <p>{{ $valoracion->Comentario }}</p>
-                </li>
-                @endforeach
-            </ul>
-            @else
-            <p>Este restaurante aún no tiene valoraciones.</p>
-            @endif
-        </section>
-        <meta name="restaurante-id" content="{{ $restaurante->idRestaurante }}">
+            <label for="comentario">Comentario:</label>
+            <textarea id="comentario" name="comentario" rows="3" placeholder="(Opcional)"></textarea>
 
-        <section id="formulario-valoracion" style="display: none;">
-            <h3>Deja tu valoración</h3>
-            <p><i>Por favor, recuerda ser respetuoso. Los comentarios ofensivos serán eliminados.</i></p>
-            <form id="nueva-valoracion">
-                <label for="valoracion">Puntuación:</label>
-                <select id="valoracion" name="valoracion" required>
-                    <option value="1">1 ⭐</option>
-                    <option value="2">2 ⭐</option>
-                    <option value="3">3 ⭐</option>
-                    <option value="4">4 ⭐</option>
-                    <option value="5">5 ⭐</option>
-                </select>
-
-                <label for="comentario">Comentario:</label>
-                <textarea id="comentario" name="comentario" rows="3" placeholder="(Opcional)"></textarea>
-
-                <button type="submit">Enviar valoración</button>
-            </form>
-        </section>
+            <button type="submit">Enviar valoración</button>
+        </form>
+    </section>
 
 </div>
 @endsection

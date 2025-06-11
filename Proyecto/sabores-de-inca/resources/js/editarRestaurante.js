@@ -1,28 +1,37 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const btnAtras = document.getElementById("atras");
+
+    btnAtras.addEventListener("click", () => {
+        window.location.href = "/admin";
+    });
+
     document.getElementById('formEditar').addEventListener('submit', async function (event) {
         event.preventDefault();
 
         const id = document.getElementById('idRestaurante').value;
+        const form = document.getElementById('formEditar');
+        const formData = new FormData(form);
+        formData.append('_method', 'PUT');
 
-        const datos = {
-            Nombre: document.getElementById('nombre').value,
-            Telefono: document.getElementById('telefono').value,
-            Vegano: document.getElementById('vegano').checked,
-            Descripcion: document.getElementById('descripcion').value,
-            fk_idTipoCocina: document.getElementById('tipoCocina').value
-        };
+        // Convertir checkbox Vegano a 1 o 0 explícitamente
+        formData.set('Vegano', document.getElementById('vegano').checked ? 1 : 0);
 
         const response = await fetch(`/api/restaurantes/${id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(datos)
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                'Accept': 'application/json'
+            },
+            body: formData
         });
 
         if (response.ok) {
             alert('Restaurante actualizado');
-            window.location.href = '/';
+            window.location.href = '/admin';
         } else {
-            alert('Error al actualizar');
+            const errorData = await response.json();
+            console.error(errorData);
+            alert('Error al actualizar: ' + (errorData.message || 'Ver consola para más detalles'));
         }
     });
-})
+});
