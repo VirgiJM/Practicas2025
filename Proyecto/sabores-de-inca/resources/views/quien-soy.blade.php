@@ -7,7 +7,7 @@
 <section id="quien-soy" style="max-width: 800px; margin: 0 auto; padding: 2rem;">
     <h2 class="h2-modo-oscuro">Quién soy</h2>
     <p style="font-size: 1.1rem; line-height: 1.6;">
-        ¡Hola! Soy <strong>Virginia</strong>, programadora y entusiasta de la buena comida.
+        ¡Hola! Soy <strong>Virginia</strong>, programadora y entusiasta del buen comer.
         <em>Sabores de Inca</em> es un proyecto que une dos de mis grandes pasiones: el desarrollo web y descubrir nuevos sitios para comer bien.
     </p>
     <p style="font-size: 1.1rem; line-height: 1.6; margin-top: 1rem;">

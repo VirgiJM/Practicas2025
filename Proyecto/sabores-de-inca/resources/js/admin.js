@@ -117,7 +117,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         valoraciones.forEach(val => {
             const tr = document.createElement('tr');
-
+            if (val.Comentario == null) {
+                val.Comentario = " ";
+            }
             tr.innerHTML = `
             <td>${val.idValoracion}</td>
             <td>${val.fk_idRestaurante}</td>
